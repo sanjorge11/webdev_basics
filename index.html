@@ -8,7 +8,8 @@
 </head>
 <!-- ng-app directive tells AngularJS <body> element is the "owner"
 of the AngularJS application -->
-<body ng-app="">
+<!-- the app name is myApp -->
+<body ng-app="myApp">
 
 <h1> Test </h1>
 
@@ -22,7 +23,8 @@ Last name: <input type="text" ng-model="lname">
 <br>
 <br>
 <!-- ng-bind binds the content of the span element to the input value -->
-Your name is: <span ng-bind="fname"></span> <span ng-bind="lname"></span>
+<!-- notice that the angular variables can also be displayed with {{ }} -->
+Your name is: <span ng-bind="fname"></span> <span> {{ lname }} </span>
 
 </body>
 </html>
