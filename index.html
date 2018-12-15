@@ -3,11 +3,26 @@
 
 <head>
 <title> WebDev Basics </title>
-
+<!-- here we are adding the angular script, hosted by google   -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 </head>
+<!-- ng-app directive tells AngularJS <body> element is the "owner"
+of the AngularJS application -->
+<body ng-app="">
 
-<body>
+<h1> Test </h1>
 
+
+<p> What is your name? </p>
+<!-- ng-model binds the value of the input field to
+the application variable 'fname' and 'lname' -->
+First name: <input type="text" ng-model="fname">
+<br>
+Last name: <input type="text" ng-model="lname">
+<br>
+<br>
+<!-- ng-bind binds the content of the span element to the input value -->
+Your name is: <span ng-bind="fname"></span> <span ng-bind="lname"></span>
 
 </body>
 </html>
