@@ -4,7 +4,10 @@
 var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function($scope) {
-    $scope.fname= "John";
-    $scope.lname= "Doe";
+    $scope.altf= "John";
+    $scope.altl= "Doe";
+
+
+
 
 });
