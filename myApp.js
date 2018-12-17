@@ -17,6 +17,19 @@ app.directive("injectElement", function() {
     };
 });
 
+app.directive("injectAttribute", function() {
+    return {
+        template : "<h1> injected from attribute </h1>"
+    };
+});
+
+app.directive("injectClass", function() {
+    return {
+        restrict : "C",
+        template : "<h1> injected from class </h1>"
+    };
+});
+
 app.directive("injectComment", function() {
   return {
       restrict : "M",
@@ -24,3 +37,6 @@ app.directive("injectComment", function() {
       template: "<h1> injected from comment </h1>"
   };
 });
+//notice that we used restrictions, those allow for the directives to be
+//invoked specifically by: element name (E), attribute (A),
+//class (C), or comment (M) -- EA means both element and attribute can invoke

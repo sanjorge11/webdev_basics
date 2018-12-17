@@ -15,7 +15,7 @@ of the AngularJS application -->
 
 <h1> Test </h1>
 
-<b> Data-Binding Example </b>
+<b> --Data-Binding Example </b>
 <br>
 <br>
 What is your name?
@@ -44,7 +44,8 @@ Bind to controller <br>
 
 <br>
 <br>
-<b> List Example </b>
+<hr>
+<b> --List Example </b>
 <!-- use ng-init to initialize a value, then use ng-repeat to repeatedly add html -->
 <div ng-init="names=['Jon','Han', 'Dan']">
   <ul>
@@ -71,7 +72,8 @@ AngularJS lets you extend HTML with new attributes called Directives.
 Angular provides a set of built-in directives which offers functionality
 to your applications, you can also define your own directives. -->
 
-<b> Invoking a directive </b>
+<hr>
+<b> --Invoking a directive </b>
 <!-- You can invoke a directive by using:
 - Element name
 - Attribute
@@ -80,7 +82,53 @@ to your applications, you can also define your own directives. -->
 
 <inject-element> </inject-element>
 
+<div inject-attribute></div>
+
+<div class="inject-class"></div>
+
 <!-- directive: inject-comment -->
+
+<hr>
+<b> --Validate user input </b>
+<br>
+<br>
+<!-- we can use the broad $error value to validate input, and further
+specify the type number that is input, notice how we
+do myForm.myID -->
+<form name="myForm">
+    ID:
+    <input type="number" name="myID" ng-model="text">
+    <span ng-show="myForm.myID.$error.number">Not a valid number</span>
+</form>
+<br>
+
+<!-- other forms of validation in Angular: $valid, $dirty, $touched, etc... -->
+<form name="myForm" ng-init="myText = 'post@myweb.com'">
+    Email:
+    <input type="email" name="myAddress" ng-model="myText" required>
+    <br>
+    <br>
+    <b> Email is valid: </b> {{myForm.myAddress.$valid}}
+    <br>
+    <b>Input has been interacted with by user: </b> {{myForm.myAddress.$dirty}}
+    <br>
+    <b>Input has been touched/focused by mouse: </b> {{myForm.myAddress.$touched}}
+</form>
+
+<!-- there are other types of validation: ng-pristine, ng-empty, etc... -->
+
+
+<!-- QUICKNOTE ABOUT DATA BINDING -->
+<!-- The ng-model directive provides a two-way binding between the model and the view. -->
+<!-- Data binding in AngularJS is the synchronization between the model and the view.
+When data in the model changes, the view reflects the change, and when data in
+the view changes, the model is updated as well. This happens immediately and
+automatically, which makes sure that the model and the view is updated at all times. -->
+
+<hr>
+<b> --Data-Binding </b>
+<br>
+<br>
 
 
 </body>
