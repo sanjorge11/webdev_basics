@@ -29,3 +29,18 @@ app.controller('colorControl', function($scope) {
 app.run(function($rootScope) {
     $rootScope.color = "red";
 });
+
+
+// create a new custom filter
+app.filter('myFormat', function() {
+    return function(x) {
+        var i;
+
+        for (i = 0; i < x.length; i++) {
+            if (x[i] === 1) { x[i] = 'one'; }
+            else if (x[i] === 5) { x[i] = 'five'; }
+            else {  }
+        }
+        return x;
+    };
+});

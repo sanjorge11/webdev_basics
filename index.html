@@ -174,7 +174,21 @@ automatically, which makes sure that the model and the view is updated at all ti
   <!-- orderBy filter [syntax -> orderBy : object : true/false reverse order]  -->
   <div ng-init="names=['Jon','Han', 'Dan']">
     <ul>
-    <li ng-repeat="x in names | orderBy : this : false">
+    <li ng-repeat="x in names | orderBy : this : false | filter: 'Jon'">
+      <!-- note that you can pipe mroe than one filter,
+      the 'filter' filter can only be used on arrays, the matching
+      value is returned, notice that a substring is filtered, not
+      necessarily an exact match -->
+      {{ x }}
+    </li>
+    </ul>
+  </div>
+
+  <!-- you can also create and apply custom filters -->
+  <div ng-init="ID=[1, 2, 3, 4, 5]">
+    <ul>
+      <!-- my custom format replaces a 1 with 'one' and 5 with 'five' -->
+    <li ng-repeat="x in ID | myFormat">
       {{ x }}
     </li>
     </ul>
