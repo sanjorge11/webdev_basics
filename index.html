@@ -15,7 +15,7 @@ of the AngularJS application -->
 
 <h1> Test </h1>
 
-<b> --Data-Binding Example </b>
+<b> -- Data-Binding Example </b>
 <br>
 <br>
 What is your name?
@@ -36,6 +36,7 @@ Your name is: <span ng-bind="fname"></span> <span> {{ lname }} </span>
 
 <!-- the name displayed here comes from the controller -->
 Alternate name: {{ altfname + " " + altlname }}
+<!-- a function call could be placed within the {{ }} as well  -->
 <br>
 <br>
 Bind to controller <br>
@@ -45,7 +46,7 @@ Bind to controller <br>
 <br>
 <br>
 <hr>
-<b> --List Example </b>
+<b> -- List Example </b>
 <!-- use ng-init to initialize a value, then use ng-repeat to repeatedly add html -->
 <div ng-init="names=['Jon','Han', 'Dan']">
   <ul>
@@ -73,7 +74,7 @@ Angular provides a set of built-in directives which offers functionality
 to your applications, you can also define your own directives. -->
 
 <hr>
-<b> --Invoking a directive </b>
+<b> -- Invoking a directive </b>
 <!-- You can invoke a directive by using:
 - Element name
 - Attribute
@@ -89,7 +90,7 @@ to your applications, you can also define your own directives. -->
 <!-- directive: inject-comment -->
 
 <hr>
-<b> --Validate user input </b>
+<b> -- Validate user input </b>
 <br>
 <br>
 <!-- we can use the broad $error value to validate input, and further
@@ -126,10 +127,13 @@ the view changes, the model is updated as well. This happens immediately and
 automatically, which makes sure that the model and the view is updated at all times. -->
 
 <hr>
-<b> --Data-Binding </b>
-<br>
-<br>
+<b> -- Scopes </b>
 
+<p> A note about scopes: All applications have a $rootScope which is
+  the scope created on the HTML element that contains the ng-app directive.
+  The rootScope is available in the entire application. If a variable has the
+  same name in both the current scope and in the rootScope, the application
+  uses the one in the current scope. </p>
 
 </body>
 </html>
