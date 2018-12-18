@@ -99,7 +99,7 @@ do myForm.myID -->
 <form name="myForm">
     ID:
     <input type="number" name="myID" ng-model="text">
-    <span ng-show="myForm.myID.$error.number">Not a valid number</span>
+    <span ng-show="myForm.myID.$error.number"> Not a valid number </span>
 </form>
 <br>
 
@@ -164,8 +164,21 @@ automatically, which makes sure that the model and the view is updated at all ti
 
   <hr>
   <b> -- Filters </b>
-  <br>
-  <br>
+
+  <p> Filters are used to transform data into a format. </p>
+
+  <!-- here we are applying an angular built-in filter, uppercase
+  the filter is applied with a pipe operation -->
+  <p> {{ altfname | uppercase }} </p>
+
+  <!-- orderBy filter [syntax -> orderBy : object : true/false reverse order]  -->
+  <div ng-init="names=['Jon','Han', 'Dan']">
+    <ul>
+    <li ng-repeat="x in names | orderBy : this : false">
+      {{ x }}
+    </li>
+    </ul>
+  </div>
 
 </body>
 </html>
