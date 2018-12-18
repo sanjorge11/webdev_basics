@@ -19,3 +19,13 @@ app.controller('myCtrl', function($scope) {
 //When adding properties to the $scope object in the controller,
 //the view (HTML) gets access to these properties. In the view, you
 //do not use the prefix $scope, you just refer to a propertyname, like {{var}}
+
+
+app.controller('colorControl', function($scope) {
+    $scope.color = "blue";
+
+});
+
+app.run(function($rootScope) {
+    $rootScope.color = "red";
+});

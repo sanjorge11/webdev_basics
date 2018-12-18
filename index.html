@@ -131,9 +131,41 @@ automatically, which makes sure that the model and the view is updated at all ti
 
 <p> A note about scopes: All applications have a $rootScope which is
   the scope created on the HTML element that contains the ng-app directive.
-  The rootScope is available in the entire application. If a variable has the
+  The rootScope is available in the entire application. <b> If a variable has the
   same name in both the current scope and in the rootScope, the application
-  uses the one in the current scope. </p>
+  uses the one in the current scope. </b> </p>
+
+  <p> the 'color' variable in $rootScope is: {{ color }} </p>
+  <div ng-controller="colorControl">
+    <p> the 'color' variable in colorControl $Scope is: {{ color }} </p>
+
+    <p> Note that we used a 'run block' to initialize the $rootScope.color
+        variable -- more information about it here... </p>
+      <p> the calling order in angular: <br>
+          1. app.config() <br>
+          2. app.run() <br>
+          3. directive's compile functions (if they are found in the dom) <br>
+          4. app.controller() <br>
+          5. directive's link functions (again, if found) <br> <br>
+
+          Run blocks - get executed after the injector is created and are used
+          to kickstart the application. Only instances and constants can be
+          injected into run blocks. This is to prevent further system
+          configuration during application run time. <br>
+
+          Run blocks are the closest thing in Angular to the main method.
+          A run block is the code which needs to run to kickstart the
+          application. It is executed after all of the services have been
+          configured and the injector has been created. Run blocks typically
+          contain code which is hard to unit-test, and for this reason should
+          be declared in isolated modules, so that they can be ignored in the
+          unit-tests. </p>
+  </div>
+
+  <hr>
+  <b> -- Filters </b>
+  <br>
+  <br>
 
 </body>
 </html>
