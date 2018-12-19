@@ -197,5 +197,19 @@ automatically, which makes sure that the model and the view is updated at all ti
   <hr>
   <b> -- Services </b>
 
+  <div ng-controller="services">
+    <br>
+      Input a positive integer: <input type="text" ng-model="numberInput" ng-change=update()>
+      <p> The binary of {{ numberInput }} is: {{ binary }} </p>
+  </div>
+
+  <div ng-init="NUM=[1, 2, 3, 4, 5]">
+    <ul>
+    <li ng-repeat="x in NUM">
+      {{ x | binaryFormat }}
+    </li>
+    </ul>
+  </div>
+
 </body>
 </html>

@@ -1,8 +1,9 @@
 // AngularJS modules define AngularJS applications.
 // AngularJS controllers control AngularJS applications.
 app.controller('myCtrl', function($scope) {
+    var s = $scope; //scope can be assigned to a variable
     $scope.altfname= "John";
-    $scope.altlname= "Doe";
+    s.altlname= "Doe";
 
     $scope.printVal = function() {
         console.log($scope.val2controller);
@@ -44,3 +45,60 @@ app.filter('myFormat', function() {
         return x;
     };
 });
+
+/* these will not work, you are making a GET on a third-party url
+  but observe how you can pass parameters to the controller and
+  capture a response data
+
+app.controller('services', function($scope, $http) {
+    var sc = $scope;
+
+    //option 1
+    $http({
+    method : "GET",
+    url : "welcome.htm"
+  }).then(function mySuccess(response) {
+    $scope.myWelcome = response.data;
+  }, function myError(response) {
+    $scope.myWelcome = response.statusText;
+  });
+
+    //option 2
+    $http.get("welcome.htm").then(function (response) {
+      sc.myWelcome = response.data;
+    });
+
+});
+*/
+
+
+//create custom service
+app.service('toBinaryService', function() {  //note this only works for positive #'s
+    this.convert = function (x) {   //'this' is the toBinaryService object
+        return x.toString(2); //to binary
+    }
+});
+
+app.controller('services', function($scope, toBinaryService) {
+    var sc = $scope;
+    sc.numberInput = 0;
+    sc.binary = 0;
+
+    sc.update = function() {
+      sc.binary = toBinaryService.convert(parseInt(sc.numberInput));
+    }
+
+});
+
+
+//use custom service inside filter
+//note: Once you have created a service, and connected it to your application,
+//you can use the service in any controller, directive, filter, or even inside
+//other services. To use the service inside a filter, add it as a dependency
+//when defining the filter:
+
+app.filter('binaryFormat',['toBinaryService', function(toBinaryService) {
+    return function(x) {
+        return toBinaryService.convert(x);
+    };
+}]);
