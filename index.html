@@ -222,5 +222,48 @@ automatically, which makes sure that the model and the view is updated at all ti
   <hr>
   <b> -- Dropdowns and Select Boxes </b>
 
+  <p> Note: you can make drop downs out of ng-repeat'ed HTML blocks of code
+    but you should use the ng-options directive whic is specifically for
+    dropdowns, ng-options allows the selected value to be an object
+    while ng-repeat value must be a string </p>
+
+    ng-repeat: <select ng-model="selectedCarString">
+      <option ng-repeat="x in cars" value="{{ x.model }}"> {{ x.model }} </option>
+    </select>
+
+    <br>
+
+  ng-options: <select ng-model="selectedCarObject" ng-options="x.model for x in cars"> </select>
+
+  <br>
+  <br>
+
+  ng-repeat: <select ng-model="selectedCarString">
+    <option ng-repeat="x in cars" value="{{ x }}"> {{ x }} </option>
+  </select>
+
+  <br>
+
+  ng-options: <select ng-model="selectedCarObject" ng-options="x for x in cars"> </select>
+
+  <br>
+  <br>
+
+  <p> we can also use objects as the data source rather than an array for ng-options </p>
+
+  <!-- Note: the selected value will always be the value in a key-value pair. -->
+  <select ng-model="selected" ng-options="x for (x, y) in carObjects"> </select>
+  <h4>You selected: {{ selected }}</h4>
+
+
+  <br>
+  <br>
+  <p> The value in a key-value pair can also be an object </p>
+  <!-- note how x is car01, car02, or car03; y is the object value
+      we can display a property from the y value for the dropdown, but
+      the true selected value will be the y in the (x,y) pair -->
+  <select ng-model="select" ng-options="y.brand for (x, y) in carObjects2"> </select>
+  <p> The object selected was: {{ select }} </p>
+
 </body>
 </html>

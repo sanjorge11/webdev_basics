@@ -9,6 +9,25 @@ app.controller('myCtrl', function($scope) {
         console.log($scope.val2controller);
     };
 
+    s.cars = [
+      { model : "Ford Mustang", color : "red" },
+      { model : "Fiat 500", color : "white" },
+      { model : "Volvo XC90", color : "black" }
+    ];
+
+    //these key value pairs are objects, e.g. car01 -- x and Ford -- y
+    s.carObjects = {
+    car01 : "Ford",
+    car02 : "Fiat",
+    car03 : "Volvo"
+    };
+
+    s.carObjects2 = {
+        car01 : {brand : "Ford", model : "Mustang", color : "red"},
+        car02 : {brand : "Fiat", model : "500", color : "white"},
+        car03 : {brand : "Volvo", model : "XC90", color : "black"}
+    }
+
 });
 
 // AngularJS will invoke the controller with a $scope object.
