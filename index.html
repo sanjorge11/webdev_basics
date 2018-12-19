@@ -43,8 +43,10 @@ Your name is: <span ng-bind="fname"></span> <span> {{ lname }} </span>
 <!-- the name displayed here comes from the controller -->
 Alternate name: {{ altfname + " " + altlname }}
 <!-- a function call could be placed within the {{ }} as well  -->
+
 <br>
 <br>
+
 Bind to controller <br>
 <input type="text" ng-model="val2controller" ng-click>
 <button ng-click="printVal(val2controller)">SEND</button>
