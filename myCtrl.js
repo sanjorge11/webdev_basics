@@ -48,7 +48,7 @@ app.filter('myFormat', function() {
 
 /* these will not work, you are making a GET on a third-party url
   but observe how you can pass parameters to the controller and
-  capture a response data
+  capture a response data with $http service
 
 app.controller('services', function($scope, $http) {
     var sc = $scope;
@@ -67,6 +67,9 @@ app.controller('services', function($scope, $http) {
     $http.get("welcome.htm").then(function (response) {
       sc.myWelcome = response.data;
     });
+    //add a second function used for error handling if needed
+    //the response could be layered data, you could specify a property
+    //array and have an ng-repeat loop through the response to display
 
 });
 */
