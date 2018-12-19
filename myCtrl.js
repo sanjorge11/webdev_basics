@@ -74,7 +74,6 @@ app.controller('services', function($scope, $http) {
 });
 */
 
-
 //create custom service
 app.service('toBinaryService', function() {  //note this only works for positive #'s
     this.convert = function (x) {   //'this' is the toBinaryService object
