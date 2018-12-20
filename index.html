@@ -14,45 +14,36 @@ of the AngularJS application -->
 <body ng-app="myApp" ng-controller="myCtrl">
 
 <h1> Quick AngularJS Tutorial </h1>
-Visit: <a href="https://docs.angularjs.org/api"> this link </a> for full
+<p> Visit: <a href="https://docs.angularjs.org/api"> this link </a> for full
 list of functions. And <a href="https://www.w3schools.com/angular/default.asp"> this link </a>
 for the W3 tutorial that I followed.
+</p>
 
-<br>
-<br>
 
 <b> -- Data-Binding Example </b>
-<br>
-<br>
-What is your name?
+
+<p> What is your name? </p>
 <!-- ng-model binds the value of the input field to
 the application variable 'fname' and 'lname' -->
-<br>
-<br>
-First name: <input type="text" ng-model="fname">
-<br>
-Last name: <input type="text" ng-model="lname">
-<br>
-<br>
+
+<p> First name: <input type="text" ng-model="fname"> <br>
+    Last name: <input type="text" ng-model="lname"> </p>
+
 <!-- ng-bind binds the content of the span element to the input value -->
 <!-- notice that the angular variables can also be displayed with {{ }} -->
-Your name is: <span ng-bind="fname"></span> <span> {{ lname }} </span>
-
-<br>
+<p> Your name is: <span ng-bind="fname"></span> <span> {{ lname }} </span> </p>
 
 <!-- the name displayed here comes from the controller -->
-Alternate name: {{ altfname + " " + altlname }}
+<p> Alternate name: {{ altfname + " " + altlname }} </p>
 <!-- a function call could be placed within the {{ }} as well  -->
 
-<br>
-<br>
+<!-- ********excessive <br> tags cleaned up to here -->
 
-Bind to controller <br>
+<p> Bind to controller <br>
 <input type="text" ng-model="val2controller" ng-click>
 <button ng-click="printVal(val2controller)">SEND</button>
+</p>
 
-<br>
-<br>
 <hr>
 <b> -- List Example </b>
 <!-- use ng-init to initialize a value, then use ng-repeat to repeatedly add html -->
@@ -219,6 +210,15 @@ automatically, which makes sure that the model and the view is updated at all ti
     </ul>
   </div>
 
+  <p> <b> A note about cross-site HTTP requests: </b>
+    A request for data from a different server
+    (other than the requesting page), are called cross-site HTTP requests.
+    Cross-site requests are common on the web. Many pages load CSS, images,
+    and scripts from different servers. In modern browsers, cross-site
+    HTTP requests from scripts are restricted to same site for security
+    reasons. To allow cross-site HTPP requests you will need to add permission
+    to appropriate header: Access-Control-Allow-Origin: * </p>
+
   <hr>
   <b> -- Dropdowns and Select Boxes </b>
 
@@ -261,6 +261,29 @@ automatically, which makes sure that the model and the view is updated at all ti
       the true selected value will be the y in the (x,y) pair -->
   <select ng-model="select" ng-options="y.brand for (x, y) in carObjects2"> </select>
   <p> The object selected was: {{ select }} </p>
+
+  <!-- COME BACK LATER TO ADD A SQL QUERY GET REQUEST TUTORIAL HERE, ADD A DB TO GITHUB PAGES -->
+
+  <hr>
+  <b> -- HTML DOM Data Binding </b>
+
+  <p> Use ng-model to store the boolean value, which will be used to
+      control the enabling/disabling of the button element </p>
+
+    <p> <button ng-disabled="mySwitch"> Click Me! </button> </p>
+
+    <p> <input type="checkbox" ng-model="mySwitch"> Button </p>
+
+    <p> Button is enabled: {{ !mySwitch }} </p>
+
+    <p> You can also use ng-show or ng-hide to control the DOM </p>
+
+    <p ng-hide="false">I am visible.</p>
+    <p ng-show="ngShowVar > 3"> {{ ngShowVar }} </p>
+
+
+    <hr>
+    <b> -- Events </b>
 
 </body>
 </html>

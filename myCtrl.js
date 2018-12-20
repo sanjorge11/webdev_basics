@@ -28,6 +28,8 @@ app.controller('myCtrl', function($scope) {
         car03 : {brand : "Volvo", model : "XC90", color : "black"}
     }
 
+    s.ngShowVar = 5;
+
 });
 
 // AngularJS will invoke the controller with a $scope object.
