@@ -37,8 +37,6 @@ the application variable 'fname' and 'lname' -->
 <p> Alternate name: {{ altfname + " " + altlname }} </p>
 <!-- a function call could be placed within the {{ }} as well  -->
 
-<!-- ********excessive <br> tags cleaned up to here -->
-
 <p> Bind to controller <br>
 <input type="text" ng-model="val2controller" ng-click>
 <button ng-click="printVal(val2controller)">SEND</button>
@@ -92,6 +90,7 @@ to your applications, you can also define your own directives. -->
 <b> -- Validate user input </b>
 <br>
 <br>
+
 <!-- we can use the broad $error value to validate input, and further
 specify the type number that is input, notice how we
 do myForm.myID -->
