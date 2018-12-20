@@ -30,6 +30,13 @@ app.controller('myCtrl', function($scope) {
 
     s.ngShowVar = 5;
 
+    s.trackMouse = function(eventVar) {
+      ////to see the event object, uncomment below
+      //console.log(eventVar);
+      s.xCor = eventVar.clientX;
+      s.yCor = eventVar.clientY;
+    }
+
 });
 
 // AngularJS will invoke the controller with a $scope object.
