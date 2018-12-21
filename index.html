@@ -218,6 +218,8 @@ automatically, which makes sure that the model and the view is updated at all ti
     reasons. To allow cross-site HTPP requests you will need to add permission
     to appropriate header: Access-Control-Allow-Origin: * </p>
 
+    <!-- *** the TABLES example is in testServer directory, run the local server  *** -->
+
   <hr>
   <b> -- Dropdowns and Select Boxes </b>
 
@@ -299,6 +301,35 @@ automatically, which makes sure that the model and the view is updated at all ti
 
     <hr>
     <b> -- Forms </b>
+
+    <p> A form element can be comprised of select, radiobuttons, checkboxes, etc.
+        Input and validation are the main concerns when creating forms. </p>
+
+    <!-- note the novalidate attribute, it indicates that the form is
+    not to be validate on submit, which is done by browser by default -->
+    <form novalidate>
+      Pick a topic:
+      <input type="radio" ng-model="myVar" value="one"> 1
+      <input type="radio" ng-model="myVar" value="two"> 2
+      <input type="radio" ng-model="myVar" value="three"> 3
+    </form>
+
+    <!-- notice that we use ng-switch, similar to switch blocks in Java -->
+    <div ng-switch="myVar">
+      <div ng-switch-when="one">
+        <p>Option 1</p>
+      </div>
+      <div ng-switch-when="two">
+        <p>Option 2</p>
+      </div>
+      <div ng-switch-when="three">
+        <p>Option 3</p>
+      </div>
+    </div>
+
+
+    <hr>
+    <b> -- Validation </b>
 
 </body>
 </html>
