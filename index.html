@@ -7,6 +7,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <script src="myApp.js"></script>
 <script src="myCtrl.js"></script>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <!-- ng-app directive tells AngularJS <body> element is the "owner"
 of the AngularJS application -->
@@ -330,6 +331,30 @@ automatically, which makes sure that the model and the view is updated at all ti
 
     <hr>
     <b> -- Validation </b>
+
+    <p> Angular is useful for client-side user input validation, but remember
+        that server-side validation is also important </p>
+
+    <form name="form">
+      <p> Name:
+        <input name="myName" ng-model="myName" required>
+        <span ng-show="form.myName.$touched && form.myName.$invalid"> Name is required. </span>
+      </p>
+
+      <p> Email:
+        <input name="myEmail" ng-model="myEmail" type="email" required>
+        <span ng-show="form.myEmail.$touched && form.myEmail.$invalid"> Email is required. </span>
+      </p>
+
+      <p> String with an 'E':
+        <input id="stringWithE" name="str" ng-model="str" required form-validation-directive>
+        <span ng-show="form.str.$touched && form.str.$invalid"> String is required. </span>
+      </p>
+    </form>
+
+
+    <hr>
+    <b> -- Includes </b>
 
 </body>
 </html>

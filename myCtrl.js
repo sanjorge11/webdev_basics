@@ -132,3 +132,33 @@ app.filter('binaryFormat',['toBinaryService', function(toBinaryService) {
         return toBinaryService.convert(x);
     };
 }]);
+
+
+
+//create directive for form validation -- this example was gotten from tutorial
+//may have to research more about the structure of custom validation directives if needed
+app.directive('formValidationDirective', function() {
+  return {
+    require: 'ngModel',
+    link: function(scope, element, attr, mCtrl) {
+      //the order of parameters above matters, first is app scope, second
+      //is the element object, object's attributes, and lastly the controlller
+
+      function myValidation(value) {
+        //the parameter is the input value of the input element, it is
+        //passed as the user edits the element
+        if (value.indexOf("e") > -1) {
+          //indexOf returns the position of the first occurrence of a specified
+          //value in a string, if not found then -1 is returned
+          mCtrl.$setValidity('charE', true);  //the controller has $setValidity
+        } else {
+          mCtrl.$setValidity('charE', false); //we can set situtations of valid/invalid input
+        }
+        return value;
+      }
+      mCtrl.$parsers.push(myValidation);
+      //the line above adds the myValidation function to an array of other
+      //functions, which will be executed every time the input value changes
+    }
+  };
+});
