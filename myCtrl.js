@@ -37,6 +37,7 @@ app.controller('myCtrl', function($scope) {
       s.yCor = eventVar.clientY;
     }
 
+    s.testHTML = "this is html from an ng-included file";
 });
 
 // AngularJS will invoke the controller with a $scope object.

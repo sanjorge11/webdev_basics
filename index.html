@@ -8,6 +8,9 @@
 <script src="myApp.js"></script>
 <script src="myCtrl.js"></script>
 <link rel="stylesheet" type="text/css" href="style.css">
+<script type="text/ng-template" id="sample.html">
+  <div>This is sample html</div>
+</script>
 </head>
 <!-- ng-app directive tells AngularJS <body> element is the "owner"
 of the AngularJS application -->
@@ -352,9 +355,46 @@ automatically, which makes sure that the model and the view is updated at all ti
       </p>
     </form>
 
-
     <hr>
     <b> -- Includes </b>
+
+    <p> Read the commented notes in source code. </p>
+
+    <!-- this will not work because it relies on a request to a web server -->
+    <!--
+      <div ng-include=" 'testInclude.html' "> </div>
+    -->
+    <!--
+      but the result is an injected html file, the html has '{{ testHTML }}',
+      and it runs under this main angular project's rules and logic, thereby
+      printing 'this is html from an ng-included file'; you can test it on
+      the local server
+  -->
+
+  <!-- Important Note:
+  By default, the ng-include directive does not allow you to include files from other domains.
+  To include files from another domain, you can add a whitelist of legal files and/or domains
+  in the config function of your application:
+
+    app.config(function($sceDelegateProvider) {
+      $sceDelegateProvider.resourceUrlWhitelist([
+          'https://tryit.w3schools.com/**'
+      ]);
+    });
+
+
+    Be sure that the server on the destination allows cross domain file access.
+    To allow this file to be read from other domains, it must contain the header:
+
+    <?php
+    header("Access-Control-Allow-Origin: *");
+    ?>
+
+  -->
+
+
+  <hr>
+  <b> -- Animation </b>
 
 </body>
 </html>
