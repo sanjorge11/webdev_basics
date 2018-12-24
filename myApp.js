@@ -4,7 +4,10 @@
 // The "myApp" parameter refers to an HTML element in which the
 //application will run. Now you can add controllers, directives,
 //filters, and more, to your Angular app
-var app = angular.module('myApp', []);
+
+//notice that i added the ngAnimate dependency, a link to its source script was
+//also added to the head element of the HTML file
+var app = angular.module('myApp', ['ngAnimate']);
 //this is compiled AFTER the library has been loaded in script tag within head
 
 

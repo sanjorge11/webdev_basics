@@ -38,6 +38,12 @@ app.controller('myCtrl', function($scope) {
     }
 
     s.testHTML = "this is html from an ng-included file";
+
+    s.hideBoolean = false;
+
+    s.toggleHide = function() {
+      s.hideBoolean = !s.hideBoolean;
+    }
 });
 
 // AngularJS will invoke the controller with a $scope object.

@@ -5,6 +5,7 @@
 <title> WebDev Basics </title>
 <!-- here we are adding the angular script, hosted by google   -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.js"></script>
 <script src="myApp.js"></script>
 <script src="myCtrl.js"></script>
 <link rel="stylesheet" type="text/css" href="style.css">
@@ -395,6 +396,32 @@ automatically, which makes sure that the model and the view is updated at all ti
 
   <hr>
   <b> -- Animations </b>
+
+  <p> To let Angular animate your HTML, you must either refer to the
+      ngAnimate module in your application i.e. adding ng-app="ngAnimate"
+      to the body element, or you can add it as a dependency to your application
+      in controller if the application already has a name: <br> <br>
+
+      var app = angular.module('myApp', ['ngAnimate']);   <br> <br>
+
+      The ngAnimate module adds and removes classes. <br>
+
+      The ngAnimate module does not animate your HTML elements, but when
+      ngAnimate notice certain events, like hide or show of an HTML element,
+      the element gets some pre-defined classes which can be used to make animations.  <br> <br>
+
+      Read <a href="https://www.w3schools.com/angular/angular_animations.asp"> here </a>
+      to learn about the directives in Angular that add/remove classes, also about using
+      keyframes in CSS to make animations.
+
+    </p>
+
+
+
+    <!-- <h1>Hide the DIV: <input type="checkbox" ng-model="myCheck"></h1> -->
+    <p> Hide Div: <button ng-click="toggleHide()"> Toggle </button> </p>
+
+    <div class="hide" ng-hide="hideBoolean"></div>
 
   <hr>
   <b> -- Routing </b>
