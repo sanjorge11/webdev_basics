@@ -8,6 +8,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.js"></script>
 <script src="myApp.js"></script>
 <script src="myCtrl.js"></script>
+<!-- below is the NgRoute script -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
 <link rel="stylesheet" type="text/css" href="style.css">
 <script type="text/ng-template" id="sample.html">
   <div>This is sample html</div>
@@ -428,6 +430,46 @@ automatically, which makes sure that the model and the view is updated at all ti
 
   <hr>
   <b> -- Routing </b>
+
+  <p> The purpose of Angular is to have a single-page application (SPA). If you
+      want to have a SPA but also navigate or route to different pages without
+      reloading the entire application, you will have to use the ngRoute
+      directive. Think about app.routes at work -- those are the routes
+      that were set up for the application. NgRoute works by adding the
+      route module dependency to the applcation module and including the
+      source in a script element. </p>
+
+  <p> Now that you added the dependency, your application has access to the
+      route module, which provides the $routeProvider. Use the $routeProvider
+      to configure different routes in your application. </p>
+
+  <p> <a href="#!">Main</a> </p>
+
+  <a href="#!red">Red</a>
+  <a href="#!green">Green</a>
+  <a href="#!blue">Blue</a>
+
+  <!-- NOTICE: the following three work the same -->
+  <!-- <div ng-view></div> -->
+  <!-- <ng-view></ng-view> -->
+  <div class="ng-view"></div>
+
+  <p> Your application uses a container to put the content provided by the
+    routing. This container is the ng-view directive. There are three different
+    ways to include the ng-view directive in your application: HTML element,
+    attribute, or class. </p>
+
+  <p> Note that applications can only have one ng-view directive, and this
+    will be the placeholder for all views provided by the route. </p>
+
+  <p> You can also switch the controller for each "view", the
+      controllers used are in each .when and it depends on the url
+      that you are currently in. You can add Angular expressions as you
+      would in any other HTML file, it is controlled by the corresponding
+      controller. </p>
+
+
+
 
 </body>
 </html>

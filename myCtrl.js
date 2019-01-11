@@ -169,3 +169,35 @@ app.directive('formValidationDirective', function() {
     }
   };
 });
+
+
+
+//configure routes -- note that you could write actual html code rather than
+//provide a link if you wanted to (try this include this example later...)
+app.config(function($routeProvider) {
+  $routeProvider
+  .when("/", {
+    templateUrl : "index.html"
+  })
+  .when("/red", {
+    templateUrl : "red.html"
+  })
+  .when("/green", {
+    templateUrl : "green.html",
+    controller : "londonCtrl"
+  })
+  .when("/blue", {
+    templateUrl : "blue.html",
+    controller : "parisCtrl"
+  }).otherwise({
+        template : "<h1>None</h1><p>Nothing has been selected</p>"
+    });
+});
+//the otherwise route above is the default route when none of the others match 
+
+app.controller("londonCtrl", function ($scope) {
+    $scope.msg = "I love London";
+});
+app.controller("parisCtrl", function ($scope) {
+    $scope.msg = "I love Paris";
+});

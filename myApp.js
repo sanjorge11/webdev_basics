@@ -7,7 +7,7 @@
 
 //notice that i added the ngAnimate dependency, a link to its source script was
 //also added to the head element of the HTML file
-var app = angular.module('myApp', ['ngAnimate']);
+var app = angular.module('myApp', ['ngAnimate', 'ngRoute']);
 //this is compiled AFTER the library has been loaded in script tag within head
 
 
