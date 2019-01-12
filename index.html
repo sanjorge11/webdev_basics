@@ -443,23 +443,23 @@ automatically, which makes sure that the model and the view is updated at all ti
       route module, which provides the $routeProvider. Use the $routeProvider
       to configure different routes in your application. </p>
 
-  <p> <a href="#!">Main</a> </p>
+  <!-- note that Angular requires a ! after the hash to prevent
+  the foward slashes to be encoded as %2F -->
+  <p> <a href="#!/">Home</a> </p>
 
-  <a href="#!red">Red</a>
-  <a href="#!green">Green</a>
-  <a href="#!blue">Blue</a>
+  <a href="#!/about">About</a>
 
   <!-- NOTICE: the following three work the same -->
-  <!-- <div ng-view></div> -->
+  <div ng-view></div>
   <!-- <ng-view></ng-view> -->
-  <div class="ng-view"></div>
+  <!-- <div class="ng-view"></div> -->
 
   <p> Your application uses a container to put the content provided by the
     routing. This container is the ng-view directive. There are three different
     ways to include the ng-view directive in your application: HTML element,
     attribute, or class. </p>
 
-  <p> Note that applications can only have one ng-view directive, and this
+  <p> Note that applications can only have one 'ng-view' directive, and this
     will be the placeholder for all views provided by the route. </p>
 
   <p> You can also switch the controller for each "view", the

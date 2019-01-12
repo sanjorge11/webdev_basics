@@ -172,32 +172,40 @@ app.directive('formValidationDirective', function() {
 
 
 
-//configure routes -- note that you could write actual html code rather than
-//provide a link if you wanted to (try this include this example later...)
-app.config(function($routeProvider) {
-  $routeProvider
-  .when("/", {
-    templateUrl : "index.html"
-  })
-  .when("/red", {
-    templateUrl : "red.html"
-  })
-  .when("/green", {
-    templateUrl : "green.html",
-    controller : "londonCtrl"
-  })
-  .when("/blue", {
-    templateUrl : "blue.html",
-    controller : "parisCtrl"
-  }).otherwise({
-        template : "<h1>None</h1><p>Nothing has been selected</p>"
-    });
+//configure routes -- note that you could provide a templateUrl instead of raw HTML
+app.config(function($routeProvider){
+    $routeProvider
+        .when('/', {
+            template: '<h2>{{page}}</h2>',
+            controller: ['$scope', function($scope){
+                $scope.page = 'Home';
+            }]
+        })
+        .when('/about', {
+            template: '<h2>{{page}}</h2>',
+            controller: ['$scope', function($scope){
+                $scope.page = 'Hello World';
+            }]
+        })
+        .otherwise({redirectTo: '/'});
 });
-//the otherwise route above is the default route when none of the others match 
 
-app.controller("londonCtrl", function ($scope) {
-    $scope.msg = "I love London";
-});
-app.controller("parisCtrl", function ($scope) {
-    $scope.msg = "I love Paris";
-});
+  // you can add a name to the configuration
+// app.config(['$routeProvider', function($routeProvider){
+//     $routeProvider
+//         .when('/', {
+//             template: '<h2>{{page}}</h2>',
+//             controller: ['$scope', function($scope){
+//                 $scope.page = 'home';
+//             }]
+//         })
+//         .when('/about', {
+//             template: '<h2>{{page}}</h2>',
+//             controller: ['$scope', function($scope){
+//                 $scope.page = 'Hello World';
+//             }]
+//         })
+//         .otherwise({redirectTo: '/'});
+// }]);
+
+//the otherwise route above is the default route when none of the others match
