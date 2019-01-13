@@ -16,7 +16,8 @@
 
 <b> -- Introduction </b>
 
-<p> Note: This tutorial is best experienced by running it on local server </p>
+<p> Note: This tutorial is best experienced by running it on a local server.
+    For more info on XMLHttpRequest Object Methods, visit the tutorial link. </p>
 
 <p> AJAX allows you to: </p>
 <ul>
@@ -43,6 +44,40 @@
 
 <hr>
 <b> -- The XMLHttpRequest Object </b>
+
+<p> The central part of AJAX is the XMLHttpRequest object, it is what's
+    used for exchanging data with a server behind the scenes and without
+    reloading the page. All modern browsers have a built-in XMLHttpRequest object.
+  </p>
+<p>
+    Note: For security reasons, modern browsers do not allow access across domains.
+    This means that both the web page and the XML file it tries to load, must
+    be located on the same server.
+  </p>
+
+<hr>
+<b> -- AJAX Request </b>
+
+<p> Two examples of HTTP request methods are GET and POST. </p>
+
+<p> GET is simpleer and faster than POST </p>
+
+<p> You use POST requests when </p>
+
+<ul>
+  <li> A cached file is not an option (update a file or database on the server). </li>
+  <li> Sending a large amount of data to the server (POST has no size limitations). </li>
+  <li> Sending user input (which can contain unknown characters),
+    POST is more robust and secure than GET. </li>
+</ul>
+
+<br>
+<b> <u> GET Example </u> </b>
+
+<div id="get-example-1">
+  <h4> Send an AJAX request to change this </h4>
+  <button type="button" onclick="requestGET1()"> Request data </button>
+</div>
 
 
 </body>

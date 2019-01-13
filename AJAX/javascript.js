@@ -35,3 +35,26 @@ function loadDoc() {
     xhttpObject.send();
 
 }
+
+
+function requestGET1() {
+
+  var xhttp = new XMLHttpRequest();
+
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("get-example-1").innerHTML = this.responseText;
+    }
+  };
+
+  //need to create a back end to handle request and send custom response
+  xhttp.open("GET", "demo_get.html?fname=Henry&lname=Ford", true);
+  xhttp.send();
+
+}
+//
+// var url_string = window.location.href;
+//   console.log(url_string);
+// var url = new URL(url_string);
+//   console.log(url);
+//var c = url.searchParams.get("c");
