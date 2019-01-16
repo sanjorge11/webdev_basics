@@ -25,4 +25,8 @@ http.createServer(function (req, res) {
   res.end();
 }).listen(8080);
 
-//SHOULD FIND RESOURCES THAT EXPLAINS res.write, res.end, etc...
+//res.write sends the specified chunk of information to the body of the response
+//res.end signals to the server that all of the response headers and body
+    //have been completed, ready to send
+
+//Visit here: https://nodejs.org/api/http.html#http_http for list of functions
