@@ -1,0 +1,7 @@
+{ "records":[
+  {"fname":"Jorge","lname":"Fuentes","age":22},
+  {"fname":"Daniel","lname":"Fuentes","age":17},
+  {"fname":"Elon","lname":"Musk","age":32},
+  {"fname":"Henry","lname":"Ford","age":76}
+  ]
+}

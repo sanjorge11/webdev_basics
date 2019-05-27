@@ -37,18 +37,17 @@ function loadDoc() {
 }
 
 
-function requestGET1() {
+function get_request2() {
 
   var xhttp = new XMLHttpRequest();
 
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("get-example-1").innerHTML = this.responseText;
+      document.getElementById("get-example-2").innerHTML = this.responseText;
     }
   };
 
-  //need to create a back end to handle request and send custom response
-  xhttp.open("GET", "demo_get.html?fname=Henry&lname=Ford", true);
+  xhttp.open("GET", "demo_get2?fname=Henry&lname=Ford", true);
   xhttp.send();
 
 }

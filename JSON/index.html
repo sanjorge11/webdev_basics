@@ -14,6 +14,14 @@
 
 
 <b> -- Introduction </b>
+<p> Sidenote: In JavaScript, all objects can be reprsented as JSON. In the client-side,
+an object is created by user, and that object is sent to the midtier for further business logic.
+The JSON is turned into a string using the Stringify method in JavaScript, and the data is
+sent via the HTTP request body. The ObjectRep classes in Java are used for parsing the
+JavaScript and creating a Java object. The midtier recieves the HTTP request, it is routed to
+the appropriate method via a url defined for each in the Controller class. Spring makes
+it simple to use the @Requestbody annotation to map the JSON string to the corresponding
+Java ObjectRep class that we want to create. </p>
 
 
 <hr>
