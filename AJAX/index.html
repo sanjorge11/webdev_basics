@@ -72,12 +72,66 @@
 </ul>
 
 <br>
-<b> <u> GET Example </u> </b>
+<b> <u> GET Examples Using AJAX </u> </b>
 
-<div id="get-example-2">
-  <h4> Send an AJAX request to change this </h4>
-  <button type="button" onclick="get_request2()"> Request data </button>
+<div>
+  <h4> Request For Time -- May Use Cached Data </h4>
+  <button type="button" onclick="get_request1_1()"> Request data </button>
+  <br>
+  <br>
+  <div id="get-example-1-1"> </div>
 </div>
+
+<div>
+  <h4> Request For Time -- Prevents Using Cached Data By Adding a Unique ID </h4>
+  <button type="button" onclick="get_request1_2()"> Request data </button>
+  <br>
+  <br>
+  <div id="get-example-1-2"> </div>
+</div>
+
+<div>
+  <h4> Request Using URL Parameters </h4>
+  <button type="button" onclick="get_request2()"> Request data </button>
+  <br>
+  <br>
+  <div id="get-example-2"> </div>
+</div>
+
+<br>
+<br>
+
+<b> <u> POST Examples Using AJAX </u> </b>
+
+<p> Both GET and POST method is used to transfer data from client to server in
+HTTP protocol but the main difference between POST and GET method is that GET
+carries request parameter appended in URL string while POST carries request
+parameter in message body which makes it more secure way of transferring data
+from client to server in HTTP protocol. NEVER USE GET REQUEST TO RETRIEVE
+DATA WITH USER CREDENTIALS ON URL PARAMETERS. </p>
+
+<div>
+  <h4> Request For Time -- POST Requests Are NEVER Cached </h4>
+  <button type="button" onclick="post_request1()"> Request data </button>
+  <br>
+  <br>
+  <div id="post-example-1"> </div>
+</div>
+
+<div>
+  <h4> Request Using HTTP Body To Store Request Information </h4>
+  <button type="button" onclick="post_request2()"> Request data </button>
+  <br>
+  <br>
+  <div id="post-example-2"> </div>
+</div>
+
+<hr>
+<b> -- AJAX Response </b>
+
+<p> An AJAX response is handled on the server-side using the XMLHttpRequest
+  object and its properties, or also with custom callback functions. </p>
+
 
 
 </body>
