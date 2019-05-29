@@ -6,6 +6,17 @@
 <script src="javascript.js"></script>
 </head>
 
+<style>
+table,th,td {
+  border : 1px solid black;
+  border-collapse: collapse;
+}
+th,td {
+  padding: 5px;
+  text-align: center;
+}
+</style>
+
 <body>
 
 <h1> Quick AJAX Tutorial </h1>
@@ -131,6 +142,57 @@ DATA WITH USER CREDENTIALS ON URL PARAMETERS. </p>
 
 <p> An AJAX response is handled on the server-side using the XMLHttpRequest
   object and its properties, or also with custom callback functions. </p>
+
+<b> <u> The onreadystatechange Property </u> </b>
+
+<code>
+  <pre>
+  function loadDoc() {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+              document.getElementById("demo").innerHTML =
+              this.responseText;
+         }
+      };
+      xhttp.open("GET", "ajax_info.txt", true);
+      xhttp.send();
+  }
+</pre>
+</code>
+
+  <p> <i> Note: The onreadystatechange event is triggered four times (1-4),
+    one time for each change in the readyState. The if statement executes the
+    body code if the readyState is 4 and status is "OK".  </i> </p>
+
+
+  <b> <u> Using a Callback Function </u> </b>
+
+  <p> A callback function is a function passed as a parameter to another function.
+    If you have more than one AJAX task in a website, you should create one
+    function for executing the XMLHttpRequest object, and one callback function
+    for each AJAX task.  </p>
+
+  <div>
+    <button type="button" onclick="get_requestWithCallback()"> Change Content </button>
+    <br>
+    <br>
+    <div id="callbackDiv"> </div>
+  </div>
+
+  <hr>
+  <b> -- Sample Application Using AJAX </b>
+
+  <h4> Click on a CD to display album information. </h4>
+  <div id="selected-CD"> <br> <br> <br> </div>
+  <br>
+
+  <table id="cd_catalog_table" style="width:30%;"> </table>
+
+  <p> <i> Notice that the AJAX calls makes it so that the UI is not reloaded
+    and program behavior is not interrupted by waiting for the server response.
+    The AJAX call was made at the begining of the page load to save the JSON
+    array on the browser. That array is indexed on whichever CD you click on the table. </i> </p>
 
 
 

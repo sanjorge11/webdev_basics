@@ -1,0 +1,8 @@
+{ "cd_catalog":[
+  {"title":"One Night Only","artist":"Bee Gees","country":"UK","company":"Polydor","price":10.90,"year":1998},
+  {"title":"The Dock of the Bay","artist":"Otis Redding","country":"USA","company":"Stax Records","price":7.90,"year":1968},
+  {"title":"Empire Burlesque","artist":"Bob Dylan","country":"USA","company":"Columbia","price":10.90,"year":1985},
+  {"title":"Red","artist":"The Communards","country":"UK","company":"London","price":7.80,"year":1987},
+  {"title":"Soulsville","artist":"Jorn Hoel","country":"Norway","company":"WEA","price":7.90,"year":1996}
+  ]
+}

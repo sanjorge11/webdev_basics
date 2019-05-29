@@ -11,6 +11,10 @@ var fileStream;
 http.createServer(function (request, response) {
   var q = url.parse(request.url, true);
 
+  //routes to all these files must be defined -- if index.html uses
+  //javascript.js, then the route to that files must be defined here so that
+  //client is able to retrieve and download the javascript code onto your browser
+  //from the server that hosts it
   if (q.pathname == '/' || q.pathname == '/index.html') {
       fileStream = fs.createReadStream('./index.html');
       fileStream.pipe(response);
@@ -112,6 +116,9 @@ http.createServer(function (request, response) {
     //asynchonously over time
     //    console.log('here');
 
+  } else if (q.pathname == '/cd_catalog.json'){
+      fileStream = fs.createReadStream('./cd_catalog.json');
+      fileStream.pipe(response);
   } else {
       return response.end();
   }

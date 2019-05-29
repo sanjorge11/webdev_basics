@@ -112,7 +112,7 @@ function post_request1() {
 
 
 function post_request2() {
-  //note: formidable module could also be used to parse IncomingForm object 
+  //note: formidable module could also be used to parse IncomingForm object
   var xhttp = new XMLHttpRequest();
 
   xhttp.onreadystatechange = function() {
@@ -133,3 +133,65 @@ function post_request2() {
   xhttp.send("fname=Henry&lname=Ford");
 
 }
+
+///////// Callback example
+function get_requestWithCallback() {
+  loadDoc("ajax_info.txt", callbackFunc);
+
+}
+
+function loadDoc(url, cFunction) {
+  var xhttp = new XMLHttpRequest();
+
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      cFunction(this);  //this refers to the xhttp object
+    }
+ };
+  xhttp.open("GET", url, true);
+  xhttp.send();
+}
+
+function callbackFunc(xhttp) {
+  //you can get response as text or as XML data
+  //  .responseText or .responseXML
+  //you could also get the response headers as text from the xhttp object
+  document.getElementById("callbackDiv").innerHTML = xhttp.responseText;
+  console.log('AJAX call was a success.');
+}
+//////////
+
+///////// AJAX app example
+var xhttp = new XMLHttpRequest();
+
+xhttp.open("GET", "cd_catalog.json", true);
+xhttp.send();
+var cd_catalog;
+
+xhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    //response is received as JSON text, we parse it to create a JavaScript object
+    cd_catalog = JSON.parse(this.responseText).cd_catalog;
+
+    //note: this could be easier with jQuery (a JavaScript library)
+    var tableHTML = "<tr> <th>Artist</th> <th>Title</th> </tr>";
+
+    for(var i=0; i<cd_catalog.length; i++) {
+      tableHTML += "<tr onclick='displayCD(" + i + ")'> <td>" + cd_catalog[i].artist + "</td> <td>" + cd_catalog[i].title + "</td> </tr>";
+    }
+
+    document.getElementById("cd_catalog_table").innerHTML = tableHTML;
+
+    console.log(cd_catalog);
+  }
+};
+
+//note that referring to cd_catalog object is safe here because it is after the
+//table has been completely loaded in the onreadystatechange function
+function displayCD(num) {
+  var text = "Artist: " + cd_catalog[num].artist + "<br>";
+  text += "Title: " + cd_catalog[num].title + "<br>";
+  text += "Year: " + cd_catalog[num].year;
+  document.getElementById("selected-CD").innerHTML = text;
+}
+//////////
