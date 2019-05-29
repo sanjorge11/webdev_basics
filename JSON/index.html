@@ -7,25 +7,79 @@
 
 <body>
 
-<h1> Quick JSON Tutorial </h1>
+<h1> Quick JSON Overview </h1>
 <p> Visit: <a href="https://www.w3schools.com/js/js_json_intro.asp"> this link </a>
   for the W3 tutorial that I followed.
 </p>
 
 
 <b> -- Introduction </b>
-<p> Sidenote: In JavaScript, all objects can be reprsented as JSON. In the client-side,
+
+<p> JSON: JavaScript Object Notation. </p>
+
+<p> JSON is a syntax for storing and exchanging data. </p>
+
+<p> JSON is <b> text </b>, written with JavaScript object notation. </p>
+
+<b> <u> Exchanging Data </u> </b>
+
+<p> When exchanging data between a browser and a server, the data can only be text. <br>
+  JSON is text, and we can convert any JavaScript object into JSON, and send JSON to the server. <br>
+  We can also convert any JSON received from the server into JavaScript objects. </p>
+
+<b> <u> Sending Data/Receiving Data </u> </b>
+
+<p> To send JavaScript objects to the server, you need to convert the objects into
+    a JSON string. Only text can be send to servers via HTTP. To convert JavaScript objects
+    to JSON, use <code> JSON.stringify() </code> and to conver JSON strings that are sent back from servers
+    into JavaScript objects, use <code> JSON.parse() </code>. </p>
+
+
+<!-- Sidenote: In JavaScript, all objects can be reprsented as JSON. In the client-side,
 an object is created by user, and that object is sent to the midtier for further business logic.
 The JSON is turned into a string using the Stringify method in JavaScript, and the data is
 sent via the HTTP request body. The ObjectRep classes in Java are used for parsing the
 JavaScript and creating a Java object. The midtier recieves the HTTP request, it is routed to
 the appropriate method via a url defined for each in the Controller class. Spring makes
 it simple to use the @Requestbody annotation to map the JSON string to the corresponding
-Java ObjectRep class that we want to create. </p>
+Java ObjectRep class that we want to create.  -->
 
 
 <hr>
-<b> -- Syntax </b>
+<b> -- Syntax and Data Types </b>
+
+<p> <b> <u> Syntax </u> </b> </p>
+
+<p> <code> { "name":"John" } </code> </p>
+
+<b> <u> Data Types </u> </b>
+
+<p style="margin-bottom:0;"> Accepted Data Types </p>
+<ul style="margin-top: 5px;">
+  <li> a string </li>
+  <li> a number </li>
+  <li> an object (JSON object) </li>
+  <li> an array </li>
+  <li> a boolean </li>
+  <li> null </li>
+</ul>
+
+<p style="margin-bottom:0;"> Non-Accepted Data Types </p>
+<ul style="margin-top: 5px;">
+  <li> a function </li>
+  <li> a date </li>
+  <li> undefined </li>
+</ul>
+
+<p style="margin-bottom:0;"> Nested JSON Example </p>
+<pre style="margin-top: 5px;">
+<code> myObj = {
+  "name":"John",
+  "age":30,
+  "cars": ["Ford", "BMW", "Fiat"],
+  "education": { "college":"UNC-Chapel Hill", "year-est":1789 }
+ }
+ </code> </pre>
 
 
 </body>
