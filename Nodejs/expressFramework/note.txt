@@ -1,0 +1,27 @@
+Express is a light-weight (minimal code changes needed to integrate into current app)
+NodeJs web application framework to help organize your web application into an
+MVC architecture on the server-side.
+
+The Express framework handles the low-level functionality that you would have
+to otherwise write yourself with pure NodeJs. Express makes it less cumbersome to
+handle routing, url parsing, etc.
+
+
+Our REST API Schema:
+
+/products
+  - GET
+  - POST
+
+/products/{id}
+  - GET
+  - PATCH (updating some fields to an existing resource, as opposed to PUTing a complete resource)
+  - DELETE
+
+/orders
+  - GET
+  - POST
+
+/orders/{id}
+  - GET
+  - DELETE
