@@ -1,1 +1,5 @@
-here you should create a full app that combines all the learned concepts together 
+here you should create a full app that combines all the learned concepts together
+
+frontend: angular
+backend/mid-tier: spring
+backend: oracle database
