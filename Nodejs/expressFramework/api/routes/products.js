@@ -9,9 +9,19 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
+  //body property given by body-parser
+  //these properties are expected to be defined this 
+  //way, according to our own design, this is what 
+  //should be documented if released as a public API
+  var product = { 
+    name: req.body.name, 
+    price: req.body.price
+  };
+
   //status 201 -- successfully created resource
   res.status(201).json({
-    message: 'Handling POST requests to /products'
+    message: 'Handling POST requests to /products',
+    createdProduct: product 
   });
 });
 
