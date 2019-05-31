@@ -6,8 +6,23 @@ var mongoose = require('mongoose');
 var Product = require('../models/product'); 
 
 router.get('/', function(req, res, next) {
-  res.status(200).json({
-    message: 'Handling GET requests to /products'
+  Product.find()
+  .exec() //execute, returning a promise
+  .then(function(docs) { //the promise
+    console.log(docs);
+    //if(docs.length >= 0) { 
+      res.status(200).json(docs);
+    // } else { 
+    //   res.status(404).json({
+    //     message: 'No entries found'
+    //   });
+    // }
+  })   
+  .catch(function(err) { 
+    console.log(err);
+    res.status(500).json({
+      error: err
+    }); 
   });
 });
 
@@ -33,14 +48,16 @@ router.post('/', function(req, res, next) {
   //success vs failure operations 
   product.save().then(function(result) {
     console.log(result);
+    //status 201 -- successfully created resource
+    res.status(201).json({
+      message: 'Handling POST requests to /products',
+      createdProduct: result 
+    });
   }).catch(function(err) {  //we chain catch to catch any errors that may arise 
     console.log(err);
-  });
-
-  //status 201 -- successfully created resource
-  res.status(201).json({
-    message: 'Handling POST requests to /products',
-    createdProduct: product 
+    res.status(500).json({
+      error: err
+    });
   });
 });
 
@@ -58,7 +75,13 @@ router.get('/:productId', function(req, res, next) {
     .exec()
     .then(function(doc) {
       console.log("From database", doc);
-      res.status(200).json(doc); 
+      if (doc) {  //if object is not null 
+        res.status(200).json(doc); 
+      } else { 
+        res.status(404).json({
+          message: "No valid entry found for provided ID"
+        });
+      }
     })
     .catch(function(err) {
       console.log(err);
@@ -79,8 +102,16 @@ router.delete('/:productId', function(req, res, next) {
   //req.params holds all url parameters from request
   //in this case the object would be like: { productId: '123' }
   var id = req.params.productId;
-  res.status(200).json({
-    message: 'Deleted product'
+  Product.remove({_id: id})  //delete all with this criteria, id is unique so delete one
+  .exec()
+  .then(function(result){
+    res.status(200).json(result);
+  })
+  .catch(function(err) { 
+    console.log(err);
+    res.status(500).json({
+      error: err  //this error object is gotten from mongoose
+    });
   });
 });
 
