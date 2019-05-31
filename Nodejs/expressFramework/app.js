@@ -4,9 +4,18 @@ var express = require('express');
 var app = express();
 var morgan = require('morgan');
 var bodyParser = require('body-parser');  //module for parsing url-encoded or json data from request body
+var mongoose = require('mongoose'); //module for easily handling actions with MongoDB
 
 var productRoutes = require('./api/routes/products');
 var orderRoutes = require('./api/routes/orders');
+
+//dynamically get password
+mongoose.connect('mongodb+srv://testUser:'+process.env.MONGO_ATLAS_PW+'@rest-api-testdb-vhmkz.mongodb.net/test?retryWrites=true&w=majority',
+{ useNewUrlParser: true } //instructed to be used by mongoose logs in terminal
+/*,
+{ //set this to use MongoDB client 
+  useMongoClient: true
+}*/);
 
 //use morgan module with 'dev' format -- morgan is a module used for logging your project
 app.use(morgan('dev'));
