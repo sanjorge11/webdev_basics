@@ -90,12 +90,33 @@ router.get('/:productId', function(req, res, next) {
 });
 
 router.patch('/:productId', function(req, res, next) {
-  //req.params holds all url parameters from request
-  //in this case the object would be like: { productId: '123' }
   var id = req.params.productId;
-  res.status(200).json({
-    message: 'Updated product'
-  });
+  /*var updateOps = {}; //empty javascript object 
+  for(var ops of req.body) {  //we expect req.body to be array of operations we want to perform
+    updateOps[ops.propName] = ops.value;  //we will set up requests so that we can extract this later
+  }
+  //use $set: updateOps below
+  */
+
+  //cleaner solution
+  var props = req.body;
+
+  //we dynamically create an object that has all properties we want updated
+  //$set is a propery understood by mongoose to know that the following properties
+  //are to be updated with the patch request
+  Product.update({ _id: id }, { $set: props })
+  .exec()
+  .then(function(result) { 
+    console.log(result); 
+    res.status(200).json(result); 
+  })
+  .catch(function(err) { 
+    console.log(err);
+    res.status(500).json({
+      error: err
+    });
+  }); 
+ 
 });
 
 router.delete('/:productId', function(req, res, next) {
