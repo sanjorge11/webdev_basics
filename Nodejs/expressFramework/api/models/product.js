@@ -4,8 +4,10 @@ var mongoose = require('mongoose');
 
 var productSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId, //we assign its data type to be the internal id system that mongoose uses
-    name: String, 
-    price: Number
+    name: {type: String, required: true}, 
+    price: {type: Number, required: true}   //have properties be required fields
+    // name: String, 
+    // price: Number
 });
 
 //we export the model with a model name of 'Product', and the 
