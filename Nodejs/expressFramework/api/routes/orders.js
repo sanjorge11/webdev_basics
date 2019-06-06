@@ -9,7 +9,8 @@ var Product = require('../models/product');
 router.get('/', function(req, res, next) {
   Order.find()
   .select('product quantity _id')
-  .exec()
+  .populate('product', 'name') //used for gathering more external info, we use product property 
+  .exec()                   //which is the only one that points to another model, you can select specific properties of that model, like 'name'
   .then(function(docs) { 
     res.status(200).json({
       count:docs.length,
@@ -79,6 +80,7 @@ router.post('/', function(req, res, next) {
 
 router.get('/:orderId', function(req, res, next) {
   Order.findById(req.params.orderId)
+  .populate('product')
   .exec()
   .then(function(order) { 
     if(!order) { 
@@ -86,7 +88,7 @@ router.get('/:orderId', function(req, res, next) {
         message: 'Order not found'
       });
     }
-    
+
     res.status(200).json({
       order: order,
       request: {
