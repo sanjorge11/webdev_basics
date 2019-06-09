@@ -2,12 +2,44 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose'); 
+var multer = require('multer'); //an alternative to body-parser, allows upload handling, also has .body parsing capabilities
+
+var storage = multer.diskStorage({
+  //these two functions are ran whenever a file is uploaded,
+  // done by multer 
+  destination: function(req, file, callback) {  
+    //file destination
+    //callback parameters: error we define, file path to store 
+    //here we expect no error, so error parameter is null
+    callback(null, './uploads/'); 
+  }, 
+  filename: function(req, file, callback) { 
+    //set a filename to upload
+    callback(null, new Date().toISOString() + file.originalname); 
+  }
+});
+
+//custom file filter that we can add to upload handler as well 
+var fileFilter = function(req, file, callback) { 
+  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') { 
+    callback(null, true); //accepts storage of file
+  } else { 
+    callback(null, false); 
+  }
+}; 
+
+var upload = multer({storage: storage, limits: { //set custom storage scheme we defined
+  fileSize: (1024*1024)*5 //option to limit fileSize, here we limit to 5MB (1024*1024) is 1MB
+},
+fileFilter: fileFilter
+});  
+//var upload = multer({dest: 'uploads/'}); //set store destination
 
 var Product = require('../models/product'); 
 
 router.get('/', function(req, res, next) {
   Product.find()
-  .select('name price _id') //select which fields to select, ignore the internal _v id
+  .select('name price _id productImage') //select which fields to select, ignore the internal _v id
   .exec() //execute, returning a promise
   .then(function(docs) { //the promise
     var response = {
@@ -16,6 +48,7 @@ router.get('/', function(req, res, next) {
           return { 
             name: doc.name, 
             price: doc.price, 
+            productImage: doc.productImage,
             _id: doc._id, 
             request: { 
               type: 'GET', 
@@ -35,7 +68,11 @@ router.get('/', function(req, res, next) {
   });
 });
 
-router.post('/', function(req, res, next) {
+//we can chain multiple handlers to execute before the 
+//main handler -- the upload.single handler is a single 
+//file upload handler by multer module -- the 'productImage'
+//is the property name that binds to the file upload
+router.post('/', upload.single('productImage'), function(req, res, next) {
   //body property given by body-parser
   //these properties are expected to be defined this 
   //way, according to our own design, this is what 
@@ -49,7 +86,8 @@ router.post('/', function(req, res, next) {
   var product = new Product({
     _id: new mongoose.Types.ObjectId(), //create new unique mongoose id
     name: req.body.name, 
-    price: req.body.price
+    price: req.body.price,
+    productImage: req.file.path   //image url string
   }); 
 
   //save is a mongoose function to save into DB
@@ -89,7 +127,7 @@ router.get('/:productId', function(req, res, next) {
   //the execution block, placing after may cause it to execute 
   //before it was appropriately needed due to asynchronousness
   Product.findById(id)
-    .select('name price _id')
+    .select('name price _id productImage')
     .exec()
     .then(function(doc) {
       console.log("From database", doc);

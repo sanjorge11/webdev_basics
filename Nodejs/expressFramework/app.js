@@ -19,6 +19,14 @@ mongoose.connect('mongodb+srv://testUser:'+process.env.MONGO_ATLAS_PW+'@rest-api
 
 //use morgan module with 'dev' format -- morgan is a module used for logging your project
 app.use(morgan('dev'));
+
+//either a route needed to be defined to recieve a request and return an image,
+//or we make the uploads folder public by making it static, we add 
+//'/uploads' to sepcify the foler path and apply static property to it
+//omitting '/uploads' would mean that /uploads path is not needed and direct path 
+//will work to get image, but we allow to add the extra path to have organization
+app.use('/uploads', express.static('uploads')); 
+
 app.use(bodyParser.urlencoded({extended: false}));  //setting for reading urlencoded body
 app.use(bodyParser.json()); 
 
