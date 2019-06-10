@@ -8,6 +8,7 @@ var mongoose = require('mongoose'); //module for easily handling actions with Mo
 
 var productRoutes = require('./api/routes/products');
 var orderRoutes = require('./api/routes/orders');
+var userRoutes = require('./api/routes/user'); 
 
 //dynamically get password
 mongoose.connect('mongodb+srv://testUser:'+process.env.MONGO_ATLAS_PW+'@rest-api-testdb-vhmkz.mongodb.net/test?retryWrites=true&w=majority',
@@ -58,6 +59,7 @@ app.use(function(req, res, next) {
 
 app.use('/products', productRoutes);
 app.use('/orders', orderRoutes);
+app.use('/user', userRoutes); 
 
 //the catch-all for invalid route requests -- assuming none from above were caught
 app.use(function(req, res, next) {

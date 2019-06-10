@@ -2,4 +2,4 @@ here you should create a full app that combines all the learned concepts togethe
 
 frontend: angular
 backend/mid-tier: spring
-backend: oracle database
+backend: oracle database -- sql db 
