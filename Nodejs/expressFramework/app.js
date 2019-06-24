@@ -12,7 +12,7 @@ var userRoutes = require('./api/routes/user');
 
 //dynamically get password
 mongoose.connect('mongodb+srv://testUser:'+process.env.MONGO_ATLAS_PW+'@rest-api-testdb-vhmkz.mongodb.net/test?retryWrites=true&w=majority',
-{ useNewUrlParser: true } //instructed to be used by mongoose logs in terminal
+{ useNewUrlParser: true, useCreateIndex: true } //instructed to be used by mongoose logs in terminal
 /*,
 { //set this to use MongoDB client 
   useMongoClient: true
