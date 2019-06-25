@@ -3,6 +3,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose'); 
 var multer = require('multer'); //an alternative to body-parser, allows upload handling, also has .body parsing capabilities
+var checkAuth = require('../middleware/check-auth');
 
 var storage = multer.diskStorage({
   //these two functions are ran whenever a file is uploaded,
@@ -71,8 +72,8 @@ router.get('/', function(req, res, next) {
 //we can chain multiple handlers to execute before the 
 //main handler -- the upload.single handler is a single 
 //file upload handler by multer module -- the 'productImage'
-//is the property name that binds to the file upload
-router.post('/', upload.single('productImage'), function(req, res, next) {
+//is the property name we use in the sent for data that binds to the file upload
+router.post('/', checkAuth, upload.single('productImage'), function(req, res, next) {
   //body property given by body-parser
   //these properties are expected to be defined this 
   //way, according to our own design, this is what 
@@ -152,7 +153,7 @@ router.get('/:productId', function(req, res, next) {
     });
 });
 
-router.patch('/:productId', function(req, res, next) {
+router.patch('/:productId', checkAuth, function(req, res, next) {
   var id = req.params.productId;
   /*var updateOps = {}; //empty javascript object 
   for(var ops of req.body) {  //we expect req.body to be array of operations we want to perform
@@ -188,7 +189,7 @@ router.patch('/:productId', function(req, res, next) {
  
 });
 
-router.delete('/:productId', function(req, res, next) {
+router.delete('/:productId', checkAuth, function(req, res, next) {
   //req.params holds all url parameters from request
   //in this case the object would be like: { productId: '123' }
   var id = req.params.productId;
