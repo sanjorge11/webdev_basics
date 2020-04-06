@@ -23,7 +23,7 @@ import { DiagramComponent } from './diagram/diagram.component';
   imports: [
     BrowserModule,
     
-    FacultyModule,
+    FacultyModule,      //note that these modules are not lazily loaded
     CoursesModule,
     AboutUsModule,
 
