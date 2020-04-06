@@ -6,15 +6,28 @@ import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomePageComponent } from './home-page/home-page.component';
 
+import { FacultyModule } from './faculty/faculty.module';
+import { CoursesModule } from './courses/courses.module';
+import { AboutUsModule } from './about-us/about-us.module';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { DiagramComponent } from './diagram/diagram.component'; 
+
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
-    HomePageComponent
+    HomePageComponent,
+    AboutUsComponent,
+    DiagramComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    
+    FacultyModule,
+    CoursesModule,
+    AboutUsModule,
+
+    AppRoutingModule    //this must be called last
   ],
   providers: [],
   bootstrap: [AppComponent]
