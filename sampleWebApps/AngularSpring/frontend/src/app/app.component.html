@@ -1,0 +1,12 @@
+<h1>{{title}}</h1>
+<nav>
+    <a routerLink='/' 
+    routerLinkActive='active' class='btn' 
+    [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    <a routerLink='/diagram' routerLinkActive='active' class='btn'>Diagram</a>
+    <a routerLink='/faculty' routerLinkActive='active' class='btn'>Faculty</a>
+    <a routerLink='/courses' routerLinkActive='active' class='btn'>Courses</a>
+    <a routerLink='/about-us' routerLinkActive='active' class='btn'>About Us</a>
+</nav>
+
+<router-outlet></router-outlet>
