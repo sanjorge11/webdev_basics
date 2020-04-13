@@ -1,1 +1,1 @@
-The serverside requires you to create a PostgreSQL database with the following properties: hostname = localhost, port = 5432, databaseName = postgres. Look at Spring Boot application.properties for more information.
+The serverside requires you to create a PostgreSQL database with the following properties:\n hostname = localhost, port = 5432, databaseName = postgres. Look at Spring Boot application.properties for more information.
