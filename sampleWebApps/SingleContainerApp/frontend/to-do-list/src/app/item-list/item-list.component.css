@@ -1,0 +1,11 @@
+#zoomable { 
+    transition: transform .2s; 
+    box-shadow: rgb(204, 204, 204) 0px 0px 1em;
+    border-radius: 15px;
+}
+
+#zoomable:hover {
+    transform: scale(1.1); 
+    box-shadow: rgb(154, 154, 154) 0px 0px 1em;
+}
+
