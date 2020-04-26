@@ -10,8 +10,8 @@ import { ItemService } from '../item/item.service';
 })
 export class ItemListComponent implements OnInit {
 
-  private itemsArr: Item[];
-  private textInput: string; 
+  public itemsArr: Item[];
+  public textInput: string; 
 
   constructor(
     private itemService: ItemService
