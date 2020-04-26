@@ -2,7 +2,7 @@
 ##pull a node image from dockerhub, used to build the angular project, assign the 'build' alias to the current docker image that we are building 
 FROM node:10-alpine AS build
 
-##set the current docker image workDir to be /dockerApp, this folder will be created in current directory . 
+##set the current docker image workDir to be /dockerApp, this folder will be created in the container's directory 
 WORKDIR /dockerApp 
 
 ##copy all contents from local machine ./frontend to the container's relative path, the . is the current directory (/dockerApp)
