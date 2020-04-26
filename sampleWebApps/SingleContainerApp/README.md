@@ -3,4 +3,6 @@
 docker build -t angular-app .
 
 ## Run
+### nginx web servercontainer is configured to listen on port 80 
 docker run -d -p 8080:80 angular-app
+
