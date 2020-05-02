@@ -1,0 +1,20 @@
+<div> 
+    <form id="input-form" class="form-inline" style="display:flex; justify-content: center;">
+        <input [(ngModel)]="textInput" style="width: 30%;" type="text" id="item" class="form-control" name="item" placeholder="New Item">
+        <button type="button" class="btn btn-success" (click)="onAdd()">Add Item</button>
+    </form>   
+</div>
+<div class="container" style="padding-top: 3%;"> 
+    <div *ngFor="let item of itemsArr">
+        <div id="zoomable" class="container" style="display: flex; align-items: center; border: solid thin black; width: 50%; height: 50px;">
+            <input type="checkbox" [(ngModel)]="item.completed"  (change)="onItemCompletionChange(item, $event)" style="margin: 0; margin-right: 2%;">
+            <div style="width: 100%; text-align: left;">{{item.description}}</div>
+            <button type="button" class="w3-large btn btn-sm" (click)="onDelete(item)">
+                <i class="fa fa-trash"></i>
+                <!-- <span aria-hidden="true">×</span>  -->
+            </button> 
+        </div>
+
+        <div style="padding: 10px;"></div>
+    </div>
+</div>
