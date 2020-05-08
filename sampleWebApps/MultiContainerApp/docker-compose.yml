@@ -1,0 +1,44 @@
+#docker-compose file version
+version: "3.7"
+
+#list services/containers used in app 
+services: 
+ spring-boot-app:
+  container_name: spring-boot-app
+  build: 
+   context: ./serverside/ 
+   dockerfile: Dockerfile
+  ports:
+   - 3000:8080
+  depends_on: 
+   - postgresql-db
+  environment: 
+   - DB_HOSTNAME=postgresql-db
+   - DB_PORT=5432
+   - DB_NAME=ToDoListApp
+   - DB_USERNAME=postgres
+   - DB_PASSWORD=password
+
+ angular-app:
+  build:
+   context: ./frontend/
+   dockerfile: Dockerfile
+  ports:
+   - 3001:80
+  depends_on: 
+   - spring-boot-app
+  environment:
+   - PORT=123
+
+ postgresql-db:
+  container_name: postgresql-db 
+  image: postgres:alpine
+  environment:
+   - POSTGRES_USER=postgres
+   - POSTGRES_PASSWORD=password
+   - POSTGRES_DB=ToDoListApp
+  volumes:
+   - ./backend/sql/:/docker-entrypoint-initdb.d/
+  ports:
+   - 5432:5432
+  restart: always

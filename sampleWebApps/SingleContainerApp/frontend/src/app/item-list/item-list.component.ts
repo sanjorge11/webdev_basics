@@ -18,41 +18,58 @@ export class ItemListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.itemService.getItems().then((data) => {
-      this.itemsArr = data;
-      console.log(data);
+    this.itemService.getItems().then((data : Item[]) => {
+      this.itemsArr = data; 
+      console.log(this.itemsArr);
     });
 
     this.textInput = '';
   }
 
   onAdd() { 
-    //will need to add item to local array after serverside 
+    //add item to local array after serverside 
     //accepts item and provides unique id
     let newItem = new Item(-1, false, this.textInput); 
-    this.itemsArr.push(newItem);
+
+    this.itemService.addItem(newItem).then((data : any) => {
+      this.itemsArr.push(newItem);
+      console.log(data); 
+
+      this.textInput = '';
+    });
+
   }
 
   onItemCompletionChange(item, event) {
 
     for(let a=0; a<this.itemsArr.length; a++) { 
       if(this.itemsArr[a].id === item.id) {
-        this.itemsArr[a].completed = event.target.checked;
+
+        item.completed = event.target.checked;
+
+        this.itemService.updateItem(item).then((data : any) => {
+          console.log(data);
+          this.itemsArr[a].completed = item.completed;
+      }); 
       }
     }
-
     console.log(this.itemsArr);
   }
 
   onDelete(item) { 
     console.log(item); 
-    
-    let tempArr = []; 
-    for(let a=0; a<this.itemsArr.length; a++) { 
-      if(this.itemsArr[a].id !== item.id) tempArr.push(this.itemsArr[a]); 
-    }
 
-    this.itemsArr = tempArr;
+    this.itemService.deleteItem(item).then((data : any) => {
+      let tempArr = []; 
+      for(let a=0; a<this.itemsArr.length; a++) { 
+        if(this.itemsArr[a].id !== item.id) tempArr.push(this.itemsArr[a]); 
+      }
+
+      this.itemsArr = tempArr;
+
+      console.log(data);
+    });
+
   }
 
 }
