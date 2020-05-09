@@ -20,6 +20,7 @@ services:
    - DB_PASSWORD=password
 
  angular-app:
+  container_name: angular-app
   build:
    context: ./frontend/
    dockerfile: Dockerfile
@@ -27,18 +28,28 @@ services:
    - 3001:80
   depends_on: 
    - spring-boot-app
-  environment:
-   - PORT=123
 
+# postgres service can be declared explicitly in docker-compose, or using the Dockerfile as the build
  postgresql-db:
   container_name: postgresql-db 
   image: postgres:alpine
+  ports:
+   - 5432:5432
   environment:
    - POSTGRES_USER=postgres
    - POSTGRES_PASSWORD=password
    - POSTGRES_DB=ToDoListApp
   volumes:
    - ./backend/sql/:/docker-entrypoint-initdb.d/
-  ports:
-   - 5432:5432
-  restart: always
+
+## note that Docker opens a Network bridge for our services to be able to communicate, we can open other networks if needed 
+
+##keywords: 
+## container_name -> custom name for container
+## build -> point the container build to a context (file path) and a dockerfile name
+## ports -> map the host port:container port
+## depends_on -> don't start this container until the dependencies have been started (but not necessarily "ready")
+## environment -> set environment variables for container
+## volumes -> set the source file path: to mount on this file path 
+##  note that any changes to mounted volume, such as source code, will not be applied to the docker container 
+##  until the container is restarted, or you can use tools like nodemon for express servers to restart in its running container as well

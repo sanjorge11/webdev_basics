@@ -2,7 +2,6 @@ FROM postgres:alpine
 ENV POSTGRES_USER postgres
 ENV POSTGRES_PASSWORD password
 ENV POSTGRES_DB ToDoListApp
-##ADD ./backend/sql/initDB.sql /docker-entrypoint-initdb.d/
 ADD ./sql/initDB.sql /docker-entrypoint-initdb.d/
 
 ## the ADD statement above will add the sql files to the /docker-entrypoint-initdb.d/ directory in container, which will execute the sql on docker run 
