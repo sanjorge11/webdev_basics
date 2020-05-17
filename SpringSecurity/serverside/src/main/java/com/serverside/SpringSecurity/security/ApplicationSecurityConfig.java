@@ -27,8 +27,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 		.authorizeRequests()
-		.antMatchers("/", "index", "/css/*", "/js/*")  //white-listed patterns
-		.permitAll()								  //permit all that match
+		.antMatchers("/", "index", "/css/*", "/js/*").permitAll()  //white-listed patterns, permit all that match
+		.antMatchers("/students/**").hasRole(ApplicationUserRole.STUDENT.name()) //this endpoint can only be accessed by users with STUDENT role
 		.anyRequest()	//every request
 		.authenticated()	//must be authenticated
 		.and()			//and use
