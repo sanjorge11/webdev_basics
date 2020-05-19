@@ -20,12 +20,7 @@ public class StudentManagementController {
 	@Autowired
 	private StudentService studentService;
 	
-	//examples for @PreAuthorize
-	//hasRole("ROLE_"), hasAnyRole("ROLE_"), hasAuthority("permission"), hasAnyAuthority("permission")
-
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	//this can replace the last antMatcher
-	//@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINTRAINEE')") 
 	public List<Student> getStudents_all() { 
 		
 		List<Student> studentList = studentService.getAllStudents();

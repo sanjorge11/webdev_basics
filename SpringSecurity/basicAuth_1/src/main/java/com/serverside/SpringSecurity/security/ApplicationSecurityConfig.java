@@ -18,7 +18,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @EnableWebSecurity  //this lets Spring know the class will configure everything about security for our web application
 @EnableGlobalMethodSecurity(prePostEnabled = true)			//this enables pre/post annotations for method-level security, https://www.baeldung.com/spring-security-method-security
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
-//1.55.01
+
 	private final PasswordEncoder passwordEncoder; 
 	
 	@Autowired	//instantiate current object by @Autowired with an encoder
