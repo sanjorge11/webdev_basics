@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -16,16 +18,21 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+import com.serverside.SpringSecurity.auth.ApplicationUserService;
+
 @Configuration
 @EnableWebSecurity  
 @EnableGlobalMethodSecurity(prePostEnabled = true)			
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 //2.58.04	
-	private final PasswordEncoder passwordEncoder; 
+	private final PasswordEncoder passwordEncoder;
+	private final ApplicationUserService applicationUserService; 
 	
 	@Autowired	
-	public ApplicationSecurityConfig(PasswordEncoder passwordEncoder) { 
+	public ApplicationSecurityConfig(PasswordEncoder passwordEncoder, 
+									 ApplicationUserService applicationUserService) { 
 		this.passwordEncoder = passwordEncoder;
+		this.applicationUserService = applicationUserService; 
 	}
 	
 	@Override
@@ -53,6 +60,12 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 		.formLogin() 	//specified as form-based authentication		
 		.loginPage("/login").permitAll()	//permit access to the login page 
 		.defaultSuccessUrl("/courses", true) 	//force re-direct to /courses on login success
+		
+		//you can configure the input element names that Spring will expect for 
+		//the username/password form
+		.usernameParameter("username")		//i kept the defualt names to expect
+		.passwordParameter("password")
+		
 		.and()
 		.rememberMe() 	//this will override the 30 min SESSIONID expiration to 2 weeks (if no parameter given)
 		//According to, https://www.baeldung.com/spring-security-remember-me 
@@ -63,6 +76,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 			.tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(21)) //you can configure it to have token last 21 days
 			.key("specialKey")		//you can set the key used for the md5 hash generated for Remember Me cookie
 		
+			.rememberMeParameter("remember-me")  //the expected remember-me name can be configured too
+			
 		//you will see a cookie with the name, remember-me in Application tab of Chrome tools if the checkbox 
 		//with name remember-me is toggled to true, Spring will enable the Remember Me option
 		
@@ -90,35 +105,48 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 		//					  https://youtu.be/her_7pa0vrg?t=10217
 	}
 
-
-	@Override	
-	@Bean  
-	protected UserDetailsService userDetailsService() {
-		UserDetails sampleUser = User.builder()
-				.username("John")
-				.password(passwordEncoder.encode("password")) 
-				.authorities(ApplicationUserRole.STUDENT.getGrantedAuthorities())  
-				.build();
-		
-		
-		UserDetails sampleAdmin = User.builder()
-				.username("Jane")
-				.password(passwordEncoder.encode("password2")) 
-				.authorities(ApplicationUserRole.ADMIN.getGrantedAuthorities())
-				.build();
-		
-		UserDetails sampleAdminTrainee = User.builder()
-				.username("Jordan")
-				.password(passwordEncoder.encode("password2")) 
-				.authorities(ApplicationUserRole.ADMINTRAINEE.getGrantedAuthorities())
-				.build();
-				
-		return new InMemoryUserDetailsManager(
-				sampleUser,
-				sampleAdmin,
-				sampleAdminTrainee
-		);
-	}
+//		this is replaced with the configure() and daoAuthenticationProvider() below
+//	@Override	
+//	@Bean  
+//	protected UserDetailsService userDetailsService() {
+//		UserDetails sampleUser = User.builder()
+//				.username("John")
+//				.password(passwordEncoder.encode("password")) 
+//				.authorities(ApplicationUserRole.STUDENT.getGrantedAuthorities())  
+//				.build();
+//		
+//		
+//		UserDetails sampleAdmin = User.builder()
+//				.username("Jane")
+//				.password(passwordEncoder.encode("password2")) 
+//				.authorities(ApplicationUserRole.ADMIN.getGrantedAuthorities())
+//				.build();
+//		
+//		UserDetails sampleAdminTrainee = User.builder()
+//				.username("Jordan")
+//				.password(passwordEncoder.encode("password2")) 
+//				.authorities(ApplicationUserRole.ADMINTRAINEE.getGrantedAuthorities())
+//				.build();
+//				
+//		return new InMemoryUserDetailsManager(
+//				sampleUser,
+//				sampleAdmin,
+//				sampleAdminTrainee
+//		);
+//	}
 	
+	
+	@Bean 
+	public DaoAuthenticationProvider daoAuthenticationProvider() { 
+		DaoAuthenticationProvider provider = new DaoAuthenticationProvider(); 
+		provider.setPasswordEncoder(passwordEncoder);	//allows passwords to be decoded
+		provider.setUserDetailsService(applicationUserService);
+		return provider;
+	}
+
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.authenticationProvider(daoAuthenticationProvider());
+	}
 	
 }
