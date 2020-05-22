@@ -24,7 +24,7 @@ import com.serverside.SpringSecurity.auth.ApplicationUserService;
 @EnableWebSecurity  
 @EnableGlobalMethodSecurity(prePostEnabled = true)			
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
-	
+	//4.01.51
 	private final PasswordEncoder passwordEncoder;
 	private final ApplicationUserService applicationUserService; 
 	
@@ -40,6 +40,22 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		//Java JWT implementation 
 		// https://github.com/jwtk/jjwt
+		
+		//JWT Authentication works by the client sending its sign-in information to the 
+		//server, after validation, the server creates and signs a JSON Web Token (JWT)
+		//and send the token back to the client. From then on, the client has to send the
+		//signed token with every request. This is an inversion from the SESSIONID model 
+		//which has the database store and keep track of all the SESSIONIDs for each user. 
+		//In this case, the user provides the signed token for the server to verify. 
+		//This is advantageous for scalability as there is no space required for storing 
+		//SESSIONIDs and it is the standard in mnay applications. 
+		
+		//Pros: Fast, Stateless, Can be used across many services 
+		//Cons: Tokens can be stolen, it is a serious problem if the secret key 
+		//is comprimised, no bookeeping of user history as you can with SESSIONIDs, 
+		//since this is a stateless approach
+		
+		//More info on JWT: https://jwt.io/
 		
 		http
 		.csrf().disable()		
