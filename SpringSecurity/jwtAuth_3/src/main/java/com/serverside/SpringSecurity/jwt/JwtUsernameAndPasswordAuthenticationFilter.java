@@ -20,6 +20,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 
+//this extends a Filter to implement our own overridden methods, 
+//Filters are between the request and the API -- they can deny a request or let them through
 public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
 	//this class will verify the credentials, Spring-Boot can verify credentials
@@ -76,6 +78,8 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 			.setExpiration(java.sql.Date.valueOf(LocalDate.now().plusWeeks(2)))	//expires in 2 weeks
 			.signWith(Keys.hmacShaKeyFor(key.getBytes()))
 			.compact();
+		
+		//you can place a breakpoint under here and copy the JWT to https://jwt.io/ to see the contents 
 			
 		response.addHeader("Authorization", ("Bearer " + jwtToken));  //pass the JWT token in response header
 	}
