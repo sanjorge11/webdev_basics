@@ -1,6 +1,8 @@
 package com.serverside.SpringSecurity.security;
 
 
+import javax.crypto.SecretKey;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,21 +16,28 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.serverside.SpringSecurity.auth.ApplicationUserService;
+import com.serverside.SpringSecurity.jwt.JwtConfig;
+import com.serverside.SpringSecurity.jwt.JwtTokenVerifier;
 import com.serverside.SpringSecurity.jwt.JwtUsernameAndPasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity  
 @EnableGlobalMethodSecurity(prePostEnabled = true)			
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
-	//4.29.50
+	//4.49.27
 	private final PasswordEncoder passwordEncoder;
 	private final ApplicationUserService applicationUserService; 
 	
-	@Autowired	
-	public ApplicationSecurityConfig(PasswordEncoder passwordEncoder, 
-									 ApplicationUserService applicationUserService) { 
+	private final SecretKey secretKey; 
+	private final JwtConfig jwtConfig;
+	
+	@Autowired
+	public ApplicationSecurityConfig(PasswordEncoder passwordEncoder, ApplicationUserService applicationUserService,
+			SecretKey secretKey, JwtConfig jwtConfig) {
 		this.passwordEncoder = passwordEncoder;
-		this.applicationUserService = applicationUserService; 
+		this.applicationUserService = applicationUserService;
+		this.secretKey = secretKey;
+		this.jwtConfig = jwtConfig;
 	}
 	
 	@Override
@@ -61,7 +70,10 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 		.and()
 		
 		//we have authenticationManager() after extending WebSecurityConfigurerAdapter
-		.addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager()))
+		.addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtConfig, secretKey))
+		
+		.addFilterAfter(new JwtTokenVerifier(secretKey, jwtConfig), JwtUsernameAndPasswordAuthenticationFilter.class)	//apply this filter after the filter above
+		
 		.authorizeRequests()
 		.antMatchers("/", "index", "/css/*", "/js/*").permitAll()  
 		.antMatchers("/students/**").hasRole(ApplicationUserRole.STUDENT.name()) 

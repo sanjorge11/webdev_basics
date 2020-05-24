@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Date;
 
+import javax.crypto.SecretKey;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -30,9 +31,17 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 	
 	//this is used by Spring-Boot to authenticate
 	private final AuthenticationManager authenticationManager; 
+	
+	private final JwtConfig jwtConfig; 
+	private final SecretKey secretKey; 
 
-	public JwtUsernameAndPasswordAuthenticationFilter(AuthenticationManager authenticationManager) {
+
+	public JwtUsernameAndPasswordAuthenticationFilter(AuthenticationManager authenticationManager,
+													  JwtConfig jwtConfig, 
+													  SecretKey secretKey) {
 		this.authenticationManager = authenticationManager;
+		this.jwtConfig = jwtConfig; 
+		this.secretKey = secretKey;
 	}
 
 
@@ -67,7 +76,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
 			Authentication authResult) throws IOException, ServletException {
 		
-		String key = "securesecuresecuresecuresecuresecure";  //the key should be long and difficult to crack
+		//String key = "securesecuresecuresecuresecuresecure";  //the key should be long and difficult to crack
 		
 		String jwtToken = 
 				
@@ -76,12 +85,14 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 			.claim("authorities", authResult.getAuthorities())	//set JWT body
 			.setIssuedAt(new Date()) 	//set Issued At date
 			.setExpiration(java.sql.Date.valueOf(LocalDate.now().plusWeeks(2)))	//expires in 2 weeks
-			.signWith(Keys.hmacShaKeyFor(key.getBytes()))
+			//.signWith(Keys.hmacShaKeyFor(key.getBytes()))
+			.signWith(secretKey)
 			.compact();
 		
 		//you can place a breakpoint under here and copy the JWT to https://jwt.io/ to see the contents 
 			
-		response.addHeader("Authorization", ("Bearer " + jwtToken));  //pass the JWT token in response header
+		//response.addHeader("Authorization", ("Bearer " + jwtToken));  //pass the JWT token in response header
+		response.addHeader(jwtConfig.getAuthorizationHeader(), jwtConfig.getTokenPrefix() + jwtToken);
 	}
 	
 }

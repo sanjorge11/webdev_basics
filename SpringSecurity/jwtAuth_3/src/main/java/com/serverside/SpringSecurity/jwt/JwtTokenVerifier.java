@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.crypto.SecretKey;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -28,31 +29,48 @@ import io.jsonwebtoken.security.Keys;
 //this class will be a filter to be invoked once for every single request 
 //coming from the client, here we will verify the JWT provided by client before allowing them access
 public class JwtTokenVerifier extends OncePerRequestFilter {
+	
+	private final SecretKey secretKey;
+	private final JwtConfig jwtConfig;
+	
+
+	public JwtTokenVerifier(SecretKey secretKey, JwtConfig jwtConfig) {
+		this.secretKey = secretKey;
+		this.jwtConfig = jwtConfig;
+	}
+
+
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, 
 									HttpServletResponse response, 
 									FilterChain filterChain)
 													throws ServletException, IOException {		
-		String authorizationHeader = request.getHeader("Authorization"); 
-		if(Strings.isNullOrEmpty(authorizationHeader) || authorizationHeader.startsWith("Bearer ")) { 
+		//String authorizationHeader = request.getHeader("Authorization"); 
+		String authorizationHeader = jwtConfig.getAuthorizationHeader();
+		
+		if(Strings.isNullOrEmpty(authorizationHeader) || authorizationHeader.startsWith(jwtConfig.getAuthorizationHeader())) { 
 			filterChain.doFilter(request, response);		//request will be rejected
 			return; 
 		}
 		
 		//token from client
-		String token = authorizationHeader.replace("Bearer ", ""); 
+		String token = authorizationHeader.replace(jwtConfig.getAuthorizationHeader(), ""); 
 		
 		try { 
 			
-			String key = "securesecuresecuresecuresecuresecure";
-			
+			//String key = "securesecuresecuresecuresecuresecure";
 
 			//parse the token 
+			//Note that .parseClaimsJws will validate the signature
+			//From Documentation: 
+			//There are two things going on here. The key from before is being used to validate the signature of the JWT. 
+			//If it fails to verify the JWT, a SignatureException (which extends from JwtException) is thrown.
 			Jws<Claims> claimsJws = 
 					
 			Jwts.parser()
-				.setSigningKey(Keys.hmacShaKeyFor(key.getBytes()))
+				//.setSigningKey(Keys.hmacShaKeyFor(key.getBytes()))
+				.setSigningKey(secretKey)	
 				.parseClaimsJws(token); 
 			//documentation mentions that when we created the JWT, calling .compact(), it creates 
 			//a signed JWT called a JWS, so we are parsing a JWS
@@ -77,13 +95,19 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
 					simpleGrantedAuthorites
 			); 
 			
+			
 			//here we set the authentication to be true, we confirm that client that sent token is authenticated
+
+			// After setting the Authentication in the context, we specify
+			// that the current user is authenticated. So it passes the
+			// Spring Security Configurations successfully.
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 			
 		} catch(JwtException e) { 
 			throw new IllegalStateException(String.format("Token %s cannot be trusted", token)); 
 		}
 		
+		filterChain.doFilter(request, response);	//pass request/response to next filter in chain
 	}
 
 }
