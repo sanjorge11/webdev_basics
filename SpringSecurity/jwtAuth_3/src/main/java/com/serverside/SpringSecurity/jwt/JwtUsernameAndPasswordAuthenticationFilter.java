@@ -19,7 +19,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
 
 //this extends a Filter to implement our own overridden methods, 
 //Filters are between the request and the API -- they can deny a request or let them through
@@ -84,7 +83,10 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 			.setSubject(authResult.getName())	//set the username info
 			.claim("authorities", authResult.getAuthorities())	//set JWT body
 			.setIssuedAt(new Date()) 	//set Issued At date
-			.setExpiration(java.sql.Date.valueOf(LocalDate.now().plusWeeks(2)))	//expires in 2 weeks
+			//.setExpiration(java.sql.Date.valueOf(LocalDate.now().plusWeeks(2)))	//expires in 2 weeks
+			
+			//this does exact thing as above but uses the JwtConfig class to get contents from application properties instead
+			.setExpiration(java.sql.Date.valueOf(LocalDate.now().plusDays(jwtConfig.getTokenExpirationAfterDays())))
 			//.signWith(Keys.hmacShaKeyFor(key.getBytes()))
 			.signWith(secretKey)
 			.compact();

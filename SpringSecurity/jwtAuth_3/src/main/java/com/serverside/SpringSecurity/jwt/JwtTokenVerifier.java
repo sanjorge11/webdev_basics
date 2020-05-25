@@ -24,7 +24,6 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
 
 //this class will be a filter to be invoked once for every single request 
 //coming from the client, here we will verify the JWT provided by client before allowing them access
@@ -47,7 +46,7 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
 									FilterChain filterChain)
 													throws ServletException, IOException {		
 		//String authorizationHeader = request.getHeader("Authorization"); 
-		String authorizationHeader = jwtConfig.getAuthorizationHeader();
+		String authorizationHeader = request.getHeader(jwtConfig.getAuthorizationHeader());
 		
 		if(Strings.isNullOrEmpty(authorizationHeader) || authorizationHeader.startsWith(jwtConfig.getAuthorizationHeader())) { 
 			filterChain.doFilter(request, response);		//request will be rejected
@@ -55,7 +54,7 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
 		}
 		
 		//token from client
-		String token = authorizationHeader.replace(jwtConfig.getAuthorizationHeader(), ""); 
+		String token = authorizationHeader.replace(jwtConfig.getTokenPrefix(), ""); 
 		
 		try { 
 			

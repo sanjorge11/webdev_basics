@@ -1,6 +1,7 @@
 package com.serverside.SpringSecurity.security;
 
 
+
 import javax.crypto.SecretKey;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +62,10 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 		//since this is a stateless approach
 		
 		//More info on JWT: https://jwt.io/
+		
+		//Important Note: It may be best practice for security reasons to implement code that will invalidate 
+		//the creation of a new JWT for a user if the user should already have an active one. It could be done 
+		//by storing user information along with JWT metadata in some database. 
 		
 		http
 		.csrf().disable()
