@@ -63,9 +63,13 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		//More info on JWT: https://jwt.io/
 		
-		//Important Note: It may be best practice for security reasons to implement code that will invalidate 
+		//IMPORTANT Note: It may be best practice for security reasons to implement code that will invalidate 
 		//the creation of a new JWT for a user if the user should already have an active one. It could be done 
-		//by storing user information along with JWT metadata in some database. 
+		//by storing user information along with JWT metadata in some database. Additionally, ther should be 
+		//code to verify that that current UserDetails object's username matches with the subject on the JWT,
+		//and verify that the JWT is not past expiration. The signature is already verified with the try/catch 
+		//block when parsing the JWS. The build-in method parses the claims and verifies the signature in one 
+		//line. If there was an error, it would go to the catch block.
 		
 		http
 		.csrf().disable()
