@@ -1,8 +1,12 @@
 package com.serverside.AngularSpringAuth.jwt;
 
+import javax.crypto.SecretKey;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
+
+import io.jsonwebtoken.security.Keys;
 
 
 @Component
@@ -16,13 +20,18 @@ public class JwtConfig {
 	public JwtConfig() { 
 		
 	}
-
-	public String getSecretKey() {
+	
+	//getters/setters names must match with items in properties file
+	public String getSecretKey() {		
 		return secretKey;
 	}
 
 	public void setSecretKey(String secretKey) {
 		this.secretKey = secretKey;
+	}
+	
+	public SecretKey secretKey() { 
+		return Keys.hmacShaKeyFor(this.secretKey.getBytes()); 
 	}
 
 	public String getTokenPrefix() {

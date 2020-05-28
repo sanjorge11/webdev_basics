@@ -1,9 +1,5 @@
 package com.serverside.AngularSpringAuth.security;
 
-
-
-import javax.crypto.SecretKey;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.serverside.AngularSpringAuth.auth.ApplicationUserService;
 import com.serverside.AngularSpringAuth.jwt.JwtConfig;
-import com.serverside.AngularSpringAuth.jwt.JwtTokenVerifier;
+import com.serverside.AngularSpringAuth.jwt.JwtTokenVerifierFilter;
 import com.serverside.AngularSpringAuth.jwt.JwtUsernameAndPasswordAuthenticationFilter;
 
 @Configuration
@@ -28,17 +24,19 @@ import com.serverside.AngularSpringAuth.jwt.JwtUsernameAndPasswordAuthentication
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private final PasswordEncoder passwordEncoder;
-	private final ApplicationUserService applicationUserService; 
-	
-	private final SecretKey secretKey; 
+	private final ApplicationUserService applicationUserService; 	
 	private final JwtConfig jwtConfig;
 	
+//	Autowiring by constructor is similar to byType but it applies to constructor arguments. It will look for 
+//	the class type of constructor arguments, and then do an autowire byType on all constructor arguments. If 
+//	exactly one bean of the constructor argument type is not present in the container, a fatal error will be raised.
+//  The properties for the constructor are injected as an argument to the constructor when ApplicationSecurityConfig
+//	is created. 	
+	
 	@Autowired
-	public ApplicationSecurityConfig(PasswordEncoder passwordEncoder, ApplicationUserService applicationUserService,
-			SecretKey secretKey, JwtConfig jwtConfig) {
+	public ApplicationSecurityConfig(PasswordEncoder passwordEncoder, ApplicationUserService applicationUserService, JwtConfig jwtConfig) {
 		this.passwordEncoder = passwordEncoder;
 		this.applicationUserService = applicationUserService;
-		this.secretKey = secretKey;
 		this.jwtConfig = jwtConfig;
 	}
 	
@@ -48,24 +46,41 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 		.csrf().disable()
 		
-		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-		.and()
+		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)	
+		.and()	
 		
-		.addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtConfig, secretKey))
-		
-		.addFilterAfter(new JwtTokenVerifier(secretKey, jwtConfig), JwtUsernameAndPasswordAuthenticationFilter.class)	//apply this filter after the filter above
+		//Make a filter chain: 
+		//Note that the first Filter happens when authenticating user in /login 
+		//The second Filter happens when verifying a request, it is NOT done after first filter 
+		//because the chain.doFilter() does not pass the request/reponse on to the next Filter in the chain.
+		//Therefore, every request that's not authenticating from /login will go to second Filter, once that 
+		//is done, it will pass on the request/response to the next Filter (which would be some other 
+		//Filter that Spring Security provides and has not been overriden by us)
+		.addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtConfig))
+		.addFilterAfter(new JwtTokenVerifierFilter(jwtConfig), JwtUsernameAndPasswordAuthenticationFilter.class)	
 		
 		.authorizeRequests()
 		.antMatchers("/", "index", "/css/*", "/js/*").permitAll()  
 		.antMatchers("/students/**").hasRole(UserRole.STUDENT.name()) 
 		.antMatchers(HttpMethod.GET, "/management/students/**").hasAnyRole(UserRole.ADMIN.name(), UserRole.ADMINTRAINEE.name())	
-		.anyRequest()	
-		.authenticated();
+		
+		.anyRequest()
+		.authenticated()
+
+		.and()			
+		.formLogin() 	
+		.loginPage("/login").permitAll()	
+		.defaultSuccessUrl("/courses", true) 	
+
+		.and()
+		.logout()
+			.logoutUrl("/logout") 	 
+			.logoutSuccessUrl("/login"); 	
 	
 	}
 	
 	
-	@Bean 
+	@Bean 		//set up this provider for AuthenticationManager to use
 	public DaoAuthenticationProvider daoAuthenticationProvider() { 
 		DaoAuthenticationProvider provider = new DaoAuthenticationProvider(); 
 		provider.setPasswordEncoder(passwordEncoder);	
@@ -73,7 +88,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 		return provider;
 	}
 
-	@Override		//override AuthenticationManager for the app with the passwordEncoder and UserDetailsService
+	@Override		//override AuthenticationManager for the app to use Provider defined above
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.authenticationProvider(daoAuthenticationProvider());
 	}

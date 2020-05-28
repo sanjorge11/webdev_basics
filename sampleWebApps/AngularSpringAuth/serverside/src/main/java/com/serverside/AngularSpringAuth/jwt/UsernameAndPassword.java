@@ -1,12 +1,11 @@
 package com.serverside.AngularSpringAuth.jwt;
 
-public class UsernameAndPasswordAuthenticationRequest {
-	//class to get username and password from client 
+public class UsernameAndPassword {
 	
 	private String username; 
 	private String password; 
 	
-	public UsernameAndPasswordAuthenticationRequest() { 
+	public UsernameAndPassword() { 
 		
 	}
 

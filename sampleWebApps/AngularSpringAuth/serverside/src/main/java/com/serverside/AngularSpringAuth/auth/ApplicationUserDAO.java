@@ -1,14 +1,78 @@
 package com.serverside.AngularSpringAuth.auth;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
-public interface ApplicationUserDAO {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Repository;
 
-	//https://www.tutorialspoint.com/java8/java8_optional_class.htm
-//	Optional is a container object used to contain not-null objects. 
-//	Optional object is used to represent null with absent value. This class 
-//	has various utility methods to facilitate code to handle values 
-//	as ‘available’ or ‘not available’ instead of checking null values.
-	public Optional<ApplicationUser> selectApplicationUserByUsername(String username); 
+import com.serverside.AngularSpringAuth.dao.BaseDAO;
+import com.serverside.AngularSpringAuth.dao.StudentDAO.StudentRowMapper;
+import com.serverside.AngularSpringAuth.domain.Student;
+import com.serverside.AngularSpringAuth.security.ApplicationResources;
+import com.serverside.AngularSpringAuth.security.UserRole;
+
+ 
+@Repository
+public class ApplicationUserDAO extends BaseDAO {
+
+	private final PasswordEncoder passwordEncoder; 
+	private final ApplicationResources applicationResources; 
+	
+	@Autowired
+	public ApplicationUserDAO(PasswordEncoder passwordEncoder, ApplicationResources applicationResources) { 
+		this.passwordEncoder = passwordEncoder;
+		this.applicationResources = applicationResources; 
+	}
+	
+	
+	public class ApplicationUserRowMapper implements RowMapper<ApplicationUser> {
+		@Override
+		public ApplicationUser mapRow(ResultSet rs, int rowNum) throws SQLException {
+			
+			List<String> applicationRoles = applicationResources.getRoles(); 
+			String userRole = rs.getString("role").trim(); 
+			
+			if(!applicationRoles.contains(userRole.toUpperCase())) return null; 
+			
+			ApplicationUser user = new ApplicationUser(
+					rs.getString("username").trim(), 
+					rs.getString("password").trim(), 
+					UserRole.valueOf(userRole).getGrantedAuthorities(), 
+					rs.getBoolean("isaccountnonexpired"), 
+					rs.getBoolean("isaccountnonlocked"), 
+					rs.getBoolean("iscredentialsnonexpired"), 
+					rs.getBoolean("isenabled")
+			);
+
+		      
+		      return user;
+		}
+	}
+	
+	public ApplicationUser selectApplicationUserByUsername(String username) {
+		Object[] args = { username }; 
+		String sql = "SELECT * FROM private.app_user WHERE username = ?"; 
+		
+		List<ApplicationUser> users = jdbcTemplate.query(sql, args, new ApplicationUserRowMapper());
+		
+		if(users == null || users.size() == 0) return null; 	//should not be more than one
+		
+		return users.get(0); 
+	}
+	
+	public int registerUser(String username, String password, String role) {
+		Object[] args = { username, passwordEncoder.encode(password), role, true, true, true, true }; 
+		String sql = "INSERT INTO private.app_user VALUES (?, ?, ?, ?, ?, ?, ?)"; 
+		
+		int res = jdbcTemplate.update(sql, args);
+		
+		return res; 
+	}
 
 }

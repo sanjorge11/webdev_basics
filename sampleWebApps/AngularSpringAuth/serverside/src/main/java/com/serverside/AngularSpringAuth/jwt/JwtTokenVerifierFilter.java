@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.crypto.SecretKey;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -23,16 +22,13 @@ import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 
-//this class will be a filter to be invoked once for every single request 
-//coming from the client, here we will verify the JWT provided by client before allowing them access
-public class JwtTokenVerifier extends OncePerRequestFilter {
+//Filter #2 -- this is done once per request
+public class JwtTokenVerifierFilter extends OncePerRequestFilter {
 	
-	private final SecretKey secretKey;
 	private final JwtConfig jwtConfig;
 	
 
-	public JwtTokenVerifier(SecretKey secretKey, JwtConfig jwtConfig) {
-		this.secretKey = secretKey;
+	public JwtTokenVerifierFilter(JwtConfig jwtConfig) {
 		this.jwtConfig = jwtConfig;
 	}
 
@@ -56,18 +52,15 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
 		
 		try { 
 			
-			//String key = "securesecuresecuresecuresecuresecure";
-
-			//parse the token 
 			//Note that .parseClaimsJws will validate the signature
 			//From Documentation: 
 			//There are two things going on here. The key from before is being used to validate the signature of the JWT. 
 			//If it fails to verify the JWT, a SignatureException (which extends from JwtException) is thrown.
+			//Will also throw exception if JWT is expired.
 			Jws<Claims> claimsJws = 
 					
 			Jwts.parser()
-				//.setSigningKey(Keys.hmacShaKeyFor(key.getBytes()))
-				.setSigningKey(secretKey)	
+				.setSigningKey(jwtConfig.secretKey())	
 				.parseClaimsJws(token); 
 			//documentation mentions that when we created the JWT, calling .compact(), it creates 
 			//a signed JWT called a JWS, so we are parsing a JWS
@@ -93,14 +86,14 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
 			); 
 			
 			
+			//you could implement more verifications here like: check expiration, check username
+			
+			
 			//here we set the authentication to be true, we confirm that client that sent token is authenticated
-
-			// After setting the Authentication in the context, we specify
-			// that the current user is authenticated. So it passes the
-			// Spring Security Configurations successfully.
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 			
 		} catch(JwtException e) { 
+			//this catch block would catch if JWS signature is invalid, or expired, etc.
 			throw new IllegalStateException(String.format("Token %s cannot be trusted", token)); 
 		}
 		
