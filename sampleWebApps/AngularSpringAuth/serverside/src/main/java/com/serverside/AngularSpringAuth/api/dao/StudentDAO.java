@@ -1,4 +1,4 @@
-package com.serverside.AngularSpringAuth.dao;
+package com.serverside.AngularSpringAuth.api.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.serverside.AngularSpringAuth.domain.Student;
+import com.serverside.AngularSpringAuth.api.domain.Student;
 
 @Repository
 public class StudentDAO extends BaseDAO {

@@ -1,4 +1,4 @@
-package com.serverside.AngularSpringAuth.jwt;
+package com.serverside.AngularSpringAuth.security.jwt;
 
 import javax.crypto.SecretKey;
 

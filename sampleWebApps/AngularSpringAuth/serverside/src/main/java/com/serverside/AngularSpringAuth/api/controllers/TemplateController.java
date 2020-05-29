@@ -1,4 +1,4 @@
-package com.serverside.AngularSpringAuth.controllers;
+package com.serverside.AngularSpringAuth.api.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

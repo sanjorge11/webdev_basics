@@ -1,4 +1,4 @@
-package com.serverside.AngularSpringAuth.services;
+package com.serverside.AngularSpringAuth.api.services;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.serverside.AngularSpringAuth.dao.StudentDAO;
-import com.serverside.AngularSpringAuth.domain.Student;
+import com.serverside.AngularSpringAuth.api.dao.StudentDAO;
+import com.serverside.AngularSpringAuth.api.domain.Student;
 
 @Service
 public class StudentService {

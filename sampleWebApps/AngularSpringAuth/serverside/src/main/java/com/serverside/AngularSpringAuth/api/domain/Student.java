@@ -1,4 +1,4 @@
-package com.serverside.AngularSpringAuth.domain;
+package com.serverside.AngularSpringAuth.api.domain;
 
 public class Student {
 	int id; 

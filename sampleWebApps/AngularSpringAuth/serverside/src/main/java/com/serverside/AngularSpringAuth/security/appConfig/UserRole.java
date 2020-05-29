@@ -1,11 +1,11 @@
-package com.serverside.AngularSpringAuth.security;
+package com.serverside.AngularSpringAuth.security.appConfig;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import static com.serverside.AngularSpringAuth.security.UserPermission.*;
+import static com.serverside.AngularSpringAuth.security.appConfig.UserPermission.*;
 
 public enum UserRole {
 	STUDENT(new HashSet<UserPermission>()), 

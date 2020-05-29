@@ -1,4 +1,4 @@
-package com.serverside.AngularSpringAuth.auth;
+package com.serverside.AngularSpringAuth.security.auth;
 
 import java.util.Collection;
 import java.util.Set;

@@ -1,4 +1,4 @@
-package com.serverside.AngularSpringAuth.security;
+package com.serverside.AngularSpringAuth.security.appConfig;
 
 public enum UserPermission {
 	STUDENT_READ("student:read"),

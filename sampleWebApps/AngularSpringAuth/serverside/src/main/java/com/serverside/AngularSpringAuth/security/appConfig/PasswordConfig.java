@@ -1,4 +1,4 @@
-package com.serverside.AngularSpringAuth.security;
+package com.serverside.AngularSpringAuth.security.appConfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class PasswordConfig {
 
-	@Bean
+	@Bean		//this Bean is referenced in other classes as object of type PasswordEncoder
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder(10);
 	}

@@ -1,4 +1,4 @@
-package com.serverside.AngularSpringAuth.dao;
+package com.serverside.AngularSpringAuth.api.dao;
 
 import javax.sql.DataSource;
 

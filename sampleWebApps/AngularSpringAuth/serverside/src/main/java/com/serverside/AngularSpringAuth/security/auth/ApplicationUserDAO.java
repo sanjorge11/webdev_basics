@@ -1,21 +1,16 @@
-package com.serverside.AngularSpringAuth.auth;
+package com.serverside.AngularSpringAuth.security.auth;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
-import com.serverside.AngularSpringAuth.dao.BaseDAO;
-import com.serverside.AngularSpringAuth.dao.StudentDAO.StudentRowMapper;
-import com.serverside.AngularSpringAuth.domain.Student;
-import com.serverside.AngularSpringAuth.security.ApplicationResources;
-import com.serverside.AngularSpringAuth.security.UserRole;
+import com.serverside.AngularSpringAuth.security.appConfig.UserRole;
+import com.serverside.AngularSpringAuth.api.dao.BaseDAO;
+import com.serverside.AngularSpringAuth.security.appConfig.ApplicationResources;
 
  
 @Repository

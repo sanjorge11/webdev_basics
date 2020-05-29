@@ -1,4 +1,4 @@
-package com.serverside.AngularSpringAuth.security;
+package com.serverside.AngularSpringAuth.security.appConfig;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,17 +13,17 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.serverside.AngularSpringAuth.auth.ApplicationUserService;
-import com.serverside.AngularSpringAuth.jwt.JwtConfig;
-import com.serverside.AngularSpringAuth.jwt.JwtTokenVerifierFilter;
-import com.serverside.AngularSpringAuth.jwt.JwtUsernameAndPasswordAuthenticationFilter;
+import com.serverside.AngularSpringAuth.security.auth.ApplicationUserService;
+import com.serverside.AngularSpringAuth.security.jwt.JwtConfig;
+import com.serverside.AngularSpringAuth.security.jwt.JwtTokenVerifierFilter;
+import com.serverside.AngularSpringAuth.security.jwt.JwtUsernameAndPasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity  
 @EnableGlobalMethodSecurity(prePostEnabled = true)			
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	private final PasswordEncoder passwordEncoder;
+	private final PasswordEncoder passwordEncoder;		//this is from the Bean defined in PasswordConfig class
 	private final ApplicationUserService applicationUserService; 	
 	private final JwtConfig jwtConfig;
 	

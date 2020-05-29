@@ -1,4 +1,4 @@
-package com.serverside.AngularSpringAuth.auth;
+package com.serverside.AngularSpringAuth.security.auth;
 
 public class RegisterUser {
 

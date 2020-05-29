@@ -1,4 +1,4 @@
-package com.serverside.AngularSpringAuth.controllers;
+package com.serverside.AngularSpringAuth.api.controllers;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.serverside.AngularSpringAuth.domain.Student;
-import com.serverside.AngularSpringAuth.services.StudentService;
+import com.serverside.AngularSpringAuth.api.domain.Student;
+import com.serverside.AngularSpringAuth.api.services.StudentService;
 
 @RestController
 @RequestMapping(value = "/students")
