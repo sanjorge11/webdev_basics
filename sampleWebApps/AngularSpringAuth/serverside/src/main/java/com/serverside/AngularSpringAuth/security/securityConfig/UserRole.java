@@ -1,16 +1,16 @@
-package com.serverside.AngularSpringAuth.security.appConfig;
+package com.serverside.AngularSpringAuth.security.securityConfig;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import static com.serverside.AngularSpringAuth.security.appConfig.UserPermission.*;
+import static com.serverside.AngularSpringAuth.security.securityConfig.UserPermission.*;
 
 public enum UserRole {
 	STUDENT(new HashSet<UserPermission>()), 
-	ADMIN(new HashSet<UserPermission>(Arrays.asList(COURSE_READ, COURSE_WRITE, STUDENT_READ, STUDENT_WRITE))),
-	ADMINTRAINEE(new HashSet<UserPermission>(Arrays.asList(COURSE_READ, STUDENT_READ)));
+	ADMIN(new HashSet<UserPermission>(Arrays.asList(STUDENT_READ, STUDENT_WRITE))),
+	ADMINTRAINEE(new HashSet<UserPermission>(Arrays.asList(STUDENT_READ)));
 	
 	
 	private final Set<UserPermission> permissions;

@@ -1,4 +1,4 @@
-package com.serverside.AngularSpringAuth.security.appConfig;
+package com.serverside.AngularSpringAuth.security.securityConfig;
 
 import java.util.Arrays;
 import java.util.List;

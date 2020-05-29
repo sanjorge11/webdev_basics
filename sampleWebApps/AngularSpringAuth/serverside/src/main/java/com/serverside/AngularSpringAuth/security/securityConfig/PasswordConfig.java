@@ -1,4 +1,4 @@
-package com.serverside.AngularSpringAuth.security.appConfig;
+package com.serverside.AngularSpringAuth.security.securityConfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

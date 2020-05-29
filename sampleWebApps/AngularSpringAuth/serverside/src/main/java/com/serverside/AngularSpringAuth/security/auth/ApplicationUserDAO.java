@@ -8,9 +8,9 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
-import com.serverside.AngularSpringAuth.security.appConfig.UserRole;
+import com.serverside.AngularSpringAuth.security.securityConfig.UserRole;
 import com.serverside.AngularSpringAuth.api.dao.BaseDAO;
-import com.serverside.AngularSpringAuth.security.appConfig.ApplicationResources;
+import com.serverside.AngularSpringAuth.security.securityConfig.ApplicationResources;
 
  
 @Repository

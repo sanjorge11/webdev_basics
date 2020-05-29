@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,18 +34,4 @@ public class StudentContoller {
 		return student; 
 	}
 	
-	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public Student createStudent(@RequestBody Student student) {
-		return studentService.createStudent(student);
-	}
-	
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public void updateStudent(@PathVariable int id, @RequestBody Student student) throws Exception {
-		studentService.updateStudent(id, student);
-	}
-	
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public void deleteStudent(@PathVariable int id) {
-		studentService.deleteStudent(id);
-	}
 }
