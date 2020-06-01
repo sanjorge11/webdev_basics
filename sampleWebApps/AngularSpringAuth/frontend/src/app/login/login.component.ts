@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth/auth.service';
+import { User } from '../auth/user';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  private usernameInput : string; 
+  private passwordInput : string; 
+
+  constructor(
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
+    this.usernameInput = ''; 
+    this.passwordInput = ''; 
+  }
+
+  login() { 
+    let user = new User(this.usernameInput, this.passwordInput, undefined);
+
+    this.authService.loginUser(user).subscribe((data : any) => {
+      //Auth is stored in cookie instead
+      //console.log(data.headers.get('Authorization'));   
+  }); 
+
   }
 
 }

@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'students', component: StudentComponent },
-  { path: 'management/students', component: AdminComponent },
+  { path: 'admin', component: AdminComponent },
   { path: '**', component: PageNotFoundComponent }  //wildcard route
 ];
 

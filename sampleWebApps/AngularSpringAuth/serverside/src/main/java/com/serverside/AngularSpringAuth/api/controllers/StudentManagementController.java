@@ -14,7 +14,7 @@ import com.serverside.AngularSpringAuth.api.domain.Student;
 import com.serverside.AngularSpringAuth.api.services.StudentService;
 
 @RestController
-@RequestMapping(value = "/management/students")
+@RequestMapping(value = "/admin")
 public class StudentManagementController {
 	
 	@Autowired

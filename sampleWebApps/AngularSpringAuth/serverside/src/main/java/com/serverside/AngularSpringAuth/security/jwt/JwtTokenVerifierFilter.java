@@ -1,6 +1,8 @@
 package com.serverside.AngularSpringAuth.security.jwt;
 
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -8,6 +10,7 @@ import java.util.stream.Collectors;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -40,6 +43,29 @@ public class JwtTokenVerifierFilter extends OncePerRequestFilter {
 									FilterChain filterChain)
 													throws ServletException, IOException {		
 
+		//Replaced logic that sends JWT inside header, to inside an HTTP-Only Cookie
+		Cookie[] cookies = request.getCookies(); 
+		if(cookies == null || cookies.length == 0) { 
+			filterChain.doFilter(request, response);		//request will be rejected
+			return; 
+		}
+		Cookie authCookie = null; 
+		for(Cookie c : cookies) { 
+			if(c.getName().equals("Authorization")) {
+				authCookie = c; 
+				break; 
+			}
+		}
+		if(authCookie == null) {
+			filterChain.doFilter(request, response);		//request will be rejected
+			return; 
+		}
+		
+		
+		String token = URLDecoder.decode(authCookie.getValue(), "UTF-8").replace(jwtConfig.getTokenPrefix(), ""); 
+		
+		
+		/*
 		String authorizationHeader = request.getHeader(jwtConfig.getAuthorizationHeader());
 		
 		if(authorizationHeader == null || authorizationHeader.length() == 0|| authorizationHeader.startsWith(jwtConfig.getAuthorizationHeader())) { 
@@ -49,6 +75,8 @@ public class JwtTokenVerifierFilter extends OncePerRequestFilter {
 		
 		//token from client
 		String token = authorizationHeader.replace(jwtConfig.getTokenPrefix(), ""); 
+		*/
+		
 		
 		try { 
 			

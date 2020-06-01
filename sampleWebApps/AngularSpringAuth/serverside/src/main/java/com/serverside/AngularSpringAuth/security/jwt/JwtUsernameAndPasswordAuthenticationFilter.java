@@ -1,14 +1,18 @@
 package com.serverside.AngularSpringAuth.security.jwt;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -68,9 +72,19 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 			.setExpiration(java.sql.Date.valueOf(LocalDate.now().plusDays(jwtConfig.getTokenExpirationAfterDays())))
 			.signWith(jwtConfig.secretKey())
 			.compact();
-			
-		response.addHeader(jwtConfig.getAuthorizationHeader(), jwtConfig.getTokenPrefix() + jwtToken);
 		
+		//Replaced logic that sends JWT inside header, to inside an HTTP-Only Cookie
+		//response.addHeader("Access-Control-Expose-Headers", "Authorization");
+		//response.addHeader(jwtConfig.getAuthorizationHeader(), jwtConfig.getTokenPrefix() + jwtToken);
+		
+		//the cookie is sent to frontend, browser automatically stores it and sends it with each subsequent request
+	    Cookie cookie = new Cookie("Authorization", URLEncoder.encode(jwtConfig.getTokenPrefix() + jwtToken, "UTF-8" ));
+	    cookie.setMaxAge((int) TimeUnit.DAYS.toSeconds(jwtConfig.getTokenExpirationAfterDays()));
+	    cookie.setHttpOnly(true);
+	    cookie.setPath("/");
+	    
+	    response.addCookie(cookie);
+
 		//chain.doFilter(request, response); 	//creates error
 	}
 	

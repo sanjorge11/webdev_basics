@@ -43,9 +43,12 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		http
+		http 
+		.cors()		//enable cross-origin requests, the overriden method I implemented will be used
+		.and()
 		.csrf().disable()
 		
+		//stateless sessions, no SESSIONIDs created or managed by spring bootß
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)	
 		.and()	
 		
@@ -60,22 +63,23 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 		.addFilterAfter(new JwtTokenVerifierFilter(jwtConfig), JwtUsernameAndPasswordAuthenticationFilter.class)	
 		
 		.authorizeRequests()
-		.antMatchers("/", "index", "/css/*", "/js/*").permitAll()  
+		.antMatchers("/", "index", "/css/*", "/js/*", "/login", "/register", 
+				"/runtime-es2015.js", "/polyfills-es2015.js", "/styles-es2015.js", "/vendor-es2015.js", "/main-es2015.js", "/favicon.ico").permitAll()  
 		.antMatchers("/students/**").hasRole(UserRole.STUDENT.name()) 
-		.antMatchers(HttpMethod.GET, "/management/students/**").hasAnyRole(UserRole.ADMIN.name(), UserRole.ADMINTRAINEE.name())	
+		.antMatchers(HttpMethod.GET, "/admin/**").hasAnyRole(UserRole.ADMIN.name(), UserRole.ADMINTRAINEE.name())	
 		
 		.anyRequest()
-		.authenticated()
+		.authenticated();
 
-		.and()			
-		.formLogin() 	
-		.loginPage("/login").permitAll()	
-		.defaultSuccessUrl("/courses", true) 	
-
-		.and()
-		.logout()
-			.logoutUrl("/logout") 	 
-			.logoutSuccessUrl("/login"); 	
+//		.and()			
+//		.formLogin() 	
+//		.loginPage("/login").permitAll()	
+//		.defaultSuccessUrl("/courses", true) 	
+//
+//		.and()
+//		.logout()
+//			.logoutUrl("/logout") 	 
+//			.logoutSuccessUrl("/login"); 	
 	
 	}
 	
@@ -92,5 +96,30 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.authenticationProvider(daoAuthenticationProvider());
 	}
+	
+	//IMPORTANT: the JWT will be stored in the frontend inside an http-only cookie
+	//which means that it will not be able to be retrieved via JavaScript and is 
+	//therefore not vulnerable to XSS. An http-only cookie is, however, NOT 
+	//safe from CSRF attacks, because the browser will be trusted by website 
+	//becuase the cookie sits in the browser and is sent with a request automatically. 
+	
+	//A way to solve this issue is by storing the Bearer Token (JWT) in-memory. 
+	//In other words, stored inside a variable in the client-side javascript 
+	//that is running, supplied by the website. The token is persisted, not lost 
+	//when refreshing the page, by having a refresh token sent along with bearer 
+	//token. It will have server generate new token if lost or expired. The refresh 
+	//token is stored in frontend as a cookie. 
+	
+	//This approach is not vulnerable to XSS because not accessible by JavaScript. 
+	//The token is stored in a variable inside the JavaScript that the browser 
+	//is running, you cannot access the variables and their values unless ab object 
+	//was console.logged. Note that it could be retrieved by setting a breakpoint in
+	//the Chrome Dev tools, but the production code should have the files minified 
+	//so the attacker will not know where to place the breakpoint or which file 
+	//to look at. It is also not vulnerable to CSRF because the website will 
+	//not only rely on the cookies stored and the trust with the user. The token 
+	//is stored in-memory and sent as a header. 
+
+	//See this video fr details: https://www.youtube.com/watch?v=iD49_NIQ-R4
 	
 }
