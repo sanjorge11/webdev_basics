@@ -2,31 +2,32 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { StudentComponent } from './student/student.component';
-import { AdminComponent } from './admin/admin.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { HomePageComponent } from './home-page/home-page.component';
+import { LogoutComponent } from './logout/logout.component';
+
+import { BaseModule } from './base/base.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StudentComponent,
-    AdminComponent,
     RegisterComponent,
     LoginComponent,
-    PageNotFoundComponent,
-    HomePageComponent
+    LogoutComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+
+    BaseModule
   ],
   providers: [],
   bootstrap: [AppComponent]

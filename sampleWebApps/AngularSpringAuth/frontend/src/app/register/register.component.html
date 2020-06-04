@@ -1,1 +1,27 @@
-<p>register works!</p>
+<div class="container">
+    <form class="form-signin">
+        <h2 class="form-signin-heading">Register</h2>
+        <p>
+            <label for="username" class="sr-only">Username</label>
+            <input type="text" id="username" [(ngModel)]="usernameInput" name="username" class="form-control"
+                placeholder="Username" required="" autofocus="">
+        </p>
+        <p>
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" [(ngModel)]="passwordInput" id="password" name="password" class="form-control"
+                placeholder="Password" required="">
+        </p>
+        <div style="text-align: center; font-weight: 700; margin-top: 20px; margin-bottom: 20px;">Register as:</div>
+        <div
+            style="display:flex; align-items: center; justify-content: space-between; margin-top: 20px; margin-bottom: 20px;">
+            <input type="radio" id="student" name="student" value="STUDENT" style="margin: 0;" [(ngModel)]="roleInput">
+            <div style="font-weight: 700;">Student</div>
+            <input type="radio" id="admin" name="admin" value="ADMIN" style="margin: 0;" [(ngModel)]="roleInput">
+            <div style="font-weight: 700;">Admin</div>
+            <input type="radio" id="adminTrainee" name="adminTrainee" value="ADMINTRAINEE" style="margin: 0;" [(ngModel)]="roleInput">
+            <div style="font-weight: 700;">Admin Trainee</div>
+        </div>
+        <p></p>
+        <button class="btn btn-lg btn-primary btn-block" (click)="register()">Register</button>
+    </form>
+</div>
