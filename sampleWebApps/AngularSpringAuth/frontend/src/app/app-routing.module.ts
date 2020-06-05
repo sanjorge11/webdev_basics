@@ -11,7 +11,6 @@ let baseUrl = 'test-auth-app';
 const routes: Routes = [
   { path: '', redirectTo: baseUrl, pathMatch: 'full' },
 
-
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
   { path: 'register', component: RegisterComponent },

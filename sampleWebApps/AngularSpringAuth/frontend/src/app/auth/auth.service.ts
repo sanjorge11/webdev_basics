@@ -17,24 +17,15 @@ export class AuthService {
     ) { }
 
   registerUser(user : User) {
-    this.http.post(this.baseUrl + "register", user, { responseType: 'text' }).subscribe((data : any) => {
-      this.router.navigate(["/"]);
-    }, (error : any) => {
-      console.log('Username already exists.');
-    });
+    return this.http.post(this.baseUrl + "register", user, { responseType: 'text' }); 
   }
 
   loginUser(user : User) { //used observe : 'response' to get full response that had null content, we wanted to read the headers
-    this.http.post(this.baseUrl + "login", user, { observe: 'response' }).subscribe((data : any) => {
-      //Auth is stored in cookie instead
-      //console.log(data.headers.get('Authorization'));   
-      this.router.navigate(["/"]);
-    });  
+    return this.http.post(this.baseUrl + "login", user, { observe: 'response' });  
   }
 
   logoutUser() { 
-    return this.http.post('logout', {}); 
-    //return this.http.get(this.baseUrl + "logout") ; 
+    return this.http.get(this.baseUrl + 'logout', { responseType: 'text' });     //Spring Boot is configured to re-direct to localhost:8080/
   }
 
 }

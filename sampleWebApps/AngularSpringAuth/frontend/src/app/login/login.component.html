@@ -1,3 +1,7 @@
+<nav>
+    <a style="float:right;" routerLink='/register' routerLinkActive='active' class='btn'>Register</a> 
+</nav>
+
 <div class="container">
     <form class="form-signin">
         <h2 class="form-signin-heading">Please log in</h2>
@@ -19,3 +23,8 @@
         <button class="btn btn-lg btn-primary btn-block" (click)="login()">Login</button>
     </form>
 </div>
+
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+
+<div *ngIf="showErrorMessage" style="color: red; text-align: center;">The username or password is not valid.</div>

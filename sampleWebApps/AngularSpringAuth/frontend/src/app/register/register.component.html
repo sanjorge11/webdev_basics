@@ -1,10 +1,14 @@
+<nav>
+    <a style="float:right;" routerLink='/login' routerLinkActive='active' class='btn'>Login</a> 
+</nav>
+
 <div class="container">
-    <form class="form-signin">
+    <form class="form-signin" #signupForm="ngForm">
         <h2 class="form-signin-heading">Register</h2>
         <p>
             <label for="username" class="sr-only">Username</label>
             <input type="text" id="username" [(ngModel)]="usernameInput" name="username" class="form-control"
-                placeholder="Username" required="" autofocus="">
+                placeholder="Username" required="true" autofocus="">
         </p>
         <p>
             <label for="password" class="sr-only">Password</label>
@@ -25,3 +29,8 @@
         <button class="btn btn-lg btn-primary btn-block" (click)="register()">Register</button>
     </form>
 </div>
+
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+
+<div *ngIf="showErrorMessage" style="color: red; text-align: center;">{{usernameInput}} is already taken</div>
