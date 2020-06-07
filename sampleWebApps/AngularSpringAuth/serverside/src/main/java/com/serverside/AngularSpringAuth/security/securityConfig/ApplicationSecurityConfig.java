@@ -8,10 +8,12 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.serverside.AngularSpringAuth.security.auth.ApplicationUserService;
 import com.serverside.AngularSpringAuth.security.jwt.JwtConfig;
@@ -63,25 +65,29 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 		.addFilterAfter(new JwtTokenVerifierFilter(jwtConfig), JwtUsernameAndPasswordAuthenticationFilter.class)	
 		
 		.authorizeRequests()
-		.antMatchers("/", "index", "/css/*", "/js/*", "/login", "/register", 
+		.antMatchers("/", "index", "/css/*", "/js/*", "/login", "/register", "/logout", "/login?logout",
 				"/runtime-es2015.js", "/polyfills-es2015.js", "/styles-es2015.js", "/vendor-es2015.js", "/main-es2015.js", "/favicon.ico").permitAll()  
 		.antMatchers("/students/**").hasRole(UserRole.STUDENT.name()) 
 		.antMatchers(HttpMethod.GET, "/admin/**").hasAnyRole(UserRole.ADMIN.name(), UserRole.ADMINTRAINEE.name())	
 		
 		.anyRequest()
-		.authenticated();
-
-//		.and()			
-//		.formLogin() 	
-//		.loginPage("/login").permitAll()	
-//		.defaultSuccessUrl("/courses", true) 	
-//
-//		.and()
-//		.logout()
-//			.logoutUrl("/logout") 	 
-//			.logoutSuccessUrl("/login"); 	
+		.authenticated()
+		
+		.and()
+		.logout()
+		.clearAuthentication(true)
+		.invalidateHttpSession(true)
+		.deleteCookies("Authorization");
+		//.logoutSuccessUrl("/");
 	
 	}
+	
+	
+	@Override  //dont let these urls go through filters, probably redundant to permit them in configuration above
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/", "index", "/css/*", "/js/*", "/register", 
+				"/runtime-es2015.js*", "/polyfills-es2015.js*", "/styles-es2015.js*", "/vendor-es2015.js*", "/main-es2015.js*", "/favicon.ico");
+    }
 	
 	
 	@Bean 		//set up this provider for AuthenticationManager to use

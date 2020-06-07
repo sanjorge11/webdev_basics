@@ -2,9 +2,10 @@
     <a routerLink='/' 
     routerLinkActive='active' class='btn' 
     [routerLinkActiveOptions]="{ exact: true }">Home</a>
-    <a routerLink='students' routerLinkActive='active' class='btn'>Student</a>
-    <a routerLink='admin' routerLinkActive='active' class='btn'>Admin</a>
-    <a style="float:right;" (click)="logout()" class='btn'>Logout</a>
+    <a *ngIf="isStudent" routerLink='students' routerLinkActive='active' class='btn'>Student</a>
+    <a *ngIf="isAdmin" routerLink='admin' routerLinkActive='active' class='btn'>Admin</a>
+    <a *ngIf="isAdminTrainee" routerLink='admin' routerLinkActive='active' class='btn'>Admin Trainee</a>
+    <a style="float:right;" (click)="logout()" routerLink='/login' routerLinkActive='active' class='btn'>Logout</a>
 </nav>
 
 <router-outlet></router-outlet>

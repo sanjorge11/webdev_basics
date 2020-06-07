@@ -46,7 +46,11 @@ public class JwtTokenVerifierFilter extends OncePerRequestFilter {
 		//Replaced logic that sends JWT inside header, to inside an HTTP-Only Cookie
 		Cookie[] cookies = request.getCookies(); 
 		if(cookies == null || cookies.length == 0) { 
-			filterChain.doFilter(request, response);		//request will be rejected
+			triggerLogout(request, response, filterChain); 
+			
+			//System.out.println(request.getRequestURI());
+
+			//filterChain.doFilter(request, response);		//request will be rejected
 			return; 
 		}
 		Cookie authCookie = null; 
@@ -57,7 +61,9 @@ public class JwtTokenVerifierFilter extends OncePerRequestFilter {
 			}
 		}
 		if(authCookie == null) {
-			filterChain.doFilter(request, response);		//request will be rejected
+			triggerLogout(request, response, filterChain); 
+			
+			//filterChain.doFilter(request, response);		//request will be rejected
 			return; 
 		}
 		
@@ -121,11 +127,24 @@ public class JwtTokenVerifierFilter extends OncePerRequestFilter {
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 			
 		} catch(JwtException e) { 
+			
+			triggerLogout(request, response, filterChain); 
+			
 			//this catch block would catch if JWS signature is invalid, or expired, etc.
 			throw new IllegalStateException(String.format("Token %s cannot be trusted", token)); 
 		}
 		
 		filterChain.doFilter(request, response);	//pass request/response to next filter in chain
+	}
+	
+	public void triggerLogout(HttpServletRequest request, 
+			HttpServletResponse response, 
+			FilterChain filterChain) { 
+		
+		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); 
+		
+		//response.setStatus(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized Request");
+		
 	}
 
 }

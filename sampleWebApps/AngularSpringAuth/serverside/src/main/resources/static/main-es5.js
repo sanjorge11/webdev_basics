@@ -51,7 +51,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<h1> Admin Page </h1>\n";
+    __webpack_exports__["default"] = "<h1 style=\"text-align: center;\"> Admin Page </h1>\n\n<div>&nbsp;</div>\n\n<pre style=\"background-color: white; border: 0;\"> {{ jsonOutput }} </pre>";
     /***/
   },
 
@@ -71,7 +71,27 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<nav>\n    <a routerLink='/' \n    routerLinkActive='active' class='btn' \n    [routerLinkActiveOptions]=\"{ exact: true }\">Home</a>\n    <a routerLink='/students' routerLinkActive='active' class='btn'>Student</a>\n    <a routerLink='/admin' routerLinkActive='active' class='btn'>Admin</a>\n    <a style=\"float:right;\" routerLink='/login' routerLinkActive='active' class='btn'>Login</a>\n    <a style=\"float:right;\" routerLink='/register' routerLinkActive='active' class='btn'>Register</a>\n    <a style=\"float:right;\" routerLink='/logout' routerLinkActive='active' class='btn'>Logout</a>\n</nav>\n\n<router-outlet></router-outlet>";
+    __webpack_exports__["default"] = "\n<router-outlet></router-outlet>";
+    /***/
+  },
+
+  /***/
+  "./node_modules/raw-loader/dist/cjs.js!./src/app/base/base.component.html":
+  /*!********************************************************************************!*\
+    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/base/base.component.html ***!
+    \********************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function node_modulesRawLoaderDistCjsJsSrcAppBaseBaseComponentHtml(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "<nav>\n    <a routerLink='/' \n    routerLinkActive='active' class='btn' \n    [routerLinkActiveOptions]=\"{ exact: true }\">Home</a>\n    <a *ngIf=\"isStudent\" routerLink='students' routerLinkActive='active' class='btn'>Student</a>\n    <a *ngIf=\"isAdmin\" routerLink='admin' routerLinkActive='active' class='btn'>Admin</a>\n    <a *ngIf=\"isAdminTrainee\" routerLink='admin' routerLinkActive='active' class='btn'>Admin Trainee</a>\n    <a style=\"float:right;\" (click)=\"logout()\" routerLink='/login' routerLinkActive='active' class='btn'>Logout</a>\n</nav>\n\n<router-outlet></router-outlet>";
     /***/
   },
 
@@ -91,7 +111,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<h1> Home Page </h1>\n";
+    __webpack_exports__["default"] = "<h1 style=\"text-align: center;\"> Home Page </h1>\n\n<div>&nbsp;</div>\n<div>&nbsp;</div>\n\n<div style=\"text-align: center;\"> {{greeting}} </div>\n";
     /***/
   },
 
@@ -111,7 +131,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"container\">\n    <form class=\"form-signin\">\n        <h2 class=\"form-signin-heading\">Please log in</h2>\n        <p>\n            <label for=\"username\" class=\"sr-only\">Username</label> \n            <input type=\"text\" id=\"username\" [(ngModel)]=\"usernameInput\" name=\"username\" class=\"form-control\"\n                placeholder=\"Username\" required=\"\" autofocus=\"\">\n        </p>\n        <p>\n            <label for=\"password\" class=\"sr-only\">Password</label> \n            <input type=\"password\" [(ngModel)]=\"passwordInput\" id=\"password\" name=\"password\" class=\"form-control\"\n                placeholder=\"Password\" required=\"\">\n        </p>\n        <!-- <div style=\"display:flex; align-items: center;\">\n            <div style=\"width:75%\"> Remember Me </div>\t\n            <input style=\"width:25%\" type=\"checkbox\" id=\"remember-me\" name=\"remember-me\" class=\"form-control\">\n        </div> -->\n        <p></p>\n        <button class=\"btn btn-lg btn-primary btn-block\" (click)=\"login()\">Login</button>\n    </form>\n</div>";
+    __webpack_exports__["default"] = "<nav>\n    <a style=\"float:right;\" routerLink='/register' routerLinkActive='active' class='btn'>Register</a> \n</nav>\n\n<div class=\"container\">\n    <form class=\"form-signin\">\n        <h2 class=\"form-signin-heading\">Please log in</h2>\n        <p>\n            <label for=\"username\" class=\"sr-only\">Username</label> \n            <input type=\"text\" id=\"username\" [(ngModel)]=\"usernameInput\" name=\"username\" class=\"form-control\"\n                placeholder=\"Username\" required=\"\" autofocus=\"\">\n        </p>\n        <p>\n            <label for=\"password\" class=\"sr-only\">Password</label> \n            <input type=\"password\" [(ngModel)]=\"passwordInput\" id=\"password\" name=\"password\" class=\"form-control\"\n                placeholder=\"Password\" required=\"\">\n        </p>\n        <p></p>\n        <button class=\"btn btn-lg btn-primary btn-block\" (click)=\"login()\">Login</button>\n    </form>\n</div>\n\n<div>&nbsp;</div>\n<div>&nbsp;</div>\n\n<div *ngIf=\"showErrorMessage\" style=\"color: red; text-align: center;\">The username or password is not valid.</div>";
     /***/
   },
 
@@ -151,7 +171,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<p>register works!</p>\n";
+    __webpack_exports__["default"] = "<nav>\n    <a style=\"float:right;\" routerLink='/login' routerLinkActive='active' class='btn'>Login</a> \n</nav>\n\n<div class=\"container\">\n    <form class=\"form-signin\" #signupForm=\"ngForm\">\n        <h2 class=\"form-signin-heading\">Register</h2>\n        <p>\n            <label for=\"username\" class=\"sr-only\">Username</label>\n            <input type=\"text\" id=\"username\" [(ngModel)]=\"usernameInput\" name=\"username\" class=\"form-control\"\n                placeholder=\"Username\" required=\"true\" autofocus=\"\">\n        </p>\n        <p>\n            <label for=\"password\" class=\"sr-only\">Password</label>\n            <input type=\"password\" [(ngModel)]=\"passwordInput\" id=\"password\" name=\"password\" class=\"form-control\"\n                placeholder=\"Password\" required=\"\">\n        </p>\n        <div style=\"text-align: center; font-weight: 700; margin-top: 20px; margin-bottom: 20px;\">Register as:</div>\n        <div\n            style=\"display:flex; align-items: center; justify-content: space-between; margin-top: 20px; margin-bottom: 20px;\">\n            <input type=\"radio\" id=\"student\" name=\"student\" value=\"STUDENT\" style=\"margin: 0;\" [(ngModel)]=\"roleInput\">\n            <div style=\"font-weight: 700;\">Student</div>\n            <input type=\"radio\" id=\"admin\" name=\"admin\" value=\"ADMIN\" style=\"margin: 0;\" [(ngModel)]=\"roleInput\">\n            <div style=\"font-weight: 700;\">Admin</div>\n            <input type=\"radio\" id=\"adminTrainee\" name=\"adminTrainee\" value=\"ADMINTRAINEE\" style=\"margin: 0;\" [(ngModel)]=\"roleInput\">\n            <div style=\"font-weight: 700;\">Admin Trainee</div>\n        </div>\n        <p></p>\n        <button class=\"btn btn-lg btn-primary btn-block\" (click)=\"register()\">Register</button>\n    </form>\n</div>\n\n<div>&nbsp;</div>\n<div>&nbsp;</div>\n\n<div *ngIf=\"showErrorMessage\" style=\"color: red; text-align: center;\">Error when registering user.</div>";
     /***/
   },
 
@@ -171,7 +191,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<h1> Student Page </h1>\n\n<div>&nbsp;</div>\n\n<pre> {{ jsonOutput }} </pre>";
+    __webpack_exports__["default"] = "<h1 style=\"text-align: center;\"> Student Page </h1>\n\n<div>&nbsp;</div>\n\n<pre style=\"background-color: white; border: 0;\"> {{ jsonOutput }} </pre>";
     /***/
   },
 
@@ -780,6 +800,125 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
   },
 
   /***/
+  "./src/app/JwtInterceptor.ts":
+  /*!***********************************!*\
+    !*** ./src/app/JwtInterceptor.ts ***!
+    \***********************************/
+
+  /*! exports provided: JwtInterceptor */
+
+  /***/
+  function srcAppJwtInterceptorTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "JwtInterceptor", function () {
+      return JwtInterceptor;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/common/http */
+    "./node_modules/@angular/common/fesm2015/http.js");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
+    /* harmony import */
+
+
+    var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! rxjs/operators */
+    "./node_modules/rxjs/_esm2015/operators/index.js");
+
+    var JwtInterceptor = /*#__PURE__*/function () {
+      function JwtInterceptor(router) {
+        _classCallCheck(this, JwtInterceptor);
+
+        this.router = router;
+      }
+
+      _createClass(JwtInterceptor, [{
+        key: "intercept",
+        value: function intercept(req, next) {
+          var _this = this;
+
+          // if (this.authService.authToken) {
+          //   const authReq = req.clone({
+          //     headers: req.headers.set(
+          //       'Authorization',
+          //       this.authService.authToken
+          //     )
+          //   });
+          //   console.log('Making an authorized request');
+          //   req = authReq;
+          // }
+          return next.handle(req).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (event) {
+            return _this.handleResponse(req, event);
+          }, function (error) {
+            return _this.handleError(req, error);
+          }));
+        }
+      }, {
+        key: "handleResponse",
+        value: function handleResponse(req, event) {
+          console.log('handle res'); //console.log('Handling response for ', req.url, event);
+
+          if (event instanceof _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpResponse"]) {
+            console.log(event); // console.log('Request for ', req.url,
+            //     ' Response Status ', event.status,
+            //     ' With body ', event.body);
+          }
+        }
+      }, {
+        key: "handleError",
+        value: function handleError(req, event) {
+          console.log('handling error');
+          console.log(req);
+          console.log(event);
+
+          if (event.status === 401) {
+            console.log('no auth');
+            this.router.navigate(["/login"]);
+          } // console.error('Request for ', req.url,
+          //       ' Response Status ', event.status,
+          //       ' With error ', event.error);
+
+        }
+      }]);
+
+      return JwtInterceptor;
+    }();
+
+    JwtInterceptor.ctorParameters = function () {
+      return [{
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
+      }];
+    };
+
+    JwtInterceptor = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])()], JwtInterceptor);
+    /***/
+  },
+
+  /***/
   "./src/app/admin/admin.component.css":
   /*!*******************************************!*\
     !*** ./src/app/admin/admin.component.css ***!
@@ -830,19 +969,53 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _admin_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ./admin.service */
+    "./src/app/admin/admin.service.ts");
 
     var AdminComponent = /*#__PURE__*/function () {
-      function AdminComponent() {
+      function AdminComponent(adminService) {
         _classCallCheck(this, AdminComponent);
+
+        this.adminService = adminService;
+        this.jsonOutput = '';
       }
 
       _createClass(AdminComponent, [{
         key: "ngOnInit",
-        value: function ngOnInit() {}
+        value: function ngOnInit() {
+          console.log('now in admin');
+          this.getStudentsForAdmin();
+        }
+      }, {
+        key: "getStudentsForAdmin",
+        value: function getStudentsForAdmin() {
+          var _this2 = this;
+
+          this.adminService.getStudentsForAdmin().subscribe(function (data) {
+            console.log(data);
+            _this2.jsonOutput = data;
+
+            if (_this2.jsonOutput.length == 0) {
+              _this2.jsonOutput = null;
+            } else {
+              _this2.jsonOutput = JSON.stringify(_this2.jsonOutput, null, "\t"); // stringify with tabs inserted at each level
+            }
+          });
+        }
       }]);
 
       return AdminComponent;
     }();
+
+    AdminComponent.ctorParameters = function () {
+      return [{
+        type: _admin_service__WEBPACK_IMPORTED_MODULE_2__["AdminService"]
+      }];
+    };
 
     AdminComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'app-admin',
@@ -853,6 +1026,74 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       /*! ./admin.component.css */
       "./src/app/admin/admin.component.css"))["default"]]
     })], AdminComponent);
+    /***/
+  },
+
+  /***/
+  "./src/app/admin/admin.service.ts":
+  /*!****************************************!*\
+    !*** ./src/app/admin/admin.service.ts ***!
+    \****************************************/
+
+  /*! exports provided: AdminService */
+
+  /***/
+  function srcAppAdminAdminServiceTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "AdminService", function () {
+      return AdminService;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/common/http */
+    "./node_modules/@angular/common/fesm2015/http.js");
+
+    var AdminService = /*#__PURE__*/function () {
+      function AdminService(http) {
+        _classCallCheck(this, AdminService);
+
+        this.http = http;
+        this.baseUrl = "http://localhost:8080/";
+      }
+
+      _createClass(AdminService, [{
+        key: "getStudentsForAdmin",
+        value: function getStudentsForAdmin() {
+          return this.http.get(this.baseUrl + "admin");
+        }
+      }]);
+
+      return AdminService;
+    }();
+
+    AdminService.ctorParameters = function () {
+      return [{
+        type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]
+      }];
+    };
+
+    AdminService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+      providedIn: 'root'
+    })], AdminService);
     /***/
   },
 
@@ -896,69 +1137,55 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony import */
 
 
-    var _home_page_home_page_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-    /*! ./home-page/home-page.component */
-    "./src/app/home-page/home-page.component.ts");
+    var _register_register_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ./register/register.component */
+    "./src/app/register/register.component.ts");
     /* harmony import */
 
 
     var _login_login_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! ./login/login.component */
     "./src/app/login/login.component.ts");
-    /* harmony import */
 
-
-    var _register_register_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
-    /*! ./register/register.component */
-    "./src/app/register/register.component.ts");
-    /* harmony import */
-
-
-    var _student_student_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-    /*! ./student/student.component */
-    "./src/app/student/student.component.ts");
-    /* harmony import */
-
-
-    var _admin_admin_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
-    /*! ./admin/admin.component */
-    "./src/app/admin/admin.component.ts");
-    /* harmony import */
-
-
-    var _page_not_found_page_not_found_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
-    /*! ./page-not-found/page-not-found.component */
-    "./src/app/page-not-found/page-not-found.component.ts");
-
+    var baseUrl = 'test-auth-app';
     var routes = [{
       path: '',
-      component: _home_page_home_page_component__WEBPACK_IMPORTED_MODULE_3__["HomePageComponent"]
+      redirectTo: baseUrl,
+      pathMatch: 'full'
     }, {
       path: 'login',
       component: _login_login_component__WEBPACK_IMPORTED_MODULE_4__["LoginComponent"]
     }, {
       path: 'register',
-      component: _register_register_component__WEBPACK_IMPORTED_MODULE_5__["RegisterComponent"]
-    }, {
-      path: 'students',
-      component: _student_student_component__WEBPACK_IMPORTED_MODULE_6__["StudentComponent"]
-    }, {
-      path: 'admin',
-      component: _admin_admin_component__WEBPACK_IMPORTED_MODULE_7__["AdminComponent"]
-    }, {
-      path: '**',
-      component: _page_not_found_page_not_found_component__WEBPACK_IMPORTED_MODULE_8__["PageNotFoundComponent"]
-    } //wildcard route
-    ];
+      component: _register_register_component__WEBPACK_IMPORTED_MODULE_3__["RegisterComponent"]
+    }];
 
     var AppRoutingModule = function AppRoutingModule() {
       _classCallCheck(this, AppRoutingModule);
     };
 
     AppRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-      imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forRoot(routes)],
+      // Use [RouterModule.forRoot(routes, {useHash: true})] in imports for Hash Strategy
+      // Must configure Spring Boot to support urls with no hash
+      // Read about why hash is required: https://angular.io/guide/router#locationstrategy-and-browser-url-styles
+      imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forRoot(routes, {
+        useHash: true
+      })],
       exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]]
-    })], AppRoutingModule);
+    })], AppRoutingModule); // Note about invoking router redirection to /login: 
+    // The browser and the API does not know if you are logged in or not. 
+    // The API relies on the fact you you have a JWT to access any data. 
+    // The browser does not care if you delete the cookie with the JWT. 
+    // Displaying UI is not necessarily bad as long as no newly requested 
+    // information is displayed. Any information that is already displayed 
+    // got there from previous authorization. If you navigate to a new page 
+    // that will make requests for more data to display, the server will 
+    // reject it and then you handle that in the front-end to re-direct to 
+    // a login page. If you navigate to a page or just simply use the UI, 
+    // but it does not make HTTP requests for more data -- then there's 
+    // no urgency to re-direct to the /login page. This is the way most 
+    // websites work from my experience. 
+
     /***/
   },
 
@@ -1096,48 +1323,46 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony import */
 
 
-    var _student_student_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
-    /*! ./student/student.component */
-    "./src/app/student/student.component.ts");
-    /* harmony import */
-
-
-    var _admin_admin_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
-    /*! ./admin/admin.component */
-    "./src/app/admin/admin.component.ts");
-    /* harmony import */
-
-
-    var _register_register_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    var _register_register_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! ./register/register.component */
     "./src/app/register/register.component.ts");
     /* harmony import */
 
 
-    var _login_login_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+    var _login_login_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! ./login/login.component */
     "./src/app/login/login.component.ts");
     /* harmony import */
 
 
-    var _page_not_found_page_not_found_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+    var _page_not_found_page_not_found_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! ./page-not-found/page-not-found.component */
     "./src/app/page-not-found/page-not-found.component.ts");
     /* harmony import */
 
 
-    var _home_page_home_page_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
-    /*! ./home-page/home-page.component */
-    "./src/app/home-page/home-page.component.ts");
+    var _base_base_module__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+    /*! ./base/base.module */
+    "./src/app/base/base.module.ts");
+    /* harmony import */
+
+
+    var _JwtInterceptor__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+    /*! ./JwtInterceptor */
+    "./src/app/JwtInterceptor.ts");
 
     var AppModule = function AppModule() {
       _classCallCheck(this, AppModule);
     };
 
     AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
-      declarations: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"], _student_student_component__WEBPACK_IMPORTED_MODULE_7__["StudentComponent"], _admin_admin_component__WEBPACK_IMPORTED_MODULE_8__["AdminComponent"], _register_register_component__WEBPACK_IMPORTED_MODULE_9__["RegisterComponent"], _login_login_component__WEBPACK_IMPORTED_MODULE_10__["LoginComponent"], _page_not_found_page_not_found_component__WEBPACK_IMPORTED_MODULE_11__["PageNotFoundComponent"], _home_page_home_page_component__WEBPACK_IMPORTED_MODULE_12__["HomePageComponent"]],
-      imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_5__["AppRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"]],
-      providers: [],
+      declarations: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"], _register_register_component__WEBPACK_IMPORTED_MODULE_7__["RegisterComponent"], _login_login_component__WEBPACK_IMPORTED_MODULE_8__["LoginComponent"], _page_not_found_page_not_found_component__WEBPACK_IMPORTED_MODULE_9__["PageNotFoundComponent"]],
+      imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_5__["AppRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"], _base_base_module__WEBPACK_IMPORTED_MODULE_10__["BaseModule"]],
+      providers: [{
+        provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HTTP_INTERCEPTORS"],
+        useClass: _JwtInterceptor__WEBPACK_IMPORTED_MODULE_11__["JwtInterceptor"],
+        multi: true
+      }],
       bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]]
     })], AppModule);
     /***/
@@ -1180,19 +1405,28 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/common/http */
     "./node_modules/@angular/common/fesm2015/http.js");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
 
     var AuthService = /*#__PURE__*/function () {
-      function AuthService(http) {
+      function AuthService(http, router) {
         _classCallCheck(this, AuthService);
 
         this.http = http;
+        this.router = router;
         this.baseUrl = "http://localhost:8080/";
       }
 
       _createClass(AuthService, [{
         key: "registerUser",
         value: function registerUser(user) {
-          return this.http.post(this.baseUrl + "register", user);
+          return this.http.post(this.baseUrl + "register", user, {
+            responseType: 'text'
+          });
         }
       }, {
         key: "loginUser",
@@ -1200,6 +1434,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           return this.http.post(this.baseUrl + "login", user, {
             observe: 'response'
           });
+        }
+      }, {
+        key: "logoutUser",
+        value: function logoutUser() {
+          return this.http.get(this.baseUrl + 'logout', {
+            responseType: 'text'
+          }); //Spring Boot is configured to re-direct to localhost:8080/
         }
       }]);
 
@@ -1209,6 +1450,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     AuthService.ctorParameters = function () {
       return [{
         type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
       }];
     };
 
@@ -1253,6 +1496,408 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     };
     /***/
 
+  },
+
+  /***/
+  "./src/app/base/base-routing.module.ts":
+  /*!*********************************************!*\
+    !*** ./src/app/base/base-routing.module.ts ***!
+    \*********************************************/
+
+  /*! exports provided: BaseRoutingModule */
+
+  /***/
+  function srcAppBaseBaseRoutingModuleTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "BaseRoutingModule", function () {
+      return BaseRoutingModule;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _home_page_home_page_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ../home-page/home-page.component */
+    "./src/app/home-page/home-page.component.ts");
+    /* harmony import */
+
+
+    var _base_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! ./base.component */
+    "./src/app/base/base.component.ts");
+    /* harmony import */
+
+
+    var _student_student_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! ../student/student.component */
+    "./src/app/student/student.component.ts");
+    /* harmony import */
+
+
+    var _admin_admin_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    /*! ../admin/admin.component */
+    "./src/app/admin/admin.component.ts");
+    /* harmony import */
+
+
+    var _page_not_found_page_not_found_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    /*! ../page-not-found/page-not-found.component */
+    "./src/app/page-not-found/page-not-found.component.ts");
+
+    var baseUrl = 'test-auth-app';
+    var routes = [{
+      path: baseUrl,
+      component: _base_component__WEBPACK_IMPORTED_MODULE_4__["BaseComponent"],
+      children: [{
+        path: '',
+        component: _home_page_home_page_component__WEBPACK_IMPORTED_MODULE_3__["HomePageComponent"]
+      }, {
+        path: 'students',
+        component: _student_student_component__WEBPACK_IMPORTED_MODULE_5__["StudentComponent"]
+      }, {
+        path: 'admin',
+        component: _admin_admin_component__WEBPACK_IMPORTED_MODULE_6__["AdminComponent"]
+      }]
+    }, {
+      path: '**',
+      component: _page_not_found_page_not_found_component__WEBPACK_IMPORTED_MODULE_7__["PageNotFoundComponent"]
+    } //wildcard route
+    ];
+
+    var BaseRoutingModule = function BaseRoutingModule() {
+      _classCallCheck(this, BaseRoutingModule);
+    };
+
+    BaseRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+      imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(routes)],
+      exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]]
+    })], BaseRoutingModule);
+    /***/
+  },
+
+  /***/
+  "./src/app/base/base.component.css":
+  /*!*****************************************!*\
+    !*** ./src/app/base/base.component.css ***!
+    \*****************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcAppBaseBaseComponentCss(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2Jhc2UvYmFzZS5jb21wb25lbnQuY3NzIn0= */";
+    /***/
+  },
+
+  /***/
+  "./src/app/base/base.component.ts":
+  /*!****************************************!*\
+    !*** ./src/app/base/base.component.ts ***!
+    \****************************************/
+
+  /*! exports provided: BaseComponent */
+
+  /***/
+  function srcAppBaseBaseComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "BaseComponent", function () {
+      return BaseComponent;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ../auth/auth.service */
+    "./src/app/auth/auth.service.ts");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _base_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! ./base.service */
+    "./src/app/base/base.service.ts");
+
+    var BaseComponent = /*#__PURE__*/function () {
+      function BaseComponent(authService, router, baseService) {
+        _classCallCheck(this, BaseComponent);
+
+        this.authService = authService;
+        this.router = router;
+        this.baseService = baseService;
+        this.isAdmin = false;
+        this.isAdminTrainee = false;
+        this.isStudent = false;
+      }
+
+      _createClass(BaseComponent, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {
+          var _this3 = this;
+
+          console.log('base');
+          this.baseService.getRole().subscribe(function (data) {
+            _this3.isAdmin = data === 'ROLE_ADMIN';
+            _this3.isAdminTrainee = data === 'ROLE_ADMINTRAINEE';
+            _this3.isStudent = data === 'ROLE_STUDENT';
+          });
+        }
+      }, {
+        key: "logout",
+        value: function logout() {
+          var _this4 = this;
+
+          console.log('logout'); //logout is a GET request because csrf is disabled
+
+          this.authService.logoutUser().subscribe(function (data) {
+            console.log('logged out');
+
+            _this4.router.navigate(['/login']);
+
+            _this4.isAdmin = false;
+            _this4.isAdminTrainee = false;
+            _this4.isStudent = false;
+          });
+        }
+      }]);
+
+      return BaseComponent;
+    }();
+
+    BaseComponent.ctorParameters = function () {
+      return [{
+        type: _auth_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
+      }, {
+        type: _base_service__WEBPACK_IMPORTED_MODULE_4__["BaseService"]
+      }];
+    };
+
+    BaseComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+      selector: 'app-base',
+      template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! raw-loader!./base.component.html */
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/base/base.component.html"))["default"],
+      styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! ./base.component.css */
+      "./src/app/base/base.component.css"))["default"]]
+    })], BaseComponent);
+    /***/
+  },
+
+  /***/
+  "./src/app/base/base.module.ts":
+  /*!*************************************!*\
+    !*** ./src/app/base/base.module.ts ***!
+    \*************************************/
+
+  /*! exports provided: BaseModule */
+
+  /***/
+  function srcAppBaseBaseModuleTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "BaseModule", function () {
+      return BaseModule;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/common */
+    "./node_modules/@angular/common/fesm2015/common.js");
+    /* harmony import */
+
+
+    var _base_routing_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ./base-routing.module */
+    "./src/app/base/base-routing.module.ts");
+    /* harmony import */
+
+
+    var _base_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! ./base.component */
+    "./src/app/base/base.component.ts");
+    /* harmony import */
+
+
+    var _student_student_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! ../student/student.component */
+    "./src/app/student/student.component.ts");
+    /* harmony import */
+
+
+    var _admin_admin_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    /*! ../admin/admin.component */
+    "./src/app/admin/admin.component.ts");
+    /* harmony import */
+
+
+    var _home_page_home_page_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    /*! ../home-page/home-page.component */
+    "./src/app/home-page/home-page.component.ts");
+
+    var BaseModule = function BaseModule() {
+      _classCallCheck(this, BaseModule);
+    };
+
+    BaseModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+      declarations: [_base_component__WEBPACK_IMPORTED_MODULE_4__["BaseComponent"], _home_page_home_page_component__WEBPACK_IMPORTED_MODULE_7__["HomePageComponent"], _student_student_component__WEBPACK_IMPORTED_MODULE_5__["StudentComponent"], _admin_admin_component__WEBPACK_IMPORTED_MODULE_6__["AdminComponent"]],
+      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _base_routing_module__WEBPACK_IMPORTED_MODULE_3__["BaseRoutingModule"]]
+    })], BaseModule);
+    /***/
+  },
+
+  /***/
+  "./src/app/base/base.service.ts":
+  /*!**************************************!*\
+    !*** ./src/app/base/base.service.ts ***!
+    \**************************************/
+
+  /*! exports provided: BaseService */
+
+  /***/
+  function srcAppBaseBaseServiceTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "BaseService", function () {
+      return BaseService;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/common/http */
+    "./node_modules/@angular/common/fesm2015/http.js");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
+
+    var BaseService = /*#__PURE__*/function () {
+      function BaseService(http, router) {
+        _classCallCheck(this, BaseService);
+
+        this.http = http;
+        this.router = router;
+        this.baseUrl = "http://localhost:8080/base/";
+      }
+
+      _createClass(BaseService, [{
+        key: "getGreeting",
+        value: function getGreeting() {
+          return this.http.get(this.baseUrl + "home", {
+            responseType: 'text'
+          });
+        }
+      }, {
+        key: "getRole",
+        value: function getRole() {
+          return this.http.get(this.baseUrl + "currentUserRole", {
+            responseType: 'text'
+          });
+        }
+      }]);
+
+      return BaseService;
+    }();
+
+    BaseService.ctorParameters = function () {
+      return [{
+        type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
+      }];
+    };
+
+    BaseService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+      providedIn: 'root'
+    })], BaseService);
+    /***/
   },
 
   /***/
@@ -1306,19 +1951,40 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _base_base_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ../base/base.service */
+    "./src/app/base/base.service.ts");
 
     var HomePageComponent = /*#__PURE__*/function () {
-      function HomePageComponent() {
+      function HomePageComponent(baseService) {
         _classCallCheck(this, HomePageComponent);
+
+        this.baseService = baseService;
+        this.greeting = '';
       }
 
       _createClass(HomePageComponent, [{
         key: "ngOnInit",
-        value: function ngOnInit() {}
+        value: function ngOnInit() {
+          var _this5 = this;
+
+          this.baseService.getGreeting().subscribe(function (data) {
+            _this5.greeting = data;
+          });
+        }
       }]);
 
       return HomePageComponent;
     }();
+
+    HomePageComponent.ctorParameters = function () {
+      return [{
+        type: _base_base_service__WEBPACK_IMPORTED_MODULE_2__["BaseService"]
+      }];
+    };
 
     HomePageComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'app-home-page',
@@ -1386,21 +2052,28 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony import */
 
 
-    var _auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _auth_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! ../auth/auth.service */
     "./src/app/auth/auth.service.ts");
     /* harmony import */
 
 
-    var _auth_user__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _auth_user__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! ../auth/user */
     "./src/app/auth/user.ts");
 
     var LoginComponent = /*#__PURE__*/function () {
-      function LoginComponent(authService) {
+      function LoginComponent(authService, router) {
         _classCallCheck(this, LoginComponent);
 
         this.authService = authService;
+        this.router = router;
       }
 
       _createClass(LoginComponent, [{
@@ -1408,13 +2081,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function ngOnInit() {
           this.usernameInput = '';
           this.passwordInput = '';
+          this.showErrorMessage = false;
         }
       }, {
         key: "login",
         value: function login() {
-          var user = new _auth_user__WEBPACK_IMPORTED_MODULE_3__["User"](this.usernameInput, this.passwordInput, undefined);
-          this.authService.loginUser(user).subscribe(function (data) {//Auth is stored in cookie instead
+          var _this6 = this;
+
+          this.showErrorMessage = false;
+          var user = new _auth_user__WEBPACK_IMPORTED_MODULE_4__["User"](this.usernameInput, this.passwordInput, undefined);
+          this.authService.loginUser(user).subscribe(function (data) {
+            //Auth is stored in cookie instead
             //console.log(data.headers.get('Authorization'));   
+            _this6.router.navigate(["/"]);
+          }, function (error) {
+            _this6.showErrorMessage = true;
           });
         }
       }]);
@@ -1424,7 +2105,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     LoginComponent.ctorParameters = function () {
       return [{
-        type: _auth_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]
+        type: _auth_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
       }];
     };
 
@@ -1545,19 +2228,67 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _auth_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ../auth/auth.service */
+    "./src/app/auth/auth.service.ts");
+    /* harmony import */
+
+
+    var _auth_user__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! ../auth/user */
+    "./src/app/auth/user.ts");
 
     var RegisterComponent = /*#__PURE__*/function () {
-      function RegisterComponent() {
+      function RegisterComponent(authService, router) {
         _classCallCheck(this, RegisterComponent);
+
+        this.authService = authService;
+        this.router = router;
+        this.usernameInput = '';
+        this.passwordInput = '';
+        this.roleInput = '';
+        this.showErrorMessage = false;
       }
 
       _createClass(RegisterComponent, [{
         key: "ngOnInit",
-        value: function ngOnInit() {}
+        value: function ngOnInit() {
+          console.log(this);
+        }
+      }, {
+        key: "register",
+        value: function register() {
+          var _this7 = this;
+
+          this.showErrorMessage = false;
+          var user = new _auth_user__WEBPACK_IMPORTED_MODULE_4__["User"](this.usernameInput, this.passwordInput, this.roleInput);
+          this.authService.registerUser(user).subscribe(function (data) {
+            _this7.router.navigate(["/"]);
+          }, function (error) {
+            _this7.showErrorMessage = true;
+          });
+        }
       }]);
 
       return RegisterComponent;
     }();
+
+    RegisterComponent.ctorParameters = function () {
+      return [{
+        type: _auth_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
+      }];
+    };
 
     RegisterComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'app-register',
@@ -1645,16 +2376,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getStudents",
         value: function getStudents() {
-          var _this = this;
+          var _this8 = this;
 
           this.studentService.getStudents().subscribe(function (data) {
             console.log(data);
-            _this.jsonOutput = data;
+            _this8.jsonOutput = data;
 
-            if (_this.jsonOutput.length == 0) {
-              _this.jsonOutput = null;
+            if (_this8.jsonOutput.length == 0) {
+              _this8.jsonOutput = null;
             } else {
-              _this.jsonOutput = JSON.stringify(_this.jsonOutput, null, "\t"); // stringify with tabs inserted at each level
+              _this8.jsonOutput = JSON.stringify(_this8.jsonOutput, null, "\t"); // stringify with tabs inserted at each level
             }
           });
         }

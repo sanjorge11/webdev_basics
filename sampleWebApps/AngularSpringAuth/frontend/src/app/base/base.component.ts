@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 
+import { Router } from '@angular/router';
+import { BaseService } from './base.service';
+
 @Component({
   selector: 'app-base',
   templateUrl: './base.component.html',
@@ -8,17 +11,39 @@ import { AuthService } from '../auth/auth.service';
 })
 export class BaseComponent implements OnInit {
 
-  constructor(
-    private authService: AuthService
-  ) { }
+  private isAdmin : boolean;
+  private isAdminTrainee : boolean;
+  private isStudent : boolean;
 
-  ngOnInit() { }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private baseService: BaseService
+  ) { 
+    this.isAdmin = false; 
+    this.isAdminTrainee = false;
+    this.isStudent = false;
+  }
+
+  ngOnInit() { 
+    console.log('base');
+    this.baseService.getRole().subscribe((data: any) => {
+      this.isAdmin = (data === 'ROLE_ADMIN');
+      this.isAdminTrainee = (data === 'ROLE_ADMINTRAINEE');
+      this.isStudent = (data === 'ROLE_STUDENT'); 
+    });
+  }
 
   logout() { 
     console.log('logout');
     //logout is a GET request because csrf is disabled
     this.authService.logoutUser().subscribe((data: any) => {
       console.log('logged out');
+      this.router.navigate(['/login']);
+
+      this.isAdmin = false; 
+      this.isAdminTrainee = false;
+      this.isStudent = false;
     });
   }
 

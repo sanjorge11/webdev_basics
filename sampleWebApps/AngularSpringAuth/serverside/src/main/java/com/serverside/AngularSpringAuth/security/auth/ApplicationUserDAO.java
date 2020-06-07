@@ -69,5 +69,9 @@ public class ApplicationUserDAO extends BaseDAO {
 		
 		return res; 
 	}
+	
+	public ApplicationResources getApplicationResources() { 
+		return this.applicationResources;
+	}
 
 }
