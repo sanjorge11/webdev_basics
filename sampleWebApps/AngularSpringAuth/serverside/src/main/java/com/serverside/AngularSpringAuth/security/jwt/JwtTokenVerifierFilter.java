@@ -48,8 +48,6 @@ public class JwtTokenVerifierFilter extends OncePerRequestFilter {
 		if(cookies == null || cookies.length == 0) { 
 			triggerLogout(request, response, filterChain); 
 			
-			//System.out.println(request.getRequestURI());
-
 			//filterChain.doFilter(request, response);		//request will be rejected
 			return; 
 		}

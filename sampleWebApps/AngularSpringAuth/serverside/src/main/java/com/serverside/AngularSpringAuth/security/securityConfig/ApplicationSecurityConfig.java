@@ -45,12 +45,17 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
+		//Note: My application will re-direct the url to /login if there was an unauthorized request,
+		//but technically all of the static files are served at once. It is still relatively safe since 
+		//no data request will pass without a valid JWT. It may be a better solution to only serve 
+		//the /login and /register files at first, and if authenticated then, serve the rest of the files.
+		
 		http 
 		.cors()		//enable cross-origin requests, the overriden method I implemented will be used
 		.and()
 		.csrf().disable()
 		
-		//stateless sessions, no SESSIONIDs created or managed by spring bootß
+		//stateless sessions, no SESSIONIDs created or managed by spring boot
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)	
 		.and()	
 		
@@ -65,7 +70,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 		.addFilterAfter(new JwtTokenVerifierFilter(jwtConfig), JwtUsernameAndPasswordAuthenticationFilter.class)	
 		
 		.authorizeRequests()
-		.antMatchers("/", "index", "/css/*", "/js/*", "/login", "/register", "/logout", "/login?logout",
+		.antMatchers("/", "index", "/css/*", "/js/*", "/login", "/register", "/logout",
 				"/runtime-es2015.js", "/polyfills-es2015.js", "/styles-es2015.js", "/vendor-es2015.js", "/main-es2015.js", "/favicon.ico").permitAll()  
 		.antMatchers("/students/**").hasRole(UserRole.STUDENT.name()) 
 		.antMatchers(HttpMethod.GET, "/admin/**").hasAnyRole(UserRole.ADMIN.name(), UserRole.ADMINTRAINEE.name())	
@@ -77,16 +82,17 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 		.logout()
 		.clearAuthentication(true)
 		.invalidateHttpSession(true)
-		.deleteCookies("Authorization");
-		//.logoutSuccessUrl("/");
+		.deleteCookies("Authorization")
+		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))		//set /logout as logout URL
+		.logoutSuccessUrl("/");		//re-direct to base URL, Angular app will re-direct it in the front-end to /login
 	
 	}
 	
 	
 	@Override  //dont let these urls go through filters, probably redundant to permit them in configuration above
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/", "index", "/css/*", "/js/*", "/register", 
-				"/runtime-es2015.js*", "/polyfills-es2015.js*", "/styles-es2015.js*", "/vendor-es2015.js*", "/main-es2015.js*", "/favicon.ico");
+		web.ignoring().antMatchers("/", "index", "/css/*", "/js/*", "/register", 			
+		"/runtime-es2015.js*", "/polyfills-es2015.js*", "/styles-es2015.js*", "/vendor-es2015.js*", "/main-es2015.js*", "/favicon.ico");
     }
 	
 	
