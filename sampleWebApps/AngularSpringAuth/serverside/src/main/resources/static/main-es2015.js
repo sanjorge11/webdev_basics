@@ -381,16 +381,16 @@ function __classPrivateFieldSet(receiver, privateMap, value) {
 
 /***/ }),
 
-/***/ "./src/app/JwtInterceptor.ts":
-/*!***********************************!*\
-  !*** ./src/app/JwtInterceptor.ts ***!
-  \***********************************/
-/*! exports provided: JwtInterceptor */
+/***/ "./src/app/HttpRequestInterceptor.ts":
+/*!*******************************************!*\
+  !*** ./src/app/HttpRequestInterceptor.ts ***!
+  \*******************************************/
+/*! exports provided: HttpRequestInterceptor */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "JwtInterceptor", function() { return JwtInterceptor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HttpRequestInterceptor", function() { return HttpRequestInterceptor; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
@@ -401,7 +401,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-let JwtInterceptor = class JwtInterceptor {
+let HttpRequestInterceptor = class HttpRequestInterceptor {
     constructor(router) {
         this.router = router;
     }
@@ -419,34 +419,32 @@ let JwtInterceptor = class JwtInterceptor {
         return next.handle(req).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(event => this.handleResponse(req, event), error => this.handleError(req, error)));
     }
     handleResponse(req, event) {
-        console.log('handle res');
+        //console.log('handle response');
         //console.log('Handling response for ', req.url, event);
         if (event instanceof _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpResponse"]) {
-            console.log(event);
+            //console.log(event);
             // console.log('Request for ', req.url,
             //     ' Response Status ', event.status,
             //     ' With body ', event.body);
         }
     }
     handleError(req, event) {
-        console.log('handling error');
-        console.log(req);
-        console.log(event);
+        //console.log('handling error');
         if (event.status === 401) {
-            console.log('no auth');
-            this.router.navigate(["/login"]);
+            //console.log('no auth');
+            this.router.navigate(['/login']);
         }
         // console.error('Request for ', req.url,
         //       ' Response Status ', event.status,
         //       ' With error ', event.error);
     }
 };
-JwtInterceptor.ctorParameters = () => [
+HttpRequestInterceptor.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }
 ];
-JwtInterceptor = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+HttpRequestInterceptor = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])()
-], JwtInterceptor);
+], HttpRequestInterceptor);
 
 
 
@@ -487,18 +485,16 @@ let AdminComponent = class AdminComponent {
         this.jsonOutput = '';
     }
     ngOnInit() {
-        console.log('now in admin');
         this.getStudentsForAdmin();
     }
     getStudentsForAdmin() {
         this.adminService.getStudentsForAdmin().subscribe((data) => {
-            console.log(data);
             this.jsonOutput = data;
             if (this.jsonOutput.length == 0) {
                 this.jsonOutput = null;
             }
             else {
-                this.jsonOutput = JSON.stringify(this.jsonOutput, null, "\t"); // stringify with tabs inserted at each level
+                this.jsonOutput = JSON.stringify(this.jsonOutput, null, '\t'); // stringify with tabs inserted at each level
             }
         });
     }
@@ -537,10 +533,10 @@ __webpack_require__.r(__webpack_exports__);
 let AdminService = class AdminService {
     constructor(http) {
         this.http = http;
-        this.baseUrl = "http://localhost:8080/";
+        this.baseUrl = 'http://localhost:8080/';
     }
     getStudentsForAdmin() {
-        return this.http.get(this.baseUrl + "admin");
+        return this.http.get(this.baseUrl + 'admin');
     }
 };
 AdminService.ctorParameters = () => [
@@ -676,7 +672,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./login/login.component */ "./src/app/login/login.component.ts");
 /* harmony import */ var _page_not_found_page_not_found_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./page-not-found/page-not-found.component */ "./src/app/page-not-found/page-not-found.component.ts");
 /* harmony import */ var _base_base_module__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./base/base.module */ "./src/app/base/base.module.ts");
-/* harmony import */ var _JwtInterceptor__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./JwtInterceptor */ "./src/app/JwtInterceptor.ts");
+/* harmony import */ var _HttpRequestInterceptor__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./HttpRequestInterceptor */ "./src/app/HttpRequestInterceptor.ts");
 
 
 
@@ -710,7 +706,7 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         providers: [
             {
                 provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HTTP_INTERCEPTORS"],
-                useClass: _JwtInterceptor__WEBPACK_IMPORTED_MODULE_11__["JwtInterceptor"],
+                useClass: _HttpRequestInterceptor__WEBPACK_IMPORTED_MODULE_11__["HttpRequestInterceptor"],
                 multi: true
             }
         ],
@@ -744,13 +740,13 @@ let AuthService = class AuthService {
     constructor(http, router) {
         this.http = http;
         this.router = router;
-        this.baseUrl = "http://localhost:8080/";
+        this.baseUrl = 'http://localhost:8080/';
     }
     registerUser(user) {
-        return this.http.post(this.baseUrl + "register", user, { responseType: 'text' });
+        return this.http.post(this.baseUrl + 'register', user, { responseType: 'text' });
     }
     loginUser(user) {
-        return this.http.post(this.baseUrl + "login", user, { observe: 'response' });
+        return this.http.post(this.baseUrl + 'login', user, { observe: 'response' });
     }
     logoutUser() {
         return this.http.get(this.baseUrl + 'logout', { responseType: 'text' }); //Spring Boot is configured to re-direct to localhost:8080/
@@ -888,7 +884,6 @@ let BaseComponent = class BaseComponent {
         this.isStudent = false;
     }
     ngOnInit() {
-        console.log('base');
         this.baseService.getRole().subscribe((data) => {
             this.isAdmin = (data === 'ROLE_ADMIN');
             this.isAdminTrainee = (data === 'ROLE_ADMINTRAINEE');
@@ -896,10 +891,9 @@ let BaseComponent = class BaseComponent {
         });
     }
     logout() {
-        console.log('logout');
         //logout is a GET request because csrf is disabled
         this.authService.logoutUser().subscribe((data) => {
-            console.log('logged out');
+            //console.log('logged out');
             this.router.navigate(['/login']);
             this.isAdmin = false;
             this.isAdminTrainee = false;
@@ -993,13 +987,13 @@ let BaseService = class BaseService {
     constructor(http, router) {
         this.http = http;
         this.router = router;
-        this.baseUrl = "http://localhost:8080/base/";
+        this.baseUrl = 'http://localhost:8080/base/';
     }
     getGreeting() {
-        return this.http.get(this.baseUrl + "home", { responseType: 'text' });
+        return this.http.get(this.baseUrl + 'home', { responseType: 'text' });
     }
     getRole() {
-        return this.http.get(this.baseUrl + "currentUserRole", { responseType: 'text' });
+        return this.http.get(this.baseUrl + 'currentUserRole', { responseType: 'text' });
     }
 };
 BaseService.ctorParameters = () => [
@@ -1120,7 +1114,7 @@ let LoginComponent = class LoginComponent {
         this.authService.loginUser(user).subscribe((data) => {
             //Auth is stored in cookie instead
             //console.log(data.headers.get('Authorization'));   
-            this.router.navigate(["/"]);
+            this.router.navigate(['/']);
         }, (error) => {
             this.showErrorMessage = true;
         });
@@ -1214,14 +1208,12 @@ let RegisterComponent = class RegisterComponent {
         this.roleInput = '';
         this.showErrorMessage = false;
     }
-    ngOnInit() {
-        console.log(this);
-    }
+    ngOnInit() { }
     register() {
         this.showErrorMessage = false;
         let user = new _auth_user__WEBPACK_IMPORTED_MODULE_4__["User"](this.usernameInput, this.passwordInput, this.roleInput);
         this.authService.registerUser(user).subscribe((data) => {
-            this.router.navigate(["/"]);
+            this.router.navigate(['/']);
         }, (error) => {
             this.showErrorMessage = true;
         });
@@ -1282,7 +1274,6 @@ let StudentComponent = class StudentComponent {
     }
     getStudents() {
         this.studentService.getStudents().subscribe((data) => {
-            console.log(data);
             this.jsonOutput = data;
             if (this.jsonOutput.length == 0) {
                 this.jsonOutput = null;
@@ -1327,10 +1318,10 @@ __webpack_require__.r(__webpack_exports__);
 let StudentService = class StudentService {
     constructor(http) {
         this.http = http;
-        this.baseUrl = "http://localhost:8080/";
+        this.baseUrl = 'http://localhost:8080/';
     }
     getStudents() {
-        return this.http.get(this.baseUrl + "students");
+        return this.http.get(this.baseUrl + 'students');
     }
 };
 StudentService.ctorParameters = () => [

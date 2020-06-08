@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 
 @Injectable()
-export class JwtInterceptor implements HttpInterceptor {
+export class HttpRequestInterceptor implements HttpInterceptor {
 
   constructor(
     private router: Router
@@ -34,24 +34,24 @@ export class JwtInterceptor implements HttpInterceptor {
   }
 
 
-  handleResponse(req: HttpRequest<any>, event) {
-    console.log('handle res');
+  handleResponse(req: HttpRequest<any>, event) {    //all responses go here, including ones that had error 
+    //console.log('handle response');
+
     //console.log('Handling response for ', req.url, event);
     if (event instanceof HttpResponse) {
-      console.log(event);
+      //console.log(event);
       // console.log('Request for ', req.url,
       //     ' Response Status ', event.status,
       //     ' With body ', event.body);
     }
   }
 
-  handleError(req: HttpRequest<any>, event) {
-    console.log('handling error');
-    console.log(req);
-    console.log(event);
+  handleError(req: HttpRequest<any>, event) {   //reponses with error go here
+    //console.log('handling error');
+    
     if(event.status === 401) { 
-      console.log('no auth');
-      this.router.navigate(["/login"]);
+      //console.log('no auth');
+      this.router.navigate(['/login']);
     }
     // console.error('Request for ', req.url,
     //       ' Response Status ', event.status,

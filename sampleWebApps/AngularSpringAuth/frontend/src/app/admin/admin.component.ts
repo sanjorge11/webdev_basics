@@ -18,20 +18,18 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('now in admin');
     this.getStudentsForAdmin();
   }
 
   getStudentsForAdmin() { 
     this.adminService.getStudentsForAdmin().subscribe((data : any) => {
 
-      console.log(data); 
       this.jsonOutput = data;
 
       if(this.jsonOutput.length == 0) { 
         this.jsonOutput = null; 
       } else { 
-        this.jsonOutput = JSON.stringify(this.jsonOutput, null, "\t"); // stringify with tabs inserted at each level
+        this.jsonOutput = JSON.stringify(this.jsonOutput, null, '\t'); // stringify with tabs inserted at each level
       }
 
     }); 

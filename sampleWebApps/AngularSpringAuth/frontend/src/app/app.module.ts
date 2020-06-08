@@ -13,7 +13,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { BaseModule } from './base/base.module';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { JwtInterceptor } from './JwtInterceptor';
+import { HttpRequestInterceptor } from './HttpRequestInterceptor';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,7 @@ import { JwtInterceptor } from './JwtInterceptor';
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: JwtInterceptor,
+      useClass: HttpRequestInterceptor,
       multi: true
     }
   ],

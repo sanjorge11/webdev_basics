@@ -800,23 +800,23 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
   },
 
   /***/
-  "./src/app/JwtInterceptor.ts":
-  /*!***********************************!*\
-    !*** ./src/app/JwtInterceptor.ts ***!
-    \***********************************/
+  "./src/app/HttpRequestInterceptor.ts":
+  /*!*******************************************!*\
+    !*** ./src/app/HttpRequestInterceptor.ts ***!
+    \*******************************************/
 
-  /*! exports provided: JwtInterceptor */
+  /*! exports provided: HttpRequestInterceptor */
 
   /***/
-  function srcAppJwtInterceptorTs(module, __webpack_exports__, __webpack_require__) {
+  function srcAppHttpRequestInterceptorTs(module, __webpack_exports__, __webpack_require__) {
     "use strict";
 
     __webpack_require__.r(__webpack_exports__);
     /* harmony export (binding) */
 
 
-    __webpack_require__.d(__webpack_exports__, "JwtInterceptor", function () {
-      return JwtInterceptor;
+    __webpack_require__.d(__webpack_exports__, "HttpRequestInterceptor", function () {
+      return HttpRequestInterceptor;
     });
     /* harmony import */
 
@@ -849,14 +849,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /*! rxjs/operators */
     "./node_modules/rxjs/_esm2015/operators/index.js");
 
-    var JwtInterceptor = /*#__PURE__*/function () {
-      function JwtInterceptor(router) {
-        _classCallCheck(this, JwtInterceptor);
+    var HttpRequestInterceptor = /*#__PURE__*/function () {
+      function HttpRequestInterceptor(router) {
+        _classCallCheck(this, HttpRequestInterceptor);
 
         this.router = router;
       }
 
-      _createClass(JwtInterceptor, [{
+      _createClass(HttpRequestInterceptor, [{
         key: "intercept",
         value: function intercept(req, next) {
           var _this = this;
@@ -880,10 +880,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "handleResponse",
         value: function handleResponse(req, event) {
-          console.log('handle res'); //console.log('Handling response for ', req.url, event);
-
-          if (event instanceof _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpResponse"]) {
-            console.log(event); // console.log('Request for ', req.url,
+          //console.log('handle response');
+          //console.log('Handling response for ', req.url, event);
+          if (event instanceof _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpResponse"]) {//console.log(event);
+            // console.log('Request for ', req.url,
             //     ' Response Status ', event.status,
             //     ' With body ', event.body);
           }
@@ -891,13 +891,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "handleError",
         value: function handleError(req, event) {
-          console.log('handling error');
-          console.log(req);
-          console.log(event);
-
+          //console.log('handling error');
           if (event.status === 401) {
-            console.log('no auth');
-            this.router.navigate(["/login"]);
+            //console.log('no auth');
+            this.router.navigate(['/login']);
           } // console.error('Request for ', req.url,
           //       ' Response Status ', event.status,
           //       ' With error ', event.error);
@@ -905,16 +902,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
       }]);
 
-      return JwtInterceptor;
+      return HttpRequestInterceptor;
     }();
 
-    JwtInterceptor.ctorParameters = function () {
+    HttpRequestInterceptor.ctorParameters = function () {
       return [{
         type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
       }];
     };
 
-    JwtInterceptor = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])()], JwtInterceptor);
+    HttpRequestInterceptor = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])()], HttpRequestInterceptor);
     /***/
   },
 
@@ -987,7 +984,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(AdminComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          console.log('now in admin');
           this.getStudentsForAdmin();
         }
       }, {
@@ -996,13 +992,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var _this2 = this;
 
           this.adminService.getStudentsForAdmin().subscribe(function (data) {
-            console.log(data);
             _this2.jsonOutput = data;
 
             if (_this2.jsonOutput.length == 0) {
               _this2.jsonOutput = null;
             } else {
-              _this2.jsonOutput = JSON.stringify(_this2.jsonOutput, null, "\t"); // stringify with tabs inserted at each level
+              _this2.jsonOutput = JSON.stringify(_this2.jsonOutput, null, '\t'); // stringify with tabs inserted at each level
             }
           });
         }
@@ -1072,13 +1067,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         _classCallCheck(this, AdminService);
 
         this.http = http;
-        this.baseUrl = "http://localhost:8080/";
+        this.baseUrl = 'http://localhost:8080/';
       }
 
       _createClass(AdminService, [{
         key: "getStudentsForAdmin",
         value: function getStudentsForAdmin() {
-          return this.http.get(this.baseUrl + "admin");
+          return this.http.get(this.baseUrl + 'admin');
         }
       }]);
 
@@ -1347,9 +1342,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony import */
 
 
-    var _JwtInterceptor__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
-    /*! ./JwtInterceptor */
-    "./src/app/JwtInterceptor.ts");
+    var _HttpRequestInterceptor__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+    /*! ./HttpRequestInterceptor */
+    "./src/app/HttpRequestInterceptor.ts");
 
     var AppModule = function AppModule() {
       _classCallCheck(this, AppModule);
@@ -1360,7 +1355,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_5__["AppRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"], _base_base_module__WEBPACK_IMPORTED_MODULE_10__["BaseModule"]],
       providers: [{
         provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HTTP_INTERCEPTORS"],
-        useClass: _JwtInterceptor__WEBPACK_IMPORTED_MODULE_11__["JwtInterceptor"],
+        useClass: _HttpRequestInterceptor__WEBPACK_IMPORTED_MODULE_11__["HttpRequestInterceptor"],
         multi: true
       }],
       bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]]
@@ -1418,20 +1413,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         this.http = http;
         this.router = router;
-        this.baseUrl = "http://localhost:8080/";
+        this.baseUrl = 'http://localhost:8080/';
       }
 
       _createClass(AuthService, [{
         key: "registerUser",
         value: function registerUser(user) {
-          return this.http.post(this.baseUrl + "register", user, {
+          return this.http.post(this.baseUrl + 'register', user, {
             responseType: 'text'
           });
         }
       }, {
         key: "loginUser",
         value: function loginUser(user) {
-          return this.http.post(this.baseUrl + "login", user, {
+          return this.http.post(this.baseUrl + 'login', user, {
             observe: 'response'
           });
         }
@@ -1684,7 +1679,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function ngOnInit() {
           var _this3 = this;
 
-          console.log('base');
           this.baseService.getRole().subscribe(function (data) {
             _this3.isAdmin = data === 'ROLE_ADMIN';
             _this3.isAdminTrainee = data === 'ROLE_ADMINTRAINEE';
@@ -1696,11 +1690,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function logout() {
           var _this4 = this;
 
-          console.log('logout'); //logout is a GET request because csrf is disabled
-
+          //logout is a GET request because csrf is disabled
           this.authService.logoutUser().subscribe(function (data) {
-            console.log('logged out');
-
+            //console.log('logged out');
             _this4.router.navigate(['/login']);
 
             _this4.isAdmin = false;
@@ -1864,20 +1856,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         this.http = http;
         this.router = router;
-        this.baseUrl = "http://localhost:8080/base/";
+        this.baseUrl = 'http://localhost:8080/base/';
       }
 
       _createClass(BaseService, [{
         key: "getGreeting",
         value: function getGreeting() {
-          return this.http.get(this.baseUrl + "home", {
+          return this.http.get(this.baseUrl + 'home', {
             responseType: 'text'
           });
         }
       }, {
         key: "getRole",
         value: function getRole() {
-          return this.http.get(this.baseUrl + "currentUserRole", {
+          return this.http.get(this.baseUrl + 'currentUserRole', {
             responseType: 'text'
           });
         }
@@ -2093,7 +2085,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           this.authService.loginUser(user).subscribe(function (data) {
             //Auth is stored in cookie instead
             //console.log(data.headers.get('Authorization'));   
-            _this6.router.navigate(["/"]);
+            _this6.router.navigate(['/']);
           }, function (error) {
             _this6.showErrorMessage = true;
           });
@@ -2261,9 +2253,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(RegisterComponent, [{
         key: "ngOnInit",
-        value: function ngOnInit() {
-          console.log(this);
-        }
+        value: function ngOnInit() {}
       }, {
         key: "register",
         value: function register() {
@@ -2272,7 +2262,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           this.showErrorMessage = false;
           var user = new _auth_user__WEBPACK_IMPORTED_MODULE_4__["User"](this.usernameInput, this.passwordInput, this.roleInput);
           this.authService.registerUser(user).subscribe(function (data) {
-            _this7.router.navigate(["/"]);
+            _this7.router.navigate(['/']);
           }, function (error) {
             _this7.showErrorMessage = true;
           });
@@ -2379,7 +2369,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var _this8 = this;
 
           this.studentService.getStudents().subscribe(function (data) {
-            console.log(data);
             _this8.jsonOutput = data;
 
             if (_this8.jsonOutput.length == 0) {
@@ -2455,13 +2444,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         _classCallCheck(this, StudentService);
 
         this.http = http;
-        this.baseUrl = "http://localhost:8080/";
+        this.baseUrl = 'http://localhost:8080/';
       }
 
       _createClass(StudentService, [{
         key: "getStudents",
         value: function getStudents() {
-          return this.http.get(this.baseUrl + "students");
+          return this.http.get(this.baseUrl + 'students');
         }
       }]);
 

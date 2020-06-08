@@ -9,7 +9,7 @@ import { User } from './user';
 })
 export class AuthService {
 
-  private baseUrl : string = "http://localhost:8080/"; 
+  private baseUrl : string = 'http://localhost:8080/'; 
 
   constructor(
     private http: HttpClient,
@@ -17,11 +17,11 @@ export class AuthService {
     ) { }
 
   registerUser(user : User) {
-    return this.http.post(this.baseUrl + "register", user, { responseType: 'text' }); 
+    return this.http.post(this.baseUrl + 'register', user, { responseType: 'text' }); 
   }
 
   loginUser(user : User) { //used observe : 'response' to get full response that had null content, we wanted to read the headers
-    return this.http.post(this.baseUrl + "login", user, { observe: 'response' });  
+    return this.http.post(this.baseUrl + 'login', user, { observe: 'response' });  
   }
 
   logoutUser() { 

@@ -24,7 +24,6 @@ export class StudentComponent implements OnInit {
   getStudents() { 
     this.studentService.getStudents().subscribe((data : any) => {
 
-      console.log(data); 
       this.jsonOutput = data;
 
       if(this.jsonOutput.length == 0) { 

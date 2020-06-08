@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 })
 export class BaseService {
 
-  private baseUrl : string = "http://localhost:8080/base/"; 
+  private baseUrl : string = 'http://localhost:8080/base/'; 
 
   constructor(
     private http: HttpClient,
@@ -15,11 +15,11 @@ export class BaseService {
     ) { }
 
   getGreeting() {
-    return this.http.get(this.baseUrl + "home", { responseType: 'text' }); 
+    return this.http.get(this.baseUrl + 'home', { responseType: 'text' }); 
   }
 
   getRole() {
-    return this.http.get(this.baseUrl + "currentUserRole", { responseType: 'text' }); 
+    return this.http.get(this.baseUrl + 'currentUserRole', { responseType: 'text' }); 
   }
 
 }

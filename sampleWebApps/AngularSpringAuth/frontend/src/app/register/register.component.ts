@@ -27,9 +27,7 @@ export class RegisterComponent implements OnInit {
     this.showErrorMessage = false;
    }
 
-  ngOnInit() {
-    console.log(this);
-  }
+  ngOnInit() { }
 
   register() { 
     this.showErrorMessage = false; 
@@ -37,7 +35,7 @@ export class RegisterComponent implements OnInit {
     let user = new User(this.usernameInput, this.passwordInput, this.roleInput);
 
     this.authService.registerUser(user).subscribe((data : any) => {
-      this.router.navigate(["/"]);
+      this.router.navigate(['/']);
       }, (error : any) => {
       this.showErrorMessage = true; 
     });

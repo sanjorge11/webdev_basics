@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     this.authService.loginUser(user).subscribe((data : any) => {
       //Auth is stored in cookie instead
       //console.log(data.headers.get('Authorization'));   
-      this.router.navigate(["/"]);
+      this.router.navigate(['/']);
     }, (error: any) => { 
       this.showErrorMessage = true;
     });

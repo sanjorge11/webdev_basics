@@ -26,7 +26,6 @@ export class BaseComponent implements OnInit {
   }
 
   ngOnInit() { 
-    console.log('base');
     this.baseService.getRole().subscribe((data: any) => {
       this.isAdmin = (data === 'ROLE_ADMIN');
       this.isAdminTrainee = (data === 'ROLE_ADMINTRAINEE');
@@ -35,10 +34,9 @@ export class BaseComponent implements OnInit {
   }
 
   logout() { 
-    console.log('logout');
     //logout is a GET request because csrf is disabled
     this.authService.logoutUser().subscribe((data: any) => {
-      console.log('logged out');
+      //console.log('logged out');
       this.router.navigate(['/login']);
 
       this.isAdmin = false; 

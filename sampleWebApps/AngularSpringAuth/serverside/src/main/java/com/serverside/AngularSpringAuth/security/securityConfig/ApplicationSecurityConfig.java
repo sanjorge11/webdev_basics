@@ -70,7 +70,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 		.addFilterAfter(new JwtTokenVerifierFilter(jwtConfig), JwtUsernameAndPasswordAuthenticationFilter.class)	
 		
 		.authorizeRequests()
-		.antMatchers("/", "index", "/css/*", "/js/*", "/login", "/register", "/logout",
+		.antMatchers("/", "index", "/css/*", "/js/*", "/login", "/register", //"/logout",
 				"/runtime-es2015.js", "/polyfills-es2015.js", "/styles-es2015.js", "/vendor-es2015.js", "/main-es2015.js", "/favicon.ico").permitAll()  
 		.antMatchers("/students/**").hasRole(UserRole.STUDENT.name()) 
 		.antMatchers(HttpMethod.GET, "/admin/**").hasAnyRole(UserRole.ADMIN.name(), UserRole.ADMINTRAINEE.name())	
@@ -83,9 +83,9 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 		.clearAuthentication(true)
 		.invalidateHttpSession(true)
 		.deleteCookies("Authorization")
-		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))		//set /logout as logout URL
-		.logoutSuccessUrl("/");		//re-direct to base URL, Angular app will re-direct it in the front-end to /login
-	
+		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))		//set /logout as logout URL (this is already default)
+		.logoutSuccessUrl("/")		//re-direct to base URL, Angular app will re-direct it in the front-end to /login
+		.permitAll(); 
 	}
 	
 	
