@@ -8,3 +8,6 @@ Google Guava is an open-source set of common libraries for Java, mainly develope
 
 ## Thymeleaf (added to pom.xml)
 Thymeleaf is a modern server-side Java template engine for both web and standalone environments.
+
+## Java JWT: JSON Web Token for Java and Android
+https://github.com/jwtk/jjwt
