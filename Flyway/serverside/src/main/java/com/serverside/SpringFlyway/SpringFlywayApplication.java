@@ -153,5 +153,10 @@ public class SpringFlywayApplication {
 	
 	//For more details, visit: https://flywaydb.org/getstarted/how
 	
+	
+	//Checksum errors may sometimes occur when you change a SQL script that has already been applied by Flyway.
+	//An easy way to fix the issue is to again, clear the database and have Flyway start from scratch. 
+	
+	//For StackOverflow reference, see: https://stackoverflow.com/questions/41147768/caused-by-org-flywaydb-core-api-flywayexception-validate-failed-migration-che/43343967
 
 }
