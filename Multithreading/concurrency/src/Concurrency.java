@@ -2,10 +2,10 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Concurrency {
-	
-	private static int count = 0; 
-	
-	//Synchronizing Method 1
+
+	private static int count = 0;
+
+	// Synchronizing Method 1
 //	Lock lock = new ReentrantLock(); 
 //	
 //	public void increment() {
@@ -17,7 +17,7 @@ public class Concurrency {
 //		lock.unlock();
 //	}
 
-	//Synchronizing Method 2
+	// Synchronizing Method 2
 //	public void increment() {
 //		
 //		synchronized(this) { 
@@ -26,48 +26,48 @@ public class Concurrency {
 //		}
 //		
 //	}
-	
-	//Synchronizing Method 3
+
+	// Synchronizing Method 3
 //	public synchronized void increment() {
 //
 //		count++;
 //		System.out.println(count);
 //		
 //	}
-	
+
 	public void increment() {
 
 		count++;
 		System.out.println(count);
-		
+
 	}
-	
-	public static void main(String[] args) throws InterruptedException { 
-		
+
+	public static void main(String[] args) throws InterruptedException {
+
 		Concurrency c = new Concurrency();
-		
-		T t1 = new T(c); 	//creating a thread reference
-		T t2 = new T(c); 
-		
-		t1.start();		//.start() spins up thread and runs it 
-		t2.start(); 
-		t1.run();		//.run() just executes thread
+
+		T t1 = new T(c); // creating a thread reference
+		T t2 = new T(c);
+
+		t1.start(); // .start() spins up thread and runs it
+		t2.start();
+		t1.run(); // .run() just executes thread
 		t1.run();
-		
+
 	}
 }
 
-class T extends Thread { 
-	
-	Concurrency c; 
-	Lock lock = new ReentrantLock(); 
-	
-	public T(Concurrency c) { 
-		this.c = c; 
+class T extends Thread {
+
+	Concurrency c;
+	Lock lock = new ReentrantLock();
+
+	public T(Concurrency c) {
+		this.c = c;
 	}
-	
+
 	@Override
-	public void run() { 
+	public void run() {
 		c.increment();
 	}
 }
