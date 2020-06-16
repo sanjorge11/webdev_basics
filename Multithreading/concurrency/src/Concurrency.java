@@ -6,9 +6,9 @@ public class Concurrency {
 	private static int count = 0;
 
 	// Synchronizing Method 1
-//	Lock lock = new ReentrantLock(); 
-//	
-//	public void increment() {
+//	Lock lock = new ReentrantLock(); 	//a ReentrantLock is a lock that can be re-entered by the same thread 
+//										//more than once, this means that it is safe for the thread to use 
+//	public void increment() {			//recursive locking with that lock without causing a deadlock
 //		lock.lock();
 //		
 //		count++;
@@ -60,7 +60,6 @@ public class Concurrency {
 class T extends Thread {
 
 	Concurrency c;
-	Lock lock = new ReentrantLock();
 
 	public T(Concurrency c) {
 		this.c = c;
