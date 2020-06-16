@@ -29,7 +29,6 @@ public class ParallelProcessing {
 		//initialize thread pool size same as amount of cores to ideally have 1 thread executed per core
 		ExecutorService service = Executors.newFixedThreadPool(cores);	
 		
-		
 		//Example: Use multithreading to find summation of 1 to 100. 
 		int paritionSize = 100 % cores > 0 ? (100/cores + 1) : 100/cores; 
 		
@@ -38,7 +37,7 @@ public class ParallelProcessing {
 			
 			final int partition = i; 
 			
-			tasks.add(new Task() {
+			tasks.add(new Task() {		//add tasks to thread pool task queue 
 				@Override
 				public Integer call() throws Exception {	
 					int localSum = 0; 
@@ -51,7 +50,7 @@ public class ParallelProcessing {
 				}
 			});
 			
-			System.out.println("added thread # " + i);
+			System.out.println("added task # " + i);
 		}
 		
 		//A Future object is similar to a Promise is JavaScript. In this case, the Future 
@@ -59,12 +58,18 @@ public class ParallelProcessing {
 		//the returned value. We used Callable objects instead of Runnable objects to 
 		//take advantage of the return type capability.
 		
-		//this is a blocking statement, the code after the statement will run when all Futures are done
+		//this is a blocking statement, the code after the .invokeAll() statement will 
+		//run after all Futures are done, see documentation here for details: 
+		// https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ExecutorService.html#invokeAll%28java.util.Collection%29
+		
+		//the main thread will wait until all Futures are completed, similar to .join() on all threads
 		List<Future<Integer>> allFutures = service.invokeAll(tasks); 	
 		int finalSum = 0; 
 		for(Future<Integer> future : allFutures) finalSum += future.get();
 		
 		System.out.println(finalSum);		//Sum from 1-100 should be 5,050
+		
+		service.shutdown();
 	}
 	
 	public void ExampleWithoutWaitingForFuture() { 
@@ -105,7 +110,7 @@ public class ParallelProcessing {
 			System.out.println("added thread # " + i);
 			allFutures.add(future);
 		}
-		
+		service.shutdown();
 	}
 
 }
